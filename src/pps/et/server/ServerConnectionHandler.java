@@ -10,8 +10,11 @@ public class ServerConnectionHandler implements Runnable {
 	PrintWriter out;
 	String inputLine, outputLine;
 	BufferedReader in;
+	GameHandler game;
 	
-	public ServerConnectionHandler(Socket client) {
+	public ServerConnectionHandler(Socket client, GameHandler game) {
+		this.game = game;
+		
 		try {
 			out = new PrintWriter(client.getOutputStream(), true);
 			in 	= new BufferedReader(new InputStreamReader(client.getInputStream()));
@@ -24,7 +27,21 @@ public class ServerConnectionHandler implements Runnable {
 	}
 	
 	private String processInput(String input) {
-		return "wwwwaaaat tjaooli";
+		// chat g tasdlajsdlakjdaa
+		// chat l dakjsdlakjdlasd
+		
+		// map
+		
+		// go r/l/u/d xpos/ypos
+		System.out.println("process");
+		
+		if (input.startsWith("map")) {
+			return "map";
+		} else if (input.startsWith("chat")) {
+			return "chat sent";
+		} else {
+			return "wwwwaaaat tjaooli";
+		}
 	}
 
 	public void run() {
@@ -34,7 +51,7 @@ public class ServerConnectionHandler implements Runnable {
 			while ((inputLine = in.readLine()) != null) {
 				System.out.println(inputLine);
 			    outputLine = processInput(inputLine);
-			    out.println(outputLine);
+			    send(outputLine);
 			    if (outputLine.equals("Bye."))
 			    	break;
 			}
@@ -43,5 +60,9 @@ public class ServerConnectionHandler implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void send(String msg) {
+		out.println(msg);
 	}
 }

@@ -10,18 +10,22 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import pps.et.logic.Player;
+
 public class ServerConnectionHandler implements Runnable {
 	PrintWriter out;
 	String inputLine, outputLine;
 	BufferedReader in;
-	GameHandler game;
-	String nick;
 	Socket clientSocket;
 	
+	GameHandler game;
+	Player player;
+	
 	public ServerConnectionHandler(Socket client, GameHandler game) {
+		
 		this.game = game;
 		clientSocket = client;
-		nick = "unknown";
+		player = new Player("unknown");
 		
 		try {
 			out = new PrintWriter(client.getOutputStream(), true);
@@ -78,11 +82,11 @@ public class ServerConnectionHandler implements Runnable {
 	}
 	
 	public String getNick() {
-		return nick;
+		return player.getNick();
 	}
 	
 	public void setNick(String newName) {
-		nick = newName;
+		player.setNick(newName);
 	}
 
 	public void sendMap() {

@@ -7,7 +7,7 @@ public class ClientChatHandler {
 	public ClientChatHandler(String nick){
 		this.nick = nick;
 		try {
-			csh = new ClientConnectionHandler("192.168.2.9", 4711);
+			csh = new ClientConnectionHandler("localhost", 4711);
 			csh.start();
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -23,14 +23,19 @@ public class Player {
 	}
 
 	public void move(String direction) {
-		if (direction == "r")
+		System.out.println("'" + direction + "'");
+		if (direction.equals("R"))
 			x++;
-		if (direction == "l")
+		else if (direction.equals( "L"))
 			x--;
-		if (direction == "u")
+		else if (direction.equals( "U"))
 			y++;
-		if (direction == "d")
+		else if (direction.equals("D"))
 			y--;
+		else 
+			System.err.println("not");
+		
+		System.out.println("player pos: " + getPos());
 	}
 	
 	public String getPos() {

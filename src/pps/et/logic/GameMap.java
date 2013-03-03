@@ -19,6 +19,13 @@ public class GameMap implements Serializable {
 		map[5][3] = 1;
 		map[5][4] = 1;
 		map[5][5] = 1;
+		map[4][5] = 1;
+		map[3][5] = 1;
+		map[7][7] = 1;
+		map[7][8] = 1;
+		map[9][8] = 1;
+		map[5][8] = 1;
+		map[6][8] = 1;
 	}
 	
 	public String toString() {
@@ -48,5 +55,13 @@ public class GameMap implements Serializable {
 				map[i][j] = Integer.parseInt(inputs[i*j+1]);
 			}
 		}
+	}
+
+	public int getSize() {
+		return map.length;
+	}
+	
+	public int getTileCode(int x, int y) {
+		return map[x][y];
 	}
 }

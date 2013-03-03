@@ -1,12 +1,8 @@
 package pps.et.server;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -25,7 +21,7 @@ public class ServerConnectionHandler implements Runnable {
 		
 		this.game = game;
 		clientSocket = client;
-		player = new Player("unknown");
+		player = new Player("unknown", 0, 0);
 		
 		try {
 			out = new PrintWriter(client.getOutputStream(), true);
@@ -55,7 +51,8 @@ public class ServerConnectionHandler implements Runnable {
 			sendMap();
 		} else if (args[0].startsWith("chat")) {
 			game.sendChat(this, "chat sent");
-			
+		} else if (args[0].equals("move")) {
+			game.movePlayer(player, args[1]);
 		} else {
 			game.sendChat(this, input);
 		}
@@ -71,7 +68,6 @@ public class ServerConnectionHandler implements Runnable {
 			}
 			System.out.println("Client " + getNick() + " disconnected");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

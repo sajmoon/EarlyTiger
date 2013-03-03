@@ -1,5 +1,7 @@
 package pps.et.server;
 
+import pps.et.logic.GameMap;
+
 public class GameHandler {
 	GameMap map;
 	Server server;

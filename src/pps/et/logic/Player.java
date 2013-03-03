@@ -41,4 +41,10 @@ public class Player {
 	public String getPos() {
 		return "x:" + x + " y:" + y;
 	}
+
+	public boolean at(int x, int y) {
+		if (this.x == x && this.y == y)
+			return true;
+		return false;
+	}
 }

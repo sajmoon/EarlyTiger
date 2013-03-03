@@ -6,7 +6,7 @@ import pps.et.logic.GameMap;
 import pps.et.logic.Player;
 
 public class GameHandler {
-	GameMap map;
+	public GameMap map;
 	Server server;
 	ArrayList<Player> players;
 	

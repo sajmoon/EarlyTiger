@@ -6,11 +6,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 
+
 public class Server {
 	static int port = 4711;
 	ServerSocket server;
 	ArrayList<ServerConnectionHandler> connections;
-	public static int mapSize = 10;
 	GameHandler game;
 	
 	public static void main(String[] args) throws IOException {

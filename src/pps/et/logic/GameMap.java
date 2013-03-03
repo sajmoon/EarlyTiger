@@ -7,9 +7,10 @@ import pps.et.server.Server;
 public class GameMap implements Serializable {
 	private static final long serialVersionUID = 1955586305740049084L;
 	int[][] map;
+	private int mapSize = 20;
 	
 	public GameMap() {
-		map = new int[Server.mapSize][Server.mapSize];
+		map = new int[mapSize][mapSize];
 		
 		populateMap();
 	}

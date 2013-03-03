@@ -15,6 +15,7 @@ public class Client extends Thread{
 		Client c = new Client();
 		
 		Player p = new Player("Test", 0, 0);
+		
 		cs = new ClientSwing(c, p);
 		cch = new ClientChatHandler("Charlie");
 		

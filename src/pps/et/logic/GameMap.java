@@ -24,7 +24,6 @@ public class GameMap implements Serializable {
 	public String toString() {
 		System.out.println("map tostring");
 		StringBuffer sb = new StringBuffer();
-		sb.append("GameMap: ");
 		sb.append(map.length);
 		sb.append(" ");
 		for (int i = 0; i < map.length; i++) {
@@ -34,5 +33,20 @@ public class GameMap implements Serializable {
 			}
 		}
 		return sb.toString();
+	}
+	
+	public void fromString(String input) {
+		String[] inputs = input.split(" ");
+		
+		
+		int mapSize = Integer.parseInt( inputs[0] );
+		
+		map = new int[mapSize][mapSize];
+		
+		for (int i = 0; i < mapSize; i++) {
+			for (int j = 0; j < mapSize; j++) {
+				map[i][j] = Integer.parseInt(inputs[i*j+1]);
+			}
+		}
 	}
 }

@@ -5,11 +5,17 @@ public class GameHandler {
 	Server server;
 	
 	public GameHandler(Server s) {
+		map = new GameMap();
 		server = s;
 	}
 	
-	public void sendChat(String msg) {
-		server.sendToAll(msg);
+	public void sendChat(ServerConnectionHandler connection, String msg) {
+		String output = "|" +  connection.getNick() + "| " + msg;
+		server.sendToAll(output);
+	}
+
+	public GameMap getMap() {
+		return map;
 	}
 	
 }

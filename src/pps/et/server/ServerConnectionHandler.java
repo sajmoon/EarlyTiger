@@ -1,8 +1,12 @@
 package pps.et.server;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -11,9 +15,13 @@ public class ServerConnectionHandler implements Runnable {
 	String inputLine, outputLine;
 	BufferedReader in;
 	GameHandler game;
+	String nick;
+	Socket clientSocket;
 	
 	public ServerConnectionHandler(Socket client, GameHandler game) {
 		this.game = game;
+		clientSocket = client;
+		nick = "unknown";
 		
 		try {
 			out = new PrintWriter(client.getOutputStream(), true);
@@ -26,7 +34,9 @@ public class ServerConnectionHandler implements Runnable {
 		}
 	}
 	
-	private String processInput(String input) {
+	private void processInput(String input) {
+		String[] args = input.split(" ");
+		// nick sdad
 		// chat g tasdlajsdlakjdaa
 		// chat l dakjsdlakjdlasd
 		
@@ -34,13 +44,16 @@ public class ServerConnectionHandler implements Runnable {
 		
 		// go r/l/u/d xpos/ypos
 		System.out.println("process");
-		
-		if (input.startsWith("map")) {
-			return "map";
-		} else if (input.startsWith("chat")) {
-			return "chat sent";
+		if (args[0].startsWith("nick")) {
+			setNick(input);
+			game.sendChat(this, "nick changed");
+		} else if (args[0].startsWith("map")) {
+			sendMap();
+		} else if (args[0].startsWith("chat")) {
+			game.sendChat(this, "chat sent");
+			
 		} else {
-			return "wwwwaaaat tjaooli";
+			game.sendChat(this, input);
 		}
 	}
 
@@ -50,12 +63,9 @@ public class ServerConnectionHandler implements Runnable {
 		try {
 			while ((inputLine = in.readLine()) != null) {
 				System.out.println(inputLine);
-			    outputLine = processInput(inputLine);
-			    send(outputLine);
-			    if (outputLine.equals("Bye."))
-			    	break;
+			    processInput(inputLine);
 			}
-			System.out.println("slut");
+			System.out.println("Client " + getNick() + " disconnected");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,5 +74,28 @@ public class ServerConnectionHandler implements Runnable {
 	
 	public void send(String msg) {
 		out.println(msg);
+		out.flush();
+	}
+	
+	public String getNick() {
+		return nick;
+	}
+	
+	public void setNick(String newName) {
+		nick = newName;
+	}
+
+	public void sendMap() {
+		try {
+			System.out.println("Send map");
+//			System.out.println(game.map.toString());
+//			OutputStream os = clientSocket.getOutputStream();
+//			BufferedOutputStream bos = new BufferedOutputStream(os);
+//			ObjectOutputStream oos = new ObjectOutputStream(bos);
+//			oos.writeObject(game.map);
+			out.println(game.map.toString());
+		} catch (Exception e) {
+			System.out.println("error sending map");
+		}
 	}
 }

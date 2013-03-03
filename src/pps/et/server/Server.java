@@ -68,6 +68,5 @@ public class Server {
 		for (int i = 0; i < connections.size(); i++) {
 			connections.get(i).send(msg);
 		}
-			
 	}
 }

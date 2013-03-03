@@ -32,18 +32,14 @@ public class ClientConnectionHandler extends Thread{
 		}
 	}
 
-	public static void main(String[] args) throws Exception{
-		ClientConnectionHandler c = new ClientConnectionHandler(args[0], Integer.parseInt(args[1]));
-		c.start();
-	}
-
 	public void run(){
 		while(s.isConnected()){
-			
 			// Listen if something is sent from the server
 			try{
-				in = new BufferedReader(new InputStreamReader(s.getInputStream()));	
-				System.out.println(in.readLine());
+				if(s.getInputStream().available() > 0){
+					in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+					System.out.println(in.readLine());
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -55,6 +51,7 @@ public class ClientConnectionHandler extends Thread{
 	
 	
 	public void send(String message){
+		System.err.println("Sending: "+ message);
 		out.println(message);
 	}
 }

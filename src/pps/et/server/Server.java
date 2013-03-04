@@ -5,13 +5,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-
-
 public class Server {
 	static int port = 4711;
 	ServerSocket server;
 	ArrayList<ServerConnectionHandler> connections;
 	GameHandler game;
+	int connectionCount = 0;
+	
 	
 	public static void main(String[] args) throws IOException {
 		Server s = new Server();
@@ -50,11 +50,13 @@ public class Server {
 					System.out.println("Accepted: " + tempSocket.getInetAddress());
 					ServerConnectionHandler c = new ServerConnectionHandler(tempSocket, game);
 					connections.add(c);
+					connectionCount++;
+					
 					Thread t = new Thread(c);
 					
 					t.start();
 					
-					System.out.println("started thread");
+					sendToAll("connected " + connectionCount);
 					
 				}
 			}

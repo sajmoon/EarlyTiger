@@ -32,6 +32,8 @@ public class GameHandler {
 	public void movePlayer(Player player, String string) {
 		//TODO check validity of move
 		player.move(string);
+		
+		server.sendToAll("[" + player.getNick() + "] moved");
 	}
 	
 }

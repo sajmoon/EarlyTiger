@@ -88,11 +88,6 @@ public class ServerConnectionHandler implements Runnable {
 	public void sendMap() {
 		try {
 			System.out.println("Send map");
-//			System.out.println(game.map.toString());
-//			OutputStream os = clientSocket.getOutputStream();
-//			BufferedOutputStream bos = new BufferedOutputStream(os);
-//			ObjectOutputStream oos = new ObjectOutputStream(bos);
-//			oos.writeObject(game.map);
 			out.println(game.map.toString());
 		} catch (Exception e) {
 			System.out.println("error sending map");

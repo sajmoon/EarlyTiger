@@ -35,6 +35,7 @@ public class Player {
 		else 
 			System.err.println("not");
 		
+		
 		System.out.println("player pos: " + getPos());
 	}
 	

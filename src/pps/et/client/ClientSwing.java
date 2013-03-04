@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -21,6 +20,7 @@ import pps.et.logic.Player;
 public class ClientSwing implements Runnable, KeyListener{
 	private Client client;
 	private Player player;
+	private ClientChatHandler cch;
 	JLabel[][] labels;
 	GameMap map;
 	
@@ -69,9 +69,10 @@ public class ClientSwing implements Runnable, KeyListener{
 		
 	}
 
-	public ClientSwing(Client client, Player player){
+	public ClientSwing(Client client, Player player, ClientChatHandler cch){
 		this.client = client;
 		this.player = player;
+		this.cch 	=  cch;
 		SwingUtilities.invokeLater(this);
 		map = new GameMap();
 		labels = new JLabel[map.getSize()][map.getSize()];
@@ -87,14 +88,18 @@ public class ClientSwing implements Runnable, KeyListener{
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 37) {
 			player.move("L");
-
+			cch.csh.send("move L");
 		} else if (e.getKeyCode() == 38) {
 			player.move("U");
+			cch.csh.send("move U");
 		} else if (e.getKeyCode() == 39) { 
 			player.move("R");
+			cch.csh.send("move R");
 		} else if (e.getKeyCode() == 40) {
 			player.move("D");
+			cch.csh.send("move D");
 		}
+		
 		
 		for (int i = 0; i < map.getSize(); i++) {
 			for (int j = 0; j < map.getSize(); j++) {

@@ -14,10 +14,11 @@ public class Client extends Thread{
 	public static void main(String[] args) {
 		Client c = new Client();
 		
+		cch = new ClientChatHandler("Charlie");
+		
 		Player p = new Player("Test", 0, 0);
 		
-		cs = new ClientSwing(c, p);
-		cch = new ClientChatHandler("Charlie");
+		cs = new ClientSwing(c, p, cch);
 		
 	}
 

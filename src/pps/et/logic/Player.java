@@ -6,8 +6,11 @@ public class Player {
 	int y;
 	int team; // 0 or 1
 	String nick;
+	int id;
 	
-	public Player(String nick, int x, int y) {
+	
+	public Player(int id, String nick, int x, int y) {
+		this.id 	= id;
 		this.x 		= x;
 		this.y 		= y;
 		this.team 	= team;
@@ -47,5 +50,14 @@ public class Player {
 		if (this.x == x && this.y == y)
 			return true;
 		return false;
+	}
+
+	public Object getConnection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public int getID() {
+		return id;
 	}
 }

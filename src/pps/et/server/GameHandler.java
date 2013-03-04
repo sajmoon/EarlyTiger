@@ -18,7 +18,7 @@ public class GameHandler {
 	
 	public void sendChat(ServerConnectionHandler connection, String msg) {
 		String output = "|" +  connection.getNick() + "| " + msg;
-		server.sendToAll(output);
+		//server.sendToAll(output);
 	}
 
 	public GameMap getMap() {
@@ -33,7 +33,13 @@ public class GameHandler {
 		//TODO check validity of move
 		player.move(string);
 		
-		server.sendToAll("[" + player.getNick() + "] moved");
+		//server.sendToAll("[" + player.getNick() + "] moved");
+	}
+
+	public void disconnectedUser(Player p) {
+		players.remove(p);
+		server.disconnectedUser(p);
+		
 	}
 	
 }

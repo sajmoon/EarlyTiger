@@ -13,10 +13,15 @@ public class Client extends Thread{
 	
 	public static void main(String[] args) {
 		Client c = new Client();
+		String nick = "Random";
 		
-		cch = new ClientChatHandler("Charlie");
+		if (args.length > 1) {
+			nick = args[0];
+		}
 		
-		Player p = new Player("Test", 0, 0);
+		cch = new ClientChatHandler(nick);
+		
+		Player p = new Player(0, "Test", 0, 0);
 		
 		cs = new ClientSwing(c, p, cch);
 		
@@ -24,7 +29,7 @@ public class Client extends Thread{
 
     public void movePlayer(String direction){
     	System.out.println(direction);
-    	cch.csh.send("move "+direction);
+    	cch.csh.send("move " + direction);
     }
 
 }

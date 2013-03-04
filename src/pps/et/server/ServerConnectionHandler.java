@@ -7,6 +7,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 import pps.et.logic.Player;
+import pps.et.server.tasks.Chat;
+import pps.et.server.tasks.ConnectionTask;
+import pps.et.server.tasks.Move;
 
 public class ServerConnectionHandler implements Runnable {
 	PrintWriter out;
@@ -14,19 +17,20 @@ public class ServerConnectionHandler implements Runnable {
 	BufferedReader in;
 	Socket clientSocket;
 	
-	GameHandler game;
+	TaskHandler th;
 	Player player;
 	
-	public ServerConnectionHandler(Socket client, GameHandler game) {
+	public ServerConnectionHandler(Socket client, TaskHandler taskHandler, Player p) {
+		th 				= taskHandler;
 		
-		this.game = game;
-		clientSocket = client;
-		player = new Player("unknown", 0, 0);
+		clientSocket 	= client;
+		player 			= p;
 		
 		try {
-			out = new PrintWriter(client.getOutputStream(), true);
-			in 	= new BufferedReader(new InputStreamReader(client.getInputStream()));
+			out 		= new PrintWriter(client.getOutputStream(), true);
+			in 			= new BufferedReader(new InputStreamReader(client.getInputStream()));
 			
+			taskHandler.addTask(new ConnectionTask(p));
 			System.out.println("Client connected");
 			
 		} catch (Exception e) {
@@ -46,15 +50,16 @@ public class ServerConnectionHandler implements Runnable {
 		System.out.println("process");
 		if (args[0].startsWith("nick")) {
 			setNick(input);
-			game.sendChat(this, "nick changed");
+			th.addTask(new Chat(player, "nich changed"));
 		} else if (args[0].startsWith("map")) {
 			sendMap();
 		} else if (args[0].startsWith("chat")) {
-			game.sendChat(this, "chat sent");
+			System.arraycopy(args, 1, args, 0, args.length-1);
+			th.addTask(new Chat(player, args.toString()));
 		} else if (args[0].equals("move")) {
-			game.movePlayer(player, args[1]);
+			th.addTask(new Move(player, args[1]));
 		} else {
-			game.sendChat(this, input);
+			System.out.println("unknwon command: " + args[0]);
 		}
 	}
 
@@ -67,6 +72,7 @@ public class ServerConnectionHandler implements Runnable {
 			    processInput(inputLine);
 			}
 			System.out.println("Client " + getNick() + " disconnected");
+			//game.disconnectedUser(player);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -88,7 +94,7 @@ public class ServerConnectionHandler implements Runnable {
 	public void sendMap() {
 		try {
 			System.out.println("Send map");
-			out.println(game.map.toString());
+			//out.println(game.map.toString());
 		} catch (Exception e) {
 			System.out.println("error sending map");
 		}

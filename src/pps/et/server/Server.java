@@ -5,13 +5,15 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import pps.et.logic.Player;
+
 public class Server {
 	static int port = 4711;
 	ServerSocket server;
 	ArrayList<ServerConnectionHandler> connections;
 	GameHandler game;
 	int connectionCount = 0;
-	
+	TaskHandler taskHandler;
 	
 	public static void main(String[] args) throws IOException {
 		Server s = new Server();
@@ -28,6 +30,7 @@ public class Server {
 			server = new ServerSocket(port);
 			System.out.println("Connected to port: " + port);
 			
+			startTaskHandler();
 			listen();
 			
 		} catch (IOException e) {
@@ -37,38 +40,74 @@ public class Server {
 		}
 	}
 	
+	/** starts a thread to consume the bag of tasks */
+	private void startTaskHandler() {
+		taskHandler = new TaskHandler(game, this);
+		
+		Thread t = new Thread(taskHandler);
+		
+		t.start();
+		
+	}
+
 	// Listens to connections and add it to the arraylist
 	public void listen(){
 		System.out.println("Waiting for connections..");
 		
 		Socket tempSocket = null;
-		boolean running = true;
+		boolean RUNNING = true;
 		
 		try {
-			while (running) {
+			while (RUNNING) {
 				if((tempSocket = server.accept()) != null){
 					System.out.println("Accepted: " + tempSocket.getInetAddress());
-					ServerConnectionHandler c = new ServerConnectionHandler(tempSocket, game);
+					Player p = new Player(connectionCount, "unknown", 0, 0);
+					ServerConnectionHandler c = new ServerConnectionHandler(tempSocket, taskHandler, p);
 					connections.add(c);
 					connectionCount++;
 					
 					Thread t = new Thread(c);
 					
 					t.start();
-					
-					sendToAll("connected " + connectionCount);
-					
 				}
 			}
+			
+			System.out.println("Shutdown server..");
 		} catch (Exception e) {
-			System.err.println("Listen error");
+			System.err.println("Error while listening for new connections.");
 		}
-
 	}
 	
-	public void sendToAll(String msg) {
-		for (int i = 0; i < connections.size(); i++) {
-			connections.get(i).send(msg);
+	public ArrayList<ServerConnectionHandler> getConnections() {
+		return connections;
+	}
+
+	public void disconnectedUser(Player p) {
+		connections.remove(p.getConnection());
+	}
+
+	public void sendToAll(String text) {
+		for (ServerConnectionHandler h : connections) {
+			h.out.println(text);
+		}
+	}
+	
+	public void sendToAllBut(Player player, String text) {
+		for (ServerConnectionHandler h : connections) {
+			if (player == null)
+				System.out.println("null");
+			if (h.player.getID() != player.getID()) {
+				h.out.println(text);
+			}
+		}
+	}
+
+	public void sendToPlayer(Player player, String string) {
+		for (ServerConnectionHandler h : connections) {
+			if (h.player.getID() == player.getID()) {
+				h.out.println(string);
+				break;
+			}				
 		}
 	}
 }

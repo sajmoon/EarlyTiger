@@ -2,6 +2,7 @@ package pps.et.server;
 
 import java.util.LinkedList;
 
+import pps.et.logic.GameHandler;
 import pps.et.server.tasks.Task;
 
 public class TaskHandler implements Runnable {

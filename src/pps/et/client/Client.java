@@ -21,9 +21,11 @@ public class Client extends Thread{
 			nick = args[0];
 		}
 		
+
+		Player p = new Player(0, nick, 0, 0);
+		
 		cch = new ClientGameHandler(nick);
 		
-		Player p = new Player(0, nick, 0, 0);
 		
 		cs = new ClientSwing(c, p, cch);
 		

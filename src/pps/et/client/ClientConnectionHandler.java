@@ -1,16 +1,20 @@
 package pps.et.client;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.Socket;
 
-public class ClientConnectionHandler extends Thread{
+import pps.et.logic.ConnectionHandler;
+
+public class ClientConnectionHandler implements ConnectionHandler{
 	
-	private Socket s;
-	private PrintStream out;
+	private Socket 			s;
+	private PrintStream 	out;
 	private BufferedReader indata;
-	private boolean active;
-	private String text;
+	private boolean 		active;
+	private String 			text;
 	
-	static BufferedReader in = null;
+	static BufferedReader 	in = null;
 
 	
 	public ClientConnectionHandler(String ip, int port){

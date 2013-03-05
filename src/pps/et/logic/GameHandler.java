@@ -1,9 +1,9 @@
-package pps.et.server;
+package pps.et.logic;
 
 import java.util.ArrayList;
 
-import pps.et.logic.GameMap;
-import pps.et.logic.Player;
+import pps.et.server.Server;
+import pps.et.server.ServerConnectionHandler;
 
 public class GameHandler {
 	public GameMap map;

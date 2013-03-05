@@ -1,18 +1,29 @@
 package pps.et.client;
 
+import pps.et.logic.GameMap;
+
 public class ClientGameHandler {
 	private String nick;
+	private GameMap map;
 	ClientConnectionHandler csh;
 	
 	public ClientGameHandler(String nick){
+		map = new GameMap();
 		this.nick = nick;
 		try {
 			csh = new ClientConnectionHandler("localhost", 4711);
-			csh.start();
+			Thread t = new Thread(csh);
+			t.start();
+			
+			// Set nick
+			csh.send("nick " + nick);
+				
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.err.println("Error connectiong to server");
 		}
-		csh.send("nick " + nick);
 	}
 
+	public GameMap getMap() {
+		return map;
+	}
 }

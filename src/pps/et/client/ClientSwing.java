@@ -70,11 +70,12 @@ public class ClientSwing implements Runnable, KeyListener{
 	}
 
 	public ClientSwing(Client client, Player player, ClientGameHandler cch){
-		this.client = client;
-		this.player = player;
-		this.cch 	=  cch;
+		this.client 	= client;
+		this.player 	= player;
+		this.cch 		= cch;
+		this.map 		= cch.getMap();
+		
 		SwingUtilities.invokeLater(this);
-		map = new GameMap();
 		labels = new JLabel[map.getSize()][map.getSize()];
 		
 	}

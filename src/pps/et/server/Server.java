@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
 
 public class Server {

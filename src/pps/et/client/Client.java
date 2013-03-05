@@ -9,7 +9,6 @@ public class Client implements ConnectionInterface {
 	
 	static private ClientConnectionHandler cch;
 	static private GameHandler game;
-	
 	public Client(){
 	}
 	
@@ -24,11 +23,11 @@ public class Client implements ConnectionInterface {
 		}
 		
 		game = new GameHandler(client);
-		Player player = new Player(0, nick, 0, 0);
+		Player p = new Player(0, nick, 0, 0);
 //		game.addPlayer(player);
 		
 		try {
-			cch = new ClientConnectionHandler("localhost", 4711, game);
+			cch = new ClientConnectionHandler("localhost", 4711, game, p);
 			
 			Thread t = new Thread(cch);
 			t.start();
@@ -40,7 +39,7 @@ public class Client implements ConnectionInterface {
 			System.err.println("Error connectiong to server");
 		}
 		
-		cs = new ClientSwing(cch, player, game);
+		cs = new ClientSwing(cch, p, game);
 		
 	}
 

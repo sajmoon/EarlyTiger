@@ -20,6 +20,7 @@ public class TaskHandler implements Runnable {
 	public synchronized void addTask(Task t) {
 		t.game 		= game;
 		t.server	= server;
+		
 		tasks.add(t);
 	}
 	

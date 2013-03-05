@@ -7,6 +7,7 @@ import java.net.Socket;
 import pps.et.logic.ConnectionHandler;
 import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
+import pps.et.server.Server;
 
 public class ClientConnectionHandler implements ConnectionHandler{
 	
@@ -16,15 +17,17 @@ public class ClientConnectionHandler implements ConnectionHandler{
 	private boolean 		active;
 	private String 			text;
 	private GameHandler 	game;
+	private Player 			currentPlayer;
 	
 	static BufferedReader in = null;
 
 	
-	public ClientConnectionHandler(String ip, int port, GameHandler game){
-		this.game 	= game;
+	public ClientConnectionHandler(String ip, int port, GameHandler game, Player p){
+		this.game 		= game;
 		
-		active 		= true;
-		indata 		= new BufferedReader(new InputStreamReader(System.in));
+		active 			= true;
+		currentPlayer 	= p;
+		indata 			= new BufferedReader(new InputStreamReader(System.in));
 		
 		try {
 			s = new Socket(ip,port);
@@ -60,16 +63,27 @@ public class ClientConnectionHandler implements ConnectionHandler{
 	private void processInput(String data) {
 		System.out.println("got: " + data);
 		String[] inputs = data.split(" ");
-		if (inputs[0].equals("player")) {
+		if (inputs[0].equals("you")) {
+			if (inputs[1].equals("id")) {
+				currentPlayer.setID(Integer.parseInt(inputs[2]));
+				game.addPlayer(currentPlayer);
+			}
+		} else if (inputs[0].equals("player")) {
 			if (inputs[1].equals("connected")) {
+				System.out.println("new player connected");
 				// player connected :id nick :nick
 				int id = Integer.parseInt( inputs[2] );
-				String newNick = inputs[4]; // TODO FUUUU!
-				Player newPlayer = new Player(id, newNick, 0, 0); 
-				game.addPlayer(newPlayer);
+				
+				// dont add self
+				if (id != currentPlayer.getID()) {
+					String newNick = inputs[4]; // TODO FUUUU!
+					Player newPlayer = new Player(id, newNick, 0, 0); 
+					game.addPlayer(newPlayer);
+				}
 				
 			} else if (inputs[2].equals("at")) {
 				// "player :id at :x :y
+				System.out.println(inputs);
 				int playerId = Integer.parseInt(inputs[1]);
 				int x = Integer.parseInt(inputs[3]);
 				int y = Integer.parseInt(inputs[4]);

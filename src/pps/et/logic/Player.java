@@ -41,7 +41,7 @@ public class Player {
 	}
 	
 	public String getPos() {
-		return "x:" + x + " y:" + y;
+		return "" + x + " " + y;
 	}
 
 	public boolean isAt(int x, int y) {
@@ -52,5 +52,9 @@ public class Player {
 	
 	public int getID() {
 		return id;
+	}
+
+	public void setID(int newID) {
+		id = newID;
 	}
 }

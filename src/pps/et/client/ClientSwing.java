@@ -35,7 +35,7 @@ public class ClientSwing implements Runnable, KeyListener{
 			System.out.println("s");
 			for (int n = 0; n < map.getSize(); n++) {
 				String text = "";
-				if (player.at(i, n)) {
+				if (player.isAt(i, n)) {
 					System.out.println("player at this tile");
 					text = "@";
 				}
@@ -103,7 +103,7 @@ public class ClientSwing implements Runnable, KeyListener{
 		
 		for (int i = 0; i < map.getSize(); i++) {
 			for (int j = 0; j < map.getSize(); j++) {
-				if (player.at(i, j)) {
+				if (player.isAt(i, j)) {
 					labels[j][i].setText("@");
 				} else {
 					labels[j][i].setText("");

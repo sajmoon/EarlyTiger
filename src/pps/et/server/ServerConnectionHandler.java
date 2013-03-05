@@ -12,10 +12,10 @@ import pps.et.server.tasks.ConnectionTask;
 import pps.et.server.tasks.Move;
 
 public class ServerConnectionHandler implements Runnable {
-	PrintWriter out;
-	String inputLine, outputLine;
-	BufferedReader in;
-	Socket clientSocket;
+	private PrintWriter out;
+	private String inputLine, outputLine;
+	private BufferedReader in;
+	private Socket clientSocket;
 	
 	TaskHandler th;
 	Player player;
@@ -31,7 +31,6 @@ public class ServerConnectionHandler implements Runnable {
 			in 			= new BufferedReader(new InputStreamReader(client.getInputStream()));
 			
 			taskHandler.addTask(new ConnectionTask(p));
-			System.out.println("Client connected");
 			
 		} catch (Exception e) {
 			
@@ -47,7 +46,7 @@ public class ServerConnectionHandler implements Runnable {
 		// map
 		
 		// go r/l/u/d xpos/ypos
-		System.out.println("process");
+		
 		if (args[0].startsWith("nick")) {
 			setNick(input);
 			th.addTask(new Chat(player, "nich changed"));
@@ -64,11 +63,9 @@ public class ServerConnectionHandler implements Runnable {
 	}
 
 	public void run() {
-		System.out.println("run");
 		
 		try {
 			while ((inputLine = in.readLine()) != null) {
-				System.out.println(inputLine);
 			    processInput(inputLine);
 			}
 			System.out.println("Client " + getNick() + " disconnected");

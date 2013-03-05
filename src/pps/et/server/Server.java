@@ -82,30 +82,34 @@ public class Server {
 		return connections;
 	}
 
+	@Deprecated
 	public void disconnectedUser(Player p) {
-		connections.remove(p.getConnection());
+		//connections.remove(p.getConnection());
 	}
 
 	public void sendToAll(String text) {
+		System.out.println("ALL: " + text);
 		for (ServerConnectionHandler h : connections) {
-			h.out.println(text);
+			h.send(text);
 		}
 	}
 	
 	public void sendToAllBut(Player player, String text) {
+		System.out.println("ALL -" + player.getID() + ": " + text);
 		for (ServerConnectionHandler h : connections) {
 			if (player == null)
 				System.out.println("null");
 			if (h.player.getID() != player.getID()) {
-				h.out.println(text);
+				h.send(text);
 			}
 		}
 	}
 
 	public void sendToPlayer(Player player, String string) {
+		System.out.println("TO: " + player.getID() + " " + string);
 		for (ServerConnectionHandler h : connections) {
 			if (h.player.getID() == player.getID()) {
-				h.out.println(string);
+				h.send(string);
 				break;
 			}				
 		}

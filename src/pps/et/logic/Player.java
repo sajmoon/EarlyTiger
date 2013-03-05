@@ -25,8 +25,8 @@ public class Player {
 		nick = input;
 	}
 
-	public void move(String direction) {
-		System.out.println("'" + direction + "'");
+	public synchronized void move(String direction) {
+		// TODO check if valid move
 		if (direction.equals("R"))
 			x++;
 		else if (direction.equals( "L"))
@@ -36,25 +36,20 @@ public class Player {
 		else if (direction.equals("D"))
 			y--;
 		else 
-			System.err.println("not");
+			System.err.println("ERROR: unknown direction");
 		
 		
-		System.out.println("player pos: " + getPos());
+		System.out.println(getNick() + " moved " + direction + " to " + getPos());
 	}
 	
 	public String getPos() {
 		return "x:" + x + " y:" + y;
 	}
 
-	public boolean at(int x, int y) {
+	public boolean isAt(int x, int y) {
 		if (this.x == x && this.y == y)
 			return true;
 		return false;
-	}
-
-	public Object getConnection() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	public int getID() {

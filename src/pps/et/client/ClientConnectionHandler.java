@@ -6,6 +6,7 @@ import java.net.Socket;
 
 import pps.et.logic.ConnectionHandler;
 import pps.et.logic.GameHandler;
+import pps.et.logic.Player;
 
 public class ClientConnectionHandler implements ConnectionHandler{
 	
@@ -60,7 +61,14 @@ public class ClientConnectionHandler implements ConnectionHandler{
 		System.out.println("got: " + data);
 		String[] inputs = data.split(" ");
 		if (inputs[0].equals("player")) {
-			if (inputs[2].equals("at")) {
+			if (inputs[1].equals("connected")) {
+				// player connected :id nick :nick
+				int id = Integer.parseInt( inputs[2] );
+				String newNick = inputs[4]; // TODO FUUUU!
+				Player newPlayer = new Player(id, newNick, 0, 0); 
+				game.addPlayer(newPlayer);
+				
+			} else if (inputs[2].equals("at")) {
 				// "player :id at :x :y
 				int playerId = Integer.parseInt(inputs[1]);
 				int x = Integer.parseInt(inputs[3]);

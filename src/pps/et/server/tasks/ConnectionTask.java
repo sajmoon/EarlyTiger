@@ -10,8 +10,8 @@ public class ConnectionTask extends Task {
 
 	@Override
 	public void consume() {
-		String text = "Player " + player.getNick() + " connected..";
-		server.sendToPlayer(player, "connected " + player.getID());
+		String text = "player connected " + player.getID() + " " + player.getNick();
+//		server.sendToPlayer(player, "connected " + player.getID());
 		server.sendToAll(text);
 	}
 

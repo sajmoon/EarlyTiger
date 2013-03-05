@@ -25,6 +25,7 @@ public class Client implements ConnectionInterface {
 		
 		game = new GameHandler(client);
 		Player player = new Player(0, nick, 0, 0);
+//		game.addPlayer(player);
 		
 		try {
 			cch = new ClientConnectionHandler("localhost", 4711, game);

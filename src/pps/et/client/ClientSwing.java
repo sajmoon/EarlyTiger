@@ -46,13 +46,16 @@ public class ClientSwing implements Runnable, KeyListener{
 		JPanel grid = new JPanel();
 		grid.setLayout(new GridLayout(map.getSize(), map.getSize()));
 		for (int i = map.getSize() -1; i >= 0; i--) {
-			System.out.println("s");
 			for (int n = 0; n < map.getSize(); n++) {
 				String text = "";
+				if (game.playerAt(i, n)) {
+					text = "#";
+				}
 				if (player.isAt(i, n)) {
 					System.out.println("player at this tile");
 					text = "@";
 				}
+				
 				JLabel j = new JLabel(text, SwingConstants.CENTER);
 				j.setOpaque(true);
 				int tileCode = map.getTileCode(i, n);
@@ -75,7 +78,7 @@ public class ClientSwing implements Runnable, KeyListener{
 
 		frame.setVisible(true);
 		try {
-			Thread.sleep(200);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -104,14 +107,16 @@ public class ClientSwing implements Runnable, KeyListener{
 			connection.send("move D");
 		}
 		
-		
 		for (int i = 0; i < map.getSize(); i++) {
 			for (int j = 0; j < map.getSize(); j++) {
 				if (player.isAt(i, j)) {
-					labels[j][i].setText("@");
+					labels[j][i].setText("&");
+				} else if (game.playerAt(i, j)) {
+					labels[j][i].setText("#");
 				} else {
 					labels[j][i].setText("");
 				}
+				
 			}
 		}
 	}

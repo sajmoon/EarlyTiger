@@ -7,7 +7,7 @@ import pps.et.server.Server;
 public class GameHandler {
 	public GameMap map;
 	ConnectionInterface connector;
-	ArrayList<Player> players;
+	public ArrayList<Player> players;
 	
 	public GameHandler(ConnectionInterface i) {
 		map = new GameMap();
@@ -20,6 +20,7 @@ public class GameHandler {
 	}
 	
 	public void addPlayer(Player p) {
+		System.out.println("newplayer added" + p.getID() + " size: " + players.size());
 		players.add(p);
 	}
 
@@ -46,5 +47,14 @@ public class GameHandler {
 	
 	public void send(String text) {
 		connector.send(text);
+	}
+
+	public boolean playerAt(int i, int n) {
+		for (Player p : players) {
+			if ( (p.x == i) && (p.y == n) ) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

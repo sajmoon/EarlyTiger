@@ -19,6 +19,7 @@ public class ServerConnectionHandler implements ConnectionHandler {
 	private Socket clientSocket;
 	
 	TaskHandler th;
+	
 	Player player;
 	
 	public ServerConnectionHandler(Socket client, TaskHandler taskHandler, Player p) {
@@ -47,7 +48,6 @@ public class ServerConnectionHandler implements ConnectionHandler {
 		// map
 		
 		// go r/l/u/d xpos/ypos
-		
 		if (args[0].startsWith("nick")) {
 			setNick(input);
 			th.addTask(new Chat(player, "nich changed"));
@@ -80,6 +80,7 @@ public class ServerConnectionHandler implements ConnectionHandler {
 		out.println(msg);
 		out.flush();
 	}
+	
 	
 	public String getNick() {
 		return player.getNick();

@@ -5,10 +5,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import pps.et.logic.ConnectionInterface;
 import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
 
-public class Server {
+public class Server implements ConnectionInterface {
 	static int port = 4711;
 	ServerSocket server;
 	ArrayList<ServerConnectionHandler> connections;
@@ -63,6 +64,7 @@ public class Server {
 				if((tempSocket = server.accept()) != null){
 					System.out.println("Accepted: " + tempSocket.getInetAddress());
 					Player p = new Player(connectionCount, "unknown", 0, 0);
+					
 					ServerConnectionHandler c = new ServerConnectionHandler(tempSocket, taskHandler, p);
 					connections.add(c);
 					connectionCount++;
@@ -113,6 +115,13 @@ public class Server {
 				h.send(string);
 				break;
 			}				
+		}
+	}
+
+	@Override
+	public void send(String text) {
+		for (ServerConnectionHandler h : connections) {
+			h.send(text);
 		}
 	}
 }

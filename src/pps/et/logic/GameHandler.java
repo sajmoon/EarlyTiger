@@ -3,24 +3,18 @@ package pps.et.logic;
 import java.util.ArrayList;
 
 import pps.et.server.Server;
-import pps.et.server.ServerConnectionHandler;
 
 public class GameHandler {
 	public GameMap map;
-	Server server;
+	ConnectionInterface connector;
 	ArrayList<Player> players;
 	
-	public GameHandler(Server s) {
+	public GameHandler(ConnectionInterface i) {
 		map = new GameMap();
 		players = new ArrayList<Player>();
-		server = s;
+		connector = i;
 	}
 	
-	public void sendChat(ServerConnectionHandler connection, String msg) {
-		String output = "|" +  connection.getNick() + "| " + msg;
-		//server.sendToAll(output);
-	}
-
 	public GameMap getMap() {
 		return map;
 	}
@@ -38,8 +32,19 @@ public class GameHandler {
 
 	public void disconnectedUser(Player p) {
 		players.remove(p);
-		server.disconnectedUser(p);
-		
+		//connector.disconnectedUser(p);
+	}
+
+	public void setPos(int playerId, int x, int y) {
+		for (Player p : players) {
+			if (p.getID() == playerId) {
+				p.x = x;
+				p.y = y;
+			}
+		}
 	}
 	
+	public void send(String text) {
+		connector.send(text);
+	}
 }

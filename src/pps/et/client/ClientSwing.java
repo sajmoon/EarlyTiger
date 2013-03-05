@@ -14,15 +14,29 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import pps.et.logic.ConnectionHandler;
+import pps.et.logic.GameHandler;
 import pps.et.logic.GameMap;
 import pps.et.logic.Player;
 
 public class ClientSwing implements Runnable, KeyListener{
-	private Client client;
+//	private Client client;
+	private ConnectionHandler connection;
 	private Player player;
-	private ClientGameHandler cch;
+	private GameHandler game;
 	JLabel[][] labels;
 	GameMap map;
+	
+	public ClientSwing(ClientConnectionHandler connection, Player player, GameHandler game){
+		this.connection	= connection;
+		this.player 	= player;
+		this.game 		= game;
+		this.map 		= game.getMap();
+		
+		SwingUtilities.invokeLater(this);
+		labels = new JLabel[map.getSize()][map.getSize()];
+		
+	}
 	
 	@Override
 	public void run() {
@@ -69,17 +83,6 @@ public class ClientSwing implements Runnable, KeyListener{
 		
 	}
 
-	public ClientSwing(Client client, Player player, ClientGameHandler cch){
-		this.client 	= client;
-		this.player 	= player;
-		this.cch 		= cch;
-		this.map 		= cch.getMap();
-		
-		SwingUtilities.invokeLater(this);
-		labels = new JLabel[map.getSize()][map.getSize()];
-		
-	}
-
 	@Override
 	public void keyTyped(KeyEvent e) {
 		//    	System.out.println(e.getKeyCode());
@@ -89,16 +92,16 @@ public class ClientSwing implements Runnable, KeyListener{
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 37) {
 			player.move("L");
-			cch.csh.send("move L");
+			connection.send("move L");
 		} else if (e.getKeyCode() == 38) {
 			player.move("U");
-			cch.csh.send("move U");
+			connection.send("move U");
 		} else if (e.getKeyCode() == 39) { 
 			player.move("R");
-			cch.csh.send("move R");
+			connection.send("move R");
 		} else if (e.getKeyCode() == 40) {
 			player.move("D");
-			cch.csh.send("move D");
+			connection.send("move D");
 		}
 		
 		

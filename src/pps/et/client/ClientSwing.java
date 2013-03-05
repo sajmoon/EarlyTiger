@@ -20,7 +20,7 @@ import pps.et.logic.Player;
 public class ClientSwing implements Runnable, KeyListener{
 	private Client client;
 	private Player player;
-	private ClientChatHandler cch;
+	private ClientGameHandler cch;
 	JLabel[][] labels;
 	GameMap map;
 	
@@ -69,7 +69,7 @@ public class ClientSwing implements Runnable, KeyListener{
 		
 	}
 
-	public ClientSwing(Client client, Player player, ClientChatHandler cch){
+	public ClientSwing(Client client, Player player, ClientGameHandler cch){
 		this.client = client;
 		this.player = player;
 		this.cch 	=  cch;

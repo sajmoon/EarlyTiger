@@ -4,7 +4,7 @@ import pps.et.logic.Player;
 
 public class Client extends Thread{
 	
-	static private ClientChatHandler cch;
+	static private ClientGameHandler cch;
 	static private ClientSwing cs;
 	
 	
@@ -12,6 +12,8 @@ public class Client extends Thread{
 	}
 	
 	public static void main(String[] args) {
+		System.out.println("Loading Early Tiger (ET)..");
+		
 		Client c = new Client();
 		String nick = "Random";
 		
@@ -19,9 +21,9 @@ public class Client extends Thread{
 			nick = args[0];
 		}
 		
-		cch = new ClientChatHandler(nick);
+		cch = new ClientGameHandler(nick);
 		
-		Player p = new Player(0, "Test", 0, 0);
+		Player p = new Player(0, nick, 0, 0);
 		
 		cs = new ClientSwing(c, p, cch);
 		

@@ -38,18 +38,21 @@ public class ClientConnectionHandler extends Thread{
 			try{
 				if(s.getInputStream().available() > 0){
 					in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-					System.out.println(in.readLine());
+					String data = in.readLine();
+					processInput(data);
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			
-			
 		}
 		System.out.println("Closing");
 	}
 	
 	
+	private void processInput(String data) {
+		
+	}
+
 	public void send(String message){
 		System.err.println("Sending: "+ message);
 		out.println(message);

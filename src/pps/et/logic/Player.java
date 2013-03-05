@@ -38,8 +38,6 @@ public class Player {
 		else 
 			System.err.println("ERROR: unknown direction");
 		
-		
-		System.out.println(getNick() + " moved " + direction + " to " + getPos());
 	}
 	
 	public String getPos() {

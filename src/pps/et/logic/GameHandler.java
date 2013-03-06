@@ -67,4 +67,14 @@ public class GameHandler {
 		}
 		return "";
 	}
+
+	public void disconnectedUserByID(int id) {
+		System.out.println("disconnect by id");
+		for (int i = 0; i < players.size(); i++) {
+			if (players.get(i).getID() == id) {
+				System.out.println("remove player from game");
+				players.remove(i);
+			}	
+		}
+	}
 }

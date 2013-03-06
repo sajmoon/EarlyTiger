@@ -12,7 +12,7 @@ public class Move extends Task {
 	
 	@Override
 	public void consume() {
-		player.move(direction);
+		game.movePlayer(player, direction);
 		server.sendToAll("player " + player.getID() + " at " + player.getPos());
 	}
 }

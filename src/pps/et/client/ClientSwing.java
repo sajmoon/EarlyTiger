@@ -93,16 +93,16 @@ public class ClientSwing implements Runnable, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 37) {
-			player.move("L");
+			game.movePlayer(player, "L");
 			connection.send("move L");
 		} else if (e.getKeyCode() == 38) {
-			player.move("U");
+			game.movePlayer(player, "U");
 			connection.send("move U");
 		} else if (e.getKeyCode() == 39) { 
-			player.move("R");
+			game.movePlayer(player, "R");
 			connection.send("move R");
 		} else if (e.getKeyCode() == 40) {
-			player.move("D");
+			game.movePlayer(player, "D");
 			connection.send("move D");
 		}
 	}

@@ -25,13 +25,20 @@ public class Player {
 		nick = input;
 	}
 
+	public void setPos(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+	
+	
+	@Deprecated
 	public synchronized void move(String direction) {
 		// TODO check if valid move
 		if (direction.equals("R"))
 			x++;
-		else if (direction.equals( "L"))
+		else if (direction.equals("L"))
 			x--;
-		else if (direction.equals( "U"))
+		else if (direction.equals("U"))
 			y++;
 		else if (direction.equals("D"))
 			y--;
@@ -56,5 +63,13 @@ public class Player {
 
 	public void setID(int newID) {
 		id = newID;
+	}
+	
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		return y;
 	}
 }

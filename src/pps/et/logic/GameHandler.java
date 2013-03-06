@@ -10,26 +10,38 @@ public class GameHandler {
 	public GameMap map;
 	ConnectionInterface connector;
 	public ArrayList<Player> players;
-	
+
 	public GameHandler(ConnectionInterface i) {
 		map = new GameMap();
 		players = new ArrayList<Player>();
 		connector = i;
 	}
-	
+
 	public GameMap getMap() {
 		return map;
 	}
-	
+
 	public void addPlayer(Player p) {
 		System.out.println("newplayer added" + p.getID() + " size: " + players.size());
 		players.add(p);
 	}
 
-	public void movePlayer(Player player, String string) {
-		//TODO check validity of move
-		player.move(string);
-		
+	public synchronized void movePlayer(Player player, String direction) {
+
+		System.out.println("movePlayer");
+		if (direction.equals("R"))
+			doMove(player, player.getX() + 1, player.getY());
+		else if (direction.equals("L"))
+			doMove(player, player.getX() - 1 , player.getY());
+		else if (direction.equals("U"))
+			doMove(player, player.getX(), player.getY() + 1);
+		else if (direction.equals("D"))
+			doMove(player, player.getX(), player.getY() - 1);
+		else 
+			System.err.println("ERROR: unknown direction");
+
+
+
 		//server.sendToAll("[" + player.getNick() + "] moved");
 	}
 
@@ -45,7 +57,7 @@ public class GameHandler {
 			}
 		}
 	}
-	
+
 	public void send(String text) {
 		connector.send(text);
 	}
@@ -76,5 +88,11 @@ public class GameHandler {
 				players.remove(i);
 			}	
 		}
+	}
+
+	private void doMove(Player p,int x, int y){
+		System.out.println("doMove x:" + x + " y: " + y);
+		if(x >= 0 && x < map.getSize() && y >= 0 && y < map.getSize())
+			p.setPos(x,y);
 	}
 }

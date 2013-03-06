@@ -48,8 +48,12 @@ public class ClientConnectionHandler implements ConnectionHandler{
 			try{
 				if(s.getInputStream().available() > 0){
 					in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-					String data = in.readLine();
-					processInput(data);
+					String data;
+					while ( (data = in.readLine() ) != null) {
+						System.out.println(data);
+						processInput(data);	
+					}
+					
 				}
 			} catch (Exception e) {
 				// TODO: handle exception

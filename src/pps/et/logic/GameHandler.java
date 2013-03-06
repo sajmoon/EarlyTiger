@@ -35,7 +35,6 @@ public class GameHandler {
 
 	public void disconnectedUser(Player p) {
 		players.remove(p);
-		//connector.disconnectedUser(p);
 	}
 
 	public void setPos(int playerId, int x, int y) {

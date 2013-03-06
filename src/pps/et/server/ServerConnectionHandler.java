@@ -10,6 +10,7 @@ import pps.et.logic.ConnectionHandler;
 import pps.et.logic.Player;
 import pps.et.server.tasks.Chat;
 import pps.et.server.tasks.ConnectionTask;
+import pps.et.server.tasks.DisconnectedTask;
 import pps.et.server.tasks.Move;
 
 public class ServerConnectionHandler implements ConnectionHandler {
@@ -70,6 +71,7 @@ public class ServerConnectionHandler implements ConnectionHandler {
 			    processInput(inputLine);
 			}
 			System.out.println("Client " + getNick() + " disconnected");
+			th.addTask(new DisconnectedTask(player));
 			//game.disconnectedUser(player);
 		} catch (IOException e) {
 			e.printStackTrace();

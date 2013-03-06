@@ -7,7 +7,6 @@ import java.net.Socket;
 import pps.et.logic.ConnectionHandler;
 import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
-import pps.et.server.Server;
 
 public class ClientConnectionHandler implements ConnectionHandler{
 	
@@ -83,7 +82,7 @@ public class ClientConnectionHandler implements ConnectionHandler{
 				
 			} else if (inputs[2].equals("at")) {
 				// "player :id at :x :y
-				System.out.println(inputs);
+				System.out.println("at:" + inputs);
 				int playerId = Integer.parseInt(inputs[1]);
 				int x = Integer.parseInt(inputs[3]);
 				int y = Integer.parseInt(inputs[4]);

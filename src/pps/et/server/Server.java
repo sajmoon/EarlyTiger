@@ -67,6 +67,7 @@ public class Server implements ConnectionInterface {
 					
 					ServerConnectionHandler c = new ServerConnectionHandler(tempSocket, taskHandler, p);
 					connections.add(c);
+					game.addPlayer(p);
 					connectionCount++;
 					
 					Thread t = new Thread(c);
@@ -109,9 +110,9 @@ public class Server implements ConnectionInterface {
 	}
 
 	public void sendToPlayer(Player player, String string) {
-		System.out.println("TO: " + player.getID() + " " + string);
 		for (ServerConnectionHandler h : connections) {
 			if (h.player.getID() == player.getID()) {
+				System.out.println("TO " + player.getID() + ": " + string);
 				h.send(string);
 				break;
 			}				

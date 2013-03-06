@@ -20,26 +20,22 @@ import pps.et.logic.GameMap;
 import pps.et.logic.Player;
 
 public class ClientSwing implements Runnable, KeyListener{
-//	private Client client;
+	//	private Client client;
 	private ConnectionHandler connection;
 	private Player player;
 	private GameHandler game;
+	private boolean shouldUpdateView = false;
 	JLabel[][] labels;
 	GameMap map;
-	
+
 	public ClientSwing(ClientConnectionHandler connection, Player player, GameHandler game){
 		this.connection	= connection;
 		this.player 	= player;
 		this.game 		= game;
 		this.map 		= game.getMap();
-		
+
 		SwingUtilities.invokeLater(this);
 		labels = new JLabel[map.getSize()][map.getSize()];
-		
-	}
-	
-	@Override
-	public void run() {
 
 		ImageIcon sky = new ImageIcon ("/home/sten/Code/EarlyTiger/bin/tile.png");
 
@@ -55,12 +51,12 @@ public class ClientSwing implements Runnable, KeyListener{
 					System.out.println("player at this tile");
 					text = "@";
 				}
-				
+
 				JLabel j = new JLabel(text, SwingConstants.CENTER);
 				j.setOpaque(true);
 				int tileCode = map.getTileCode(i, n);
 				j.setForeground(Color.red);
-				
+
 				if (tileCode == 0)
 					j.setBackground(Color.blue);
 				else if (tileCode == 1)
@@ -77,13 +73,21 @@ public class ClientSwing implements Runnable, KeyListener{
 		frame.addKeyListener(this);
 
 		frame.setVisible(true);
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		shouldUpdateView = true;
+
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			updateView();
+			try {
+				Thread.sleep(500);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 		}
-		
 	}
 
 	@Override
@@ -106,7 +110,9 @@ public class ClientSwing implements Runnable, KeyListener{
 			player.move("D");
 			connection.send("move D");
 		}
-		
+	}
+
+	public void updateView() {
 		for (int i = 0; i < map.getSize(); i++) {
 			for (int j = 0; j < map.getSize(); j++) {
 				if (player.isAt(i, j)) {
@@ -116,7 +122,6 @@ public class ClientSwing implements Runnable, KeyListener{
 				} else {
 					labels[j][i].setText("");
 				}
-				
 			}
 		}
 	}

@@ -41,6 +41,15 @@ public class Client implements ConnectionInterface {
 		
 		cs = new ClientSwing(cch, p, game);
 		
+		try {
+			Thread.sleep(200);
+		} catch (Exception e) {
+			System.out.println("no sleep");
+		}
+		
+		Thread swing = new Thread(cs);
+		swing.start();
+		
 	}
 
     public void movePlayer(String direction){

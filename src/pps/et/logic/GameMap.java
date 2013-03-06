@@ -65,4 +65,9 @@ public class GameMap implements Serializable {
 	public int getTileCode(int x, int y) {
 		return map[x][y];
 	}
+	
+	public int at(int i, int j) {
+		return map[i][j];
+	}
 }
+

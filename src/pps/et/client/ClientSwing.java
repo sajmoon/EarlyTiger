@@ -20,11 +20,10 @@ import pps.et.logic.GameMap;
 import pps.et.logic.Player;
 
 public class ClientSwing implements Runnable, KeyListener{
-	//	private Client client;
+	//private Client client;
 	private ConnectionHandler connection;
 	private Player player;
 	private GameHandler game;
-	private boolean shouldUpdateView = false;
 	JLabel[][] labels;
 	GameMap map;
 
@@ -36,8 +35,6 @@ public class ClientSwing implements Runnable, KeyListener{
 
 		SwingUtilities.invokeLater(this);
 		labels = new JLabel[map.getSize()][map.getSize()];
-
-		ImageIcon sky = new ImageIcon ("/home/sten/Code/EarlyTiger/bin/tile.png");
 
 		JPanel grid = new JPanel();
 		grid.setLayout(new GridLayout(map.getSize(), map.getSize()));
@@ -73,9 +70,6 @@ public class ClientSwing implements Runnable, KeyListener{
 		frame.addKeyListener(this);
 
 		frame.setVisible(true);
-
-		shouldUpdateView = true;
-
 	}
 
 	@Override

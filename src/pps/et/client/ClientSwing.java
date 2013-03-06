@@ -33,7 +33,6 @@ public class ClientSwing implements Runnable, KeyListener{
 		this.game 		= game;
 		this.map 		= game.getMap();
 
-		SwingUtilities.invokeLater(this);
 		labels = new JLabel[map.getSize()][map.getSize()];
 
 		JPanel grid = new JPanel();
@@ -70,6 +69,8 @@ public class ClientSwing implements Runnable, KeyListener{
 		frame.addKeyListener(this);
 
 		frame.setVisible(true);
+		
+
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package pps.et.logic;
 
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import pps.et.server.Server;
 
 public class GameHandler {
@@ -56,5 +58,14 @@ public class GameHandler {
 			}
 		}
 		return false;
+	}
+
+	public String playerIdAt(int x, int y) {
+		for (Player p : players) {
+			if (p.x == x && p.y == y) {
+				return p.getNick();
+			}
+		}
+		return "";
 	}
 }

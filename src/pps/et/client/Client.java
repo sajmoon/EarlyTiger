@@ -18,7 +18,7 @@ public class Client implements ConnectionInterface {
 		Client client = new Client();
 		String nick = "Random";
 		
-		if (args.length > 1) {
+		if (args.length > 0) {
 			nick = args[0];
 		}
 		

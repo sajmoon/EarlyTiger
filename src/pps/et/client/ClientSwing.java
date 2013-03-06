@@ -109,13 +109,8 @@ public class ClientSwing implements Runnable, KeyListener{
 	public void updateView() {
 		for (int i = 0; i < map.getSize(); i++) {
 			for (int j = 0; j < map.getSize(); j++) {
-				if (player.isAt(i, j)) {
-					labels[j][i].setText("&");
-				} else if (game.playerAt(i, j)) {
-					labels[j][i].setText("#");
-				} else {
-					labels[j][i].setText("");
-				}
+				labels[j][i].setText( game.playerIdAt(i, j) );
+				
 			}
 		}
 	}

@@ -16,17 +16,13 @@ public class ConnectionTask extends Task {
 		
 		server.send(text);
 		
-		
 		System.out.println("size(): "  + this.game.players.size());
 		for (Player p : this.game.players) {
-			try {
-			//	Thread.sleep(100);
-				
-			} catch (Exception e) {
-			
-			}
 			String t = "player connected " + p.getID() + " " + p.getNick();
 			server.sendToPlayer(player, t);
+			
+			String pos = "player " + p.getID() + " at " + p.getPos();
+			server.sendToPlayer(player, pos);
 		}
 	}
 }

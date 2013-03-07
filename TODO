@@ -1,0 +1,39 @@
+TODO
+====
+
+Att saker händer när minor sprängs.
+Lägga till saker vi vill ha.
+- destructable walls/object
+- indestructable walls.
+
+Saker pa entities:
+- Liv
+- destructable/indestructable boolean
+- Skada
+- action
+
+
+- man maste kunna dö.
+- man maste kunna forsvinna och respawn.
+
+- teams.
+- olika spawn places.
+
+- Startskarm
+- val av nick
+
+Chat
+- textruta pa en ruta.
+- Visa textmedelanden man far. 
+
+Spelide:
+- skjuta rakt fram.
+- close combat. kniv pa nara hall.
+- last man standing.
+
+Andra kartan till en hashmap med key som pair.
+Ta bort matrix, kor bara entities.
+
+- Ga igenom all kod och kolla sync.
+- notify och wait.
+-  

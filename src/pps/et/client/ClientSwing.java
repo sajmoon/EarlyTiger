@@ -1,18 +1,19 @@
 package pps.et.client;
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.ImageIcon;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
+import javax.swing.border.BevelBorder;
 
 import pps.et.logic.ConnectionHandler;
 import pps.et.logic.GameHandler;
@@ -35,8 +36,12 @@ public class ClientSwing implements Runnable, KeyListener{
 
 		labels = new JLabel[map.getSize()][map.getSize()];
 
-		JPanel grid = new JPanel();
-		grid.setLayout(new GridLayout(map.getSize(), map.getSize()));
+		JFrame frame = new JFrame("PPS13");
+		frame.setLayout(new BorderLayout());
+
+		JPanel gameGrid = new JPanel();
+		
+		gameGrid.setLayout(new GridLayout(map.getSize(), map.getSize()));
 		for (int i = map.getSize() -1; i >= 0; i--) {
 			for (int n = 0; n < map.getSize(); n++) {
 				String text = "";
@@ -57,17 +62,35 @@ public class ClientSwing implements Runnable, KeyListener{
 					j.setBackground(Color.blue);
 				else if (tileCode == 1)
 					j.setBackground(Color.white);
-				grid.add(j);
+				gameGrid.add(j);
 				labels[i][n] = j;
 			}
 		}
-		JFrame frame = new JFrame("PPS13");
+		
+		// create the status bar panel and shove it down the bottom of the frame
+		JPanel statusPanel = new JPanel();
+		statusPanel.setLayout(new GridLayout(1,3));
+		statusPanel.setBorder(new BevelBorder(BevelBorder.LOWERED));
+		
+		statusPanel.setPreferredSize(new Dimension(frame.getWidth(), 16));
+		statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.X_AXIS));
+		
+		JLabel statusLabel = new JLabel("status");
+		JLabel ammoLabel = new JLabel("Ammo");
+		JLabel healthLabel = new JLabel("Health");
+		
+		statusPanel.add(statusLabel, BorderLayout.WEST);
+		statusPanel.add(ammoLabel, BorderLayout.CENTER);
+		statusPanel.add(healthLabel, BorderLayout.EAST);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setPreferredSize(new Dimension(640, 400));
-		frame.add(grid);
+		frame.add(gameGrid);
 		frame.pack();
 		frame.addKeyListener(this);
 
+		frame.add(statusPanel, BorderLayout.SOUTH);
+		
 		frame.setVisible(true);
 		
 
@@ -112,10 +135,14 @@ public class ClientSwing implements Runnable, KeyListener{
 			connection.send("move D");
 		} else if (e.getKeyCode() == 27) {
 			//escape
+			connection.quit();
 		} else if (e.getKeyCode() == 32) {
 			// Space
 		} else if (e.getKeyCode() == 10) {
 			// enter
+		} else if (e.getKeyCode() == 84) {
+			// t
+			// for talk/chat
 		} else {
 			System.out.println("Keypres: " + e.getKeyCode());
 		}

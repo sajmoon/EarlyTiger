@@ -109,4 +109,9 @@ public class ClientConnectionHandler implements ConnectionHandler{
 		System.err.println("Sending: "+ message);
 		out.println(message);
 	}
+
+	@Override
+	public void quit() {
+		
+	}
 }

@@ -100,4 +100,10 @@ public class ServerConnectionHandler implements ConnectionHandler {
 			System.out.println("error sending map");
 		}
 	}
+
+	@Override
+	public void quit() {
+		// TODO Auto-generated method stub
+		
+	}
 }

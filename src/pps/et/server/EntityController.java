@@ -14,7 +14,14 @@ public class EntityController implements Runnable {
 	public void run() {
 		while (true) {
 			for (Entity e : game.getEntities()) {
-				System.out.println(e.getName());
+				if (e.canActivate()) {
+					System.out.println("BOOM!");
+				}
+			}
+			try {
+				Thread.sleep(100);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			
 		}	

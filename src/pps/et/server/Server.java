@@ -44,7 +44,7 @@ public class Server implements ConnectionInterface {
 	}
 	
 	private void startEntityController() {
-		new Thread(new EntityController(game));
+		new Thread(new EntityController(game)).start();
 	}
 
 	/** starts threads to consume the bag of tasks */

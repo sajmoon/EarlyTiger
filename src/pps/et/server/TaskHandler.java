@@ -34,7 +34,7 @@ public class TaskHandler {
 		tasks.add(t);
 	}
 	
-	public synchronized Task getTask() {
+	public synchronized Task getNextTask() {
 		if (tasks.isEmpty())
 			return null;
 		return tasks.poll();

@@ -15,7 +15,7 @@ public class TaskConsumer implements Runnable {
 	@Override
 	public void run() {
 		while (RUNNING) {
-			Task task = t.getTask();
+			Task task = t.getNextTask();
 			if (task != null)
 				task.consume();
 			else {

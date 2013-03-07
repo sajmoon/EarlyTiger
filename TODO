@@ -6,34 +6,34 @@ Lägga till saker vi vill ha.
 - destructable walls/object
 - indestructable walls.
 
-Saker pa entities:
+Saker på entities:
 - Liv
 - destructable/indestructable boolean
 - Skada
 - action
 
-
-- man maste kunna dö.
-- man maste kunna forsvinna och respawn.
+- man måste kunna dö.
+- man måste kunna försvinna och respawn.
 
 - teams.
 - olika spawn places.
 
-- Startskarm
-- val av nick
+- Startskärm Skit it.
+- val av nick typ kommandon i chattextruta.
 
 Chat
 - textruta pa en ruta.
 - Visa textmedelanden man far. 
 
 Spelide:
-- skjuta rakt fram.
-- close combat. kniv pa nara hall.
-- last man standing.
+- skjuta rakt fram. (eller inte)
+- close combat. kniv pa nara hall. ( kör på först)
+- val av vapen. (senare, först kniv)
+- last man standing. / capture the flag.
 
-Andra kartan till en hashmap med key som pair.
-Ta bort matrix, kor bara entities.
+Ändra kartan till en hashmap med key som pair.
+Ta bort matrix, kör bara entities.
 
 - Ga igenom all kod och kolla sync.
 - notify och wait.
--  
+- Skriv rapport

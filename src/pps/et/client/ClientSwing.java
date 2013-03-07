@@ -53,7 +53,7 @@ public class ClientSwing implements Runnable, KeyListener{
 		ActionListener buildMenuActionListener = new ActionListener() {
 		      public void actionPerformed(ActionEvent actionEvent) {
 		    	  connection.send("build " + actionEvent.getActionCommand() + " at " + player.getPos());
-		    	  game.build(player, actionEvent.getActionCommand());
+		    	  game.build(player, actionEvent.getActionCommand(), player.getX(), player.getY());
 		        }
 		      };
 		
@@ -194,7 +194,9 @@ public class ClientSwing implements Runnable, KeyListener{
 		for (int i = 0; i < map.getSize(); i++) {
 			for (int j = 0; j < map.getSize(); j++) {
 				labels[j][i].setText( game.playerIdAt(i, j) );
-				
+				if (map.hasEntity(i , j)) {
+					labels[j][i].setText( "M" );
+				}
 			}
 		}
 	}

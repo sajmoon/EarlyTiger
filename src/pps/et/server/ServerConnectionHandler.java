@@ -61,14 +61,13 @@ public class ServerConnectionHandler implements ConnectionHandler {
 		} else if (args[0].equals("move")) {
 			th.addTask(new Move(player, args[1]));
 		} else if (args[0].equals("build")) {
-			th.addTask(new Build(player, args[1], args[3], args[4]));
+			th.addTask(new Build(player, args[1], Integer.parseInt(args[3]), Integer.parseInt(args[4])));
 		} else {
 			System.out.println("unknwon command: " + args[0]);
 		}
 	}
 
 	public void run() {
-		
 		try {
 			while ((inputLine = in.readLine()) != null) {
 			    processInput(inputLine);

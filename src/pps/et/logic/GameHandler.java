@@ -34,6 +34,10 @@ public class GameHandler {
 		else 
 			System.err.println("ERROR: unknown direction");
 	}
+	
+	private void addEntity(Player player, String what, int x, int y) {
+		map.addEntity(player, what, x, y);
+	}
 
 	public void disconnectedUser(Player p) {
 		players.remove(p);
@@ -86,8 +90,7 @@ public class GameHandler {
 			p.setPos(x,y);
 	}
 
-	public void build(Player player, String actionCommand) {
-		
-		System.out.println("Build a " + actionCommand);
+	public void build(Player player, String what, int x, int y) {
+		addEntity(player, what, x, y);
 	}
 }

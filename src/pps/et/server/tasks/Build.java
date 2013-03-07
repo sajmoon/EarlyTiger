@@ -5,10 +5,10 @@ import pps.et.logic.Player;
 
 public class Build extends Task {
 	private String what;
-	private String x;
-	private String y;
+	private int x;
+	private int y;
 	
-	public Build(Player p, String what, String x, String y) {
+	public Build(Player p, String what, int x, int y) {
 		super(p);
 		this.what 	= what;
 		this.x 		= x;
@@ -18,5 +18,6 @@ public class Build extends Task {
 	@Override
 	public void consume() {
 		System.out.println("Build " + what + " at " + x + " " + y);
+		game.build(player, what, x, y);
 	}
 }

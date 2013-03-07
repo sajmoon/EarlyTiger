@@ -20,6 +20,7 @@ public class TaskHandler {
 		MAXCONSUMERS 	= countConsumers;
 		
 		consumers = new Thread[MAXCONSUMERS];
+		System.out.println("[SERVER] Starting " + MAXCONSUMERS + " consumers.");
 		for (int i = 0; i < MAXCONSUMERS; i++) {
 			consumers[i] = new Thread(new TaskConsumer(i, this));
 			consumers[i].start();

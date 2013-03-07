@@ -8,7 +8,6 @@ public class TaskConsumer implements Runnable {
 	private boolean RUNNING = true;
 	
 	public TaskConsumer(int id, TaskHandler tasks) {
-		System.out.println("Start new taskconsumer");
 		this.id = id;
 		t = tasks;
 	}
@@ -21,7 +20,7 @@ public class TaskConsumer implements Runnable {
 				task.consume();
 			else {
 				try {
-					Thread.sleep(500);
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import pps.et.logic.ConnectionInterface;
+import pps.et.logic.EntityController;
 import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
 

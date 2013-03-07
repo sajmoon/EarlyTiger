@@ -7,7 +7,8 @@ public abstract class Entity {
 	private long		createdAt;
 	private long		activeIn;
 	protected String	type;
-	private boolean 	hasBeenActivated;
+	private boolean		hasBeenActivated;
+	private int			id;
 
 	public Entity(Player p) {
 		owner = p;
@@ -15,6 +16,14 @@ public abstract class Entity {
 		activeIn = 0;
 		type = "Entity";
 		hasBeenActivated = false;
+	}
+
+	public void setID(int input) {
+		id = input;
+	}
+
+	protected String getIdentifier() {
+		return "[" + type + "-" + getID() + "]";
 	}
 
 	protected void setActivationTime(int seconds) {
@@ -27,10 +36,16 @@ public abstract class Entity {
 
 	public boolean canActivate() {
 		if (!hasBeenActivated
-				&& System.currentTimeMillis() > (createdAt + activeIn))  {
+				&& System.currentTimeMillis() > (createdAt + activeIn)) {
 			hasBeenActivated = true;
 			return true;
-		}	
+		}
 		return false;
 	}
+
+	private int getID() {
+		return id;
+	}
+
+	public abstract void activate();
 }

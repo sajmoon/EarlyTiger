@@ -13,12 +13,13 @@ public class GameMap {
 	
 	public final int FLOOR = 0;
 	public final int WALL = 1;
+	private int	lastEntityID = 0;
 	
 	public GameMap() {
 		map 		= new int[mapSize][mapSize];
 		entityList 	= new ArrayList<Entity>();
 		entities 	= new int[mapSize][mapSize];
-		
+
 		// set all values to -1
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
@@ -33,6 +34,7 @@ public class GameMap {
 		Entity e = null;
 		if (what.equals("Mine")) {
 			e = new Mine(player);
+			e.setID(getNextEntityID());
 			entityList.add(e);
 			entities[x][y] = entityList.indexOf(e);
 			System.out.println("Entity " + entities[x][y] + " at " +x + " " + y);
@@ -41,6 +43,11 @@ public class GameMap {
 		}
 	}
 	
+	private int getNextEntityID() {
+		lastEntityID++;
+		return lastEntityID;
+	}
+
 	private void populateMap() {
 		map[3][2] = WALL;
 		map[5][3] = WALL;

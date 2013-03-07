@@ -10,4 +10,10 @@ public class Mine extends Entity {
 
 		System.out.println("[" + owner.getNick() + "] Placed a mine.");
 	}
+	
+	public void activate() {
+		// Mine goes off.
+		System.out.println(getIdentifier() + " goes BOOM!");
+		
+	}
 }

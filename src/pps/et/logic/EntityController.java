@@ -14,7 +14,7 @@ public class EntityController implements Runnable {
 		while (true) {
 			for (Entity e : game.getEntities()) {
 				if (e.canActivate()) {
-					System.out.println("BOOM!");
+					e.activate();
 				}
 			}
 			try {

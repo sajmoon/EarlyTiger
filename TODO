@@ -17,13 +17,16 @@ Saker på entities:
 
 - teams.
 - olika spawn places.
+- score så man vet vem som vinner.
 
-- Startskärm Skit it.
-- val av nick typ kommandon i chattextruta.
+- Startskärm Skit it. (Charlie)
+- val av nick typ kommandon i chattextruta. (Charlie)
+
+Byta ut swing interfacet (Charlie)
 
 Chat
-- textruta pa en ruta.
-- Visa textmedelanden man far. 
+- textruta pa en ruta. (Charlie)
+- Visa textmedelanden man far. (Charlie)
 
 Spelide:
 - skjuta rakt fram. (eller inte)
@@ -34,6 +37,25 @@ Spelide:
 Ändra kartan till en hashmap med key som pair.
 Ta bort matrix, kör bara entities.
 
+- Kollap pingtider. Inbyggt i socket
+
 - Ga igenom all kod och kolla sync.
 - notify och wait.
 - Skriv rapport
+
+Design 
+- Socket.
+- Interacting peers.
+- Rich set of process interatctions.
+
+
+Krav:
+- Descirbe application
+- descrbe algorithms. /Choosen algorithms.
+- sync or method of communication
+- explan motivation for design choices.
+- IDE, computer platform.
+- describe implementation, function classes etc.
+- Performance evaluation. Ping tider etc.
+- Summary of achievments.
+

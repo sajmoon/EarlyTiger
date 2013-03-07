@@ -9,25 +9,38 @@ public class Client implements ConnectionInterface {
 	
 	static private ClientConnectionHandler cch;
 	static private GameHandler game;
+	static private String host;
+	static private int port = 4711;
+	
 	public Client(){
+		
 	}
 	
+	/**
+	 * Start a client
+	 * @param args :host :nick
+	 */
 	public static void main(String[] args) {
 		System.out.println("Loading Early Tiger (ET)..");
 		
 		Client client = new Client();
 		String nick = "Random";
 		
-		if (args.length > 0) {
-			nick = args[0];
-		}
+		if (args.length > 0)
+			host = args[0];
+		else
+			host = "localhost";
+		
+		if (args.length > 1)
+			nick = args[1];		
 		
 		game = new GameHandler(client);
 		Player p = new Player(0, nick, 0, 0);
-//		game.addPlayer(player);
 		
 		try {
-			cch = new ClientConnectionHandler("localhost", 4711, game, p);
+			
+			System.out.println("Connecting to " + host + ":" + port);
+			cch = new ClientConnectionHandler(host, port, game, p);
 			
 			Thread t = new Thread(cch);
 			t.start();

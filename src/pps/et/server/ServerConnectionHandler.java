@@ -8,6 +8,7 @@ import java.net.Socket;
 
 import pps.et.logic.ConnectionHandler;
 import pps.et.logic.Player;
+import pps.et.server.tasks.Build;
 import pps.et.server.tasks.Chat;
 import pps.et.server.tasks.ConnectionTask;
 import pps.et.server.tasks.DisconnectedTask;
@@ -59,13 +60,14 @@ public class ServerConnectionHandler implements ConnectionHandler {
 			th.addTask(new Chat(player, args.toString()));
 		} else if (args[0].equals("move")) {
 			th.addTask(new Move(player, args[1]));
+		} else if (args[0].equals("build")) {
+			th.addTask(new Build(player, args[1], Integer.parseInt(args[3]), Integer.parseInt(args[4])));
 		} else {
 			System.out.println("unknwon command: " + args[0]);
 		}
 	}
 
 	public void run() {
-		
 		try {
 			while ((inputLine = in.readLine()) != null) {
 			    processInput(inputLine);
@@ -99,5 +101,11 @@ public class ServerConnectionHandler implements ConnectionHandler {
 		} catch (Exception e) {
 			System.out.println("error sending map");
 		}
+	}
+
+	@Override
+	public void quit() {
+		// TODO Auto-generated method stub
+		
 	}
 }

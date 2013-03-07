@@ -1,20 +1,31 @@
 package pps.et.logic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-import pps.et.server.Server;
+import pps.et.logic.entity.Entity;
+import pps.et.logic.entity.Mine;
 
 public class GameMap implements Serializable {
 	private static final long serialVersionUID = 1955586305740049084L;
 	int[][] map;
 	private int mapSize = 20;
+	private Entity[][] entities;
 	
 	public final int FLOOR = 0;
 	public final int WALL = 1;
 	public GameMap() {
 		map = new int[mapSize][mapSize];
+		entities = new Entity[mapSize][mapSize];
 		
 		populateMap();
+	}
+	
+	public Entity addEntity(Player player, String what, int x, int y) {
+		Entity e = new Mine(player);
+		entities[x][y] = e;
+		System.out.println("entity at " + entities[x][y]);
+		return e;
 	}
 	
 	private void populateMap() {
@@ -48,7 +59,6 @@ public class GameMap implements Serializable {
 	public void fromString(String input) {
 		String[] inputs = input.split(" ");
 		
-		
 		int mapSize = Integer.parseInt( inputs[0] );
 		
 		map = new int[mapSize][mapSize];
@@ -76,6 +86,12 @@ public class GameMap implements Serializable {
 		if (getTileCode(x,y) == FLOOR)
 			return true;
 		
+		return false;
+	}
+	
+	public boolean hasEntity(int i, int j) {
+		if (entities[i][j] != null)
+			return true;
 		return false;
 	}
 }

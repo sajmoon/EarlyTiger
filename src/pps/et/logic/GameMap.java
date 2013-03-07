@@ -9,6 +9,8 @@ public class GameMap implements Serializable {
 	int[][] map;
 	private int mapSize = 20;
 	
+	public final int FLOOR = 0;
+	public final int WALL = 1;
 	public GameMap() {
 		map = new int[mapSize][mapSize];
 		
@@ -16,17 +18,17 @@ public class GameMap implements Serializable {
 	}
 	
 	private void populateMap() {
-		map[5][2] = 1;
-		map[5][3] = 1;
-		map[5][4] = 1;
-		map[5][5] = 1;
-		map[4][5] = 1;
-		map[3][5] = 1;
-		map[7][7] = 1;
-		map[7][8] = 1;
-		map[9][8] = 1;
-		map[5][8] = 1;
-		map[6][8] = 1;
+		map[3][2] = WALL;
+		map[5][3] = WALL;
+		map[5][4] = WALL;
+		map[5][5] = WALL;
+		map[4][5] = WALL;
+		map[3][5] = WALL;
+		map[7][7] = WALL;
+		map[7][8] = WALL;
+		map[9][8] = WALL;
+		map[5][8] = WALL;
+		map[6][8] = WALL;
 	}
 	
 	public String toString() {
@@ -68,6 +70,13 @@ public class GameMap implements Serializable {
 	
 	public int at(int i, int j) {
 		return map[i][j];
+	}
+
+	public boolean walkableTile(int x, int y) {
+		if (getTileCode(x,y) == FLOOR)
+			return true;
+		
+		return false;
 	}
 }
 

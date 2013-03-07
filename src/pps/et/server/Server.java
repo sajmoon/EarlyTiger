@@ -33,6 +33,7 @@ public class Server implements ConnectionInterface {
 			System.out.println("Connected to port: " + port);
 			
 			startTaskHandler();
+			startEntityController();
 			listen();
 			
 		} catch (IOException e) {
@@ -42,6 +43,10 @@ public class Server implements ConnectionInterface {
 		}
 	}
 	
+	private void startEntityController() {
+		new Thread(new EntityController(game));
+	}
+
 	/** starts threads to consume the bag of tasks */
 	private void startTaskHandler() {
 		taskHandler = new TaskHandler(game, this, 3);

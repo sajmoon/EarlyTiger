@@ -109,7 +109,7 @@ public class ClientSwing implements Runnable, KeyListener{
 	private void createBuildPopup(ActionListener menuActionListener) {
 		popupMenu = new JPopupMenu();
 		JMenuItem m1 = new JMenuItem("Turret");
-		JMenuItem m2 = new JMenuItem("Timemine");
+		JMenuItem m2 = new JMenuItem("Mine");
 		JMenuItem m3 = new JMenuItem("Proxymine");
 		JMenuItem m4 = new JMenuItem("Cottage");
 		JMenuItem m5 = new JMenuItem("Desk");

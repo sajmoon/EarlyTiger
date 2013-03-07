@@ -1,30 +1,43 @@
 package pps.et.logic;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import pps.et.logic.entity.Entity;
 import pps.et.logic.entity.Mine;
 
-public class GameMap implements Serializable {
-	private static final long serialVersionUID = 1955586305740049084L;
+public class GameMap {
 	int[][] map;
 	private int mapSize = 20;
-	private Entity[][] entities;
+	private int[][] entities; // same the id of the entity
+	private ArrayList<Entity> entityList;
 	
 	public final int FLOOR = 0;
 	public final int WALL = 1;
 	public GameMap() {
-		map = new int[mapSize][mapSize];
-		entities = new Entity[mapSize][mapSize];
+		map 		= new int[mapSize][mapSize];
+		entityList 	= new ArrayList<Entity>();
+		entities 	= new int[mapSize][mapSize];
+		
+		// set all values to -1
+		for (int i = 0; i < mapSize; i++) {
+			for (int j = 0; j < mapSize; j++) {
+				entities[i][j] = -1;
+			}
+		}
 		
 		populateMap();
 	}
 	
-	public Entity addEntity(Player player, String what, int x, int y) {
-		Entity e = new Mine(player);
-		entities[x][y] = e;
-		return e;
+	public void addEntity(Player player, String what, int x, int y) {
+		Entity e = null;
+		if (what.equals("Mine")) {
+			e = new Mine(player);
+			entityList.add(e);
+			entities[x][y] = entityList.indexOf(e);
+			System.out.println("Entity " + entities[x][y] + " at " +x + " " + y);
+		} else {
+			System.out.println("No such thing to build.");
+		}
 	}
 	
 	private void populateMap() {
@@ -89,8 +102,12 @@ public class GameMap implements Serializable {
 	}
 	
 	public boolean hasEntity(int i, int j) {
-		if (entities[i][j] != null)
+		if (entities[i][j] > -1)
 			return true;
 		return false;
+	}
+
+	public ArrayList<Entity> getEntities() {
+		return entityList;
 	}
 }

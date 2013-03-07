@@ -2,6 +2,8 @@ package pps.et.logic;
 
 import java.util.ArrayList;
 
+import pps.et.logic.entity.Entity;
+
 public class GameHandler {
 	public GameMap map;
 	ConnectionInterface connector;
@@ -104,5 +106,9 @@ public class GameHandler {
 
 	public void build(Player player, String what, int x, int y) {
 		addEntity(player, what, x, y);
+	}
+
+	public ArrayList<Entity> getEntities() {
+		return map.getEntities();
 	}
 }

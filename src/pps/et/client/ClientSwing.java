@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -34,7 +36,7 @@ public class ClientSwing implements Runnable, KeyListener{
 	private JFrame frame;
 	private JPopupMenu popupMenu;
 
-	public ClientSwing(ClientConnectionHandler connection, Player player, GameHandler game){
+	public ClientSwing(final ClientConnectionHandler connection, final Player player, final GameHandler game){
 		this.connection	= connection;
 		this.player 	= player;
 		this.game 		= game;
@@ -48,16 +50,31 @@ public class ClientSwing implements Runnable, KeyListener{
 		JPanel gameGrid = new JPanel();
 		
 		// Build menus
+		ActionListener menuActionListener = new ActionListener() {
+		      public void actionPerformed(ActionEvent actionEvent) {
+		    	  connection.send("build " + actionEvent.getActionCommand() + " at " + player.getPos());
+		    	  game.build(player, actionEvent.getActionCommand());
+		        }
+		      };
+		
 		popupMenu = new JPopupMenu();
 		JMenuItem m1 = new JMenuItem("Turret");
-		JMenuItem m2 = new JMenuItem("Time-Mine");
-		JMenuItem m3 = new JMenuItem("Proxy-Mine");
+		JMenuItem m2 = new JMenuItem("Timemine");
+		JMenuItem m3 = new JMenuItem("Proxymine");
 		JMenuItem m4 = new JMenuItem("Cottage");
+		JMenuItem m5 = new JMenuItem("Desk");
+		
+		m1.addActionListener(menuActionListener);
+		m2.addActionListener(menuActionListener);
+		m3.addActionListener(menuActionListener);
+		m4.addActionListener(menuActionListener);
+		m5.addActionListener(menuActionListener);
 		
 		popupMenu.add(m1);
 		popupMenu.add(m2);
 		popupMenu.add(m3);
 		popupMenu.add(m4);
+		popupMenu.add(m5);
 		
 		gameGrid.setLayout(new GridLayout(map.getSize(), map.getSize()));
 		for (int i = map.getSize() -1; i >= 0; i--) {

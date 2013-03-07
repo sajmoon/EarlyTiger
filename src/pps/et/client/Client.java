@@ -32,12 +32,10 @@ public class Client implements ConnectionInterface {
 			host = "localhost";
 		
 		if (args.length > 1)
-			nick = args[1];
-		
+			nick = args[1];		
 		
 		game = new GameHandler(client);
 		Player p = new Player(0, nick, 0, 0);
-//		game.addPlayer(player);
 		
 		try {
 			

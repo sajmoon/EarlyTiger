@@ -2,10 +2,6 @@ package pps.et.logic;
 
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-
-import pps.et.server.Server;
-
 public class GameHandler {
 	public GameMap map;
 	ConnectionInterface connector;
@@ -22,13 +18,11 @@ public class GameHandler {
 	}
 
 	public void addPlayer(Player p) {
-		System.out.println("newplayer added" + p.getID() + " size: " + players.size());
+		System.out.println("[" + p.getNick() + "(" + p.getID()+")] joined the game.");
 		players.add(p);
 	}
 
 	public synchronized void movePlayer(Player player, String direction) {
-
-		System.out.println("movePlayer");
 		if (direction.equals("R"))
 			doMove(player, player.getX() + 1, player.getY());
 		else if (direction.equals("L"))
@@ -39,10 +33,6 @@ public class GameHandler {
 			doMove(player, player.getX(), player.getY() - 1);
 		else 
 			System.err.println("ERROR: unknown direction");
-
-
-
-		//server.sendToAll("[" + player.getNick() + "] moved");
 	}
 
 	public void disconnectedUser(Player p) {
@@ -94,5 +84,10 @@ public class GameHandler {
 		System.out.println("doMove x:" + x + " y: " + y);
 		if(x >= 0 && x < map.getSize() && y >= 0 && y < map.getSize())
 			p.setPos(x,y);
+	}
+
+	public void build(Player player, String actionCommand) {
+		
+		System.out.println("Build a " + actionCommand);
 	}
 }

@@ -50,31 +50,14 @@ public class ClientSwing implements Runnable, KeyListener{
 		JPanel gameGrid = new JPanel();
 		
 		// Build menus
-		ActionListener menuActionListener = new ActionListener() {
+		ActionListener buildMenuActionListener = new ActionListener() {
 		      public void actionPerformed(ActionEvent actionEvent) {
 		    	  connection.send("build " + actionEvent.getActionCommand() + " at " + player.getPos());
 		    	  game.build(player, actionEvent.getActionCommand());
 		        }
 		      };
 		
-		popupMenu = new JPopupMenu();
-		JMenuItem m1 = new JMenuItem("Turret");
-		JMenuItem m2 = new JMenuItem("Timemine");
-		JMenuItem m3 = new JMenuItem("Proxymine");
-		JMenuItem m4 = new JMenuItem("Cottage");
-		JMenuItem m5 = new JMenuItem("Desk");
-		
-		m1.addActionListener(menuActionListener);
-		m2.addActionListener(menuActionListener);
-		m3.addActionListener(menuActionListener);
-		m4.addActionListener(menuActionListener);
-		m5.addActionListener(menuActionListener);
-		
-		popupMenu.add(m1);
-		popupMenu.add(m2);
-		popupMenu.add(m3);
-		popupMenu.add(m4);
-		popupMenu.add(m5);
+		createBuildPopup(buildMenuActionListener);
 		
 		gameGrid.setLayout(new GridLayout(map.getSize(), map.getSize()));
 		for (int i = map.getSize() -1; i >= 0; i--) {
@@ -129,6 +112,27 @@ public class ClientSwing implements Runnable, KeyListener{
 		frame.setVisible(true);
 		
 
+	}
+
+	private void createBuildPopup(ActionListener menuActionListener) {
+		popupMenu = new JPopupMenu();
+		JMenuItem m1 = new JMenuItem("Turret");
+		JMenuItem m2 = new JMenuItem("Timemine");
+		JMenuItem m3 = new JMenuItem("Proxymine");
+		JMenuItem m4 = new JMenuItem("Cottage");
+		JMenuItem m5 = new JMenuItem("Desk");
+		
+		m1.addActionListener(menuActionListener);
+		m2.addActionListener(menuActionListener);
+		m3.addActionListener(menuActionListener);
+		m4.addActionListener(menuActionListener);
+		m5.addActionListener(menuActionListener);
+		
+		popupMenu.add(m1);
+		popupMenu.add(m2);
+		popupMenu.add(m3);
+		popupMenu.add(m4);
+		popupMenu.add(m5);
 	}
 
 	@Override

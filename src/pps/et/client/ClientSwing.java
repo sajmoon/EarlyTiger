@@ -62,23 +62,15 @@ public class ClientSwing implements Runnable, KeyListener{
 		gameGrid.setLayout(new GridLayout(map.getSize(), map.getSize()));
 		for (int i = map.getSize() -1; i >= 0; i--) {
 			for (int n = 0; n < map.getSize(); n++) {
-				String text = "";
-				if (game.playerAt(i, n)) {
-					text = "#";
-				}
-				if (player.isAt(i, n)) {
-					System.out.println("player at this tile");
-					text = "@";
-				}
-
-				JLabel j = new JLabel(text, SwingConstants.CENTER);
+				
+				JLabel j = new JLabel("", SwingConstants.CENTER);
 				j.setOpaque(true);
-				int tileCode = map.getTileCode(i, n);
+				int tileCode = map.getTileCode(n, i);
 				j.setForeground(Color.red);
 
-				if (tileCode == 0)
+				if (tileCode == map.FLOOR)
 					j.setBackground(Color.blue);
-				else if (tileCode == 1)
+				else if (tileCode == map.WALL)
 					j.setBackground(Color.white);
 				gameGrid.add(j);
 				labels[i][n] = j;

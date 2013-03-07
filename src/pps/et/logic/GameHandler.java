@@ -94,8 +94,12 @@ public class GameHandler {
 	}
 
 	private void doMove(Player p,int x, int y){
-		if(x >= 0 && x < map.getSize() && y >= 0 && y < map.getSize())
-			p.setPos(x,y);
+		if(x >= 0 && x < map.getSize() && y >= 0 && y < map.getSize()){
+			if(map.walkableTile(x,y)){
+				p.setPos(x,y);
+			}else
+				System.out.println("[GAME] Not a valid move");
+		}
 	}
 
 	public void build(Player player, String what, int x, int y) {

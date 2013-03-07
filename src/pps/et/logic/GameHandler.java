@@ -42,6 +42,15 @@ public class GameHandler {
 	public void disconnectedUser(Player p) {
 		players.remove(p);
 	}
+	
+	public Player getPlayer(int playerId) {
+		for (Player p : players) {
+			if (p.getID() == playerId) {
+				return p;
+			}
+		}
+		return null;
+	}
 
 	public void setPos(int playerId, int x, int y) {
 		for (Player p : players) {

@@ -85,24 +85,29 @@ public class ClientConnectionHandler implements ConnectionHandler{
 				}
 				
 			} else if (inputs[2].equals("disconnected")) {
-				System.out.println("player disconnected now..");
-				System.out.println(inputs.toString());
 				// player connected :id nick :nick
+				
 				int id = Integer.parseInt( inputs[1] );
-				System.out.println("disconnect u: " + id);
 				// dont add self
 				game.disconnectedUserByID(id);
 				 
 			} else if (inputs[2].equals("at")) {
 				// "player :id at :x :y
-				System.out.println("at:" + inputs);
-				int playerId = Integer.parseInt(inputs[1]);
-				int x = Integer.parseInt(inputs[3]);
-				int y = Integer.parseInt(inputs[4]);
+				
+				int playerId 	= Integer.parseInt(inputs[1]);
+				int x 			= Integer.parseInt(inputs[3]);
+				int y 			= Integer.parseInt(inputs[4]);
 				game.setPos(playerId, x, y);
+			} else if (inputs[2].equals("build")) {
+				// "player :id build :what at :x :y
+				
+				int playerId 	= Integer.parseInt(inputs[1]);
+				int x 			= Integer.parseInt(inputs[5]);
+				int y 			= Integer.parseInt(inputs[6]);
+				Player player 	= game.getPlayer(playerId);
+				game.build(player, inputs[3], x, y);
 			}
 		}
-		
 	}
 
 	public void send(String message){

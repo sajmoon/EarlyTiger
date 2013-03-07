@@ -11,7 +11,9 @@ import java.awt.event.KeyListener;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
@@ -27,6 +29,10 @@ public class ClientSwing implements Runnable, KeyListener{
 	private GameHandler game;
 	JLabel[][] labels;
 	GameMap map;
+	
+	// GUI stuff
+	private JFrame frame;
+	private JPopupMenu popupMenu;
 
 	public ClientSwing(ClientConnectionHandler connection, Player player, GameHandler game){
 		this.connection	= connection;
@@ -36,10 +42,22 @@ public class ClientSwing implements Runnable, KeyListener{
 
 		labels = new JLabel[map.getSize()][map.getSize()];
 
-		JFrame frame = new JFrame("PPS13");
+		frame = new JFrame("PPS13");
 		frame.setLayout(new BorderLayout());
 
 		JPanel gameGrid = new JPanel();
+		
+		// Build menus
+		popupMenu = new JPopupMenu();
+		JMenuItem m1 = new JMenuItem("Turret");
+		JMenuItem m2 = new JMenuItem("Time-Mine");
+		JMenuItem m3 = new JMenuItem("Proxy-Mine");
+		JMenuItem m4 = new JMenuItem("Cottage");
+		
+		popupMenu.add(m1);
+		popupMenu.add(m2);
+		popupMenu.add(m3);
+		popupMenu.add(m4);
 		
 		gameGrid.setLayout(new GridLayout(map.getSize(), map.getSize()));
 		for (int i = map.getSize() -1; i >= 0; i--) {
@@ -143,6 +161,9 @@ public class ClientSwing implements Runnable, KeyListener{
 		} else if (e.getKeyCode() == 84) {
 			// t
 			// for talk/chat
+		} else if (e.getKeyCode() == 66) {
+			// build
+			popupMenu.show(frame, 400, 200);
 		} else {
 			System.out.println("Keypres: " + e.getKeyCode());
 		}

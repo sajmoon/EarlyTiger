@@ -78,7 +78,9 @@ public class ClientSwing implements Runnable, KeyListener{
 		while (true) {
 			updateView();
 			try {
-				Thread.sleep(500);
+				Thread.sleep(100);
+				// TODO Detta borde vi kunna göra med en flagga. 
+				// Typ att nära det ändras i någon klass så sätts den till true etc
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}

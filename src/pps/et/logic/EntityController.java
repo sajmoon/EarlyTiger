@@ -1,6 +1,5 @@
-package pps.et.server;
+package pps.et.logic;
 
-import pps.et.logic.GameHandler;
 import pps.et.logic.entity.Entity;
 
 public class EntityController implements Runnable {

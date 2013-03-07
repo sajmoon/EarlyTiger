@@ -42,14 +42,9 @@ public class Server implements ConnectionInterface {
 		}
 	}
 	
-	/** starts a thread to consume the bag of tasks */
+	/** starts threads to consume the bag of tasks */
 	private void startTaskHandler() {
-		taskHandler = new TaskHandler(game, this);
-		
-		Thread t = new Thread(taskHandler);
-		
-		t.start();
-		
+		taskHandler = new TaskHandler(game, this, 3);
 	}
 
 	// Listens to connections and add it to the arraylist

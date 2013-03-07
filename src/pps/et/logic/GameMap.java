@@ -22,7 +22,6 @@ public class GameMap implements Serializable {
 	public Entity addEntity(Player player, String what, int x, int y) {
 		Entity e = new Mine(player);
 		entities[x][y] = e;
-		System.out.println("entity at " + entities[x][y]);
 		return e;
 	}
 	
@@ -86,4 +85,3 @@ public class GameMap implements Serializable {
 		return false;
 	}
 }
-

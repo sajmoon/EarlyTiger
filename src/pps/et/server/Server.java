@@ -87,14 +87,14 @@ public class Server implements ConnectionInterface {
 	}
 
 	public void sendToAll(String text) {
-		System.out.println("ALL: " + text);
+		System.out.println("[SERVER] ALL: " + text);
 		for (ServerConnectionHandler h : connections) {
 			h.send(text);
 		}
 	}
 	
 	public void sendToAllBut(Player player, String text) {
-		System.out.println("ALL -" + player.getID() + ": " + text);
+		System.out.println("[SERVER] ALL -" + player.getID() + ": " + text);
 		for (ServerConnectionHandler h : connections) {
 			if (player == null)
 				System.out.println("null");
@@ -107,7 +107,7 @@ public class Server implements ConnectionInterface {
 	public void sendToPlayer(Player player, String string) {
 		for (ServerConnectionHandler h : connections) {
 			if (h.player.getID() == player.getID()) {
-				System.out.println("TO " + player.getID() + ": " + string);
+				System.out.println("[SERVER] TO " + player.getID() + ": " + string);
 				h.send(string);
 				break;
 			}				

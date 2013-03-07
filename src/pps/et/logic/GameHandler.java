@@ -94,7 +94,6 @@ public class GameHandler {
 	}
 
 	private void doMove(Player p,int x, int y){
-		System.out.println("doMove x:" + x + " y: " + y);
 		if(x >= 0 && x < map.getSize() && y >= 0 && y < map.getSize())
 			p.setPos(x,y);
 	}

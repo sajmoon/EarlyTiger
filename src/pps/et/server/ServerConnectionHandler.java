@@ -43,24 +43,23 @@ public class ServerConnectionHandler implements ConnectionHandler {
 	
 	private void processInput(String input) {
 		String[] args = input.split(" ");
-		// nick sdad
-		// chat g tasdlajsdlakjdaa
-		// chat l dakjsdlakjdlasd
 		
-		// map
-		
-		// go r/l/u/d xpos/ypos
 		if (args[0].startsWith("nick")) {
+			// nick :newnick
 			setNick(input);
 			th.addTask(new Chat(player, "nich changed"));
 		} else if (args[0].startsWith("map")) {
+			// dont work
 			sendMap();
 		} else if (args[0].startsWith("chat")) {
+			// chat [:text]
 			System.arraycopy(args, 1, args, 0, args.length-1);
 			th.addTask(new Chat(player, args.toString()));
 		} else if (args[0].equals("move")) {
+			// move :direction
 			th.addTask(new Move(player, args[1]));
 		} else if (args[0].equals("build")) {
+			// build :what at :x :y
 			th.addTask(new Build(player, args[1], Integer.parseInt(args[3]), Integer.parseInt(args[4])));
 		} else {
 			System.out.println("unknwon command: " + args[0]);

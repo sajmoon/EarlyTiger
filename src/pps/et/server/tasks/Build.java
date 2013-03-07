@@ -17,7 +17,6 @@ public class Build extends Task {
 
 	@Override
 	public void consume() {
-		System.out.println("Build " + what + " at " + x + " " + y);
 		game.build(player, what, x, y);
 		server.sendToAllBut(player, "player " + player.getID() + " build " + what + " at " + x + " " + y);	
 	}

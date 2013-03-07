@@ -6,13 +6,14 @@ import pps.et.logic.entity.Entity;
 import pps.et.logic.entity.Mine;
 
 public class GameMap {
-	int[][] map;
+	private int[][] map;
 	private int mapSize = 20;
 	private int[][] entities; // same the id of the entity
 	private ArrayList<Entity> entityList;
 	
 	public final int FLOOR = 0;
 	public final int WALL = 1;
+	
 	public GameMap() {
 		map 		= new int[mapSize][mapSize];
 		entityList 	= new ArrayList<Entity>();

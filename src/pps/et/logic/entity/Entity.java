@@ -9,13 +9,21 @@ public abstract class Entity {
 	protected String	type;
 	private boolean		hasBeenActivated;
 	private int			id;
+	private boolean		visible;
+	private int			x;
+	private int			y;
+	protected int			typeCode;
 
-	public Entity(Player p) {
+	public Entity(Player p, int x, int y) {
 		owner = p;
 		createdAt = System.currentTimeMillis();
 		activeIn = 0;
 		type = "Entity";
-		hasBeenActivated = false;
+		hasBeenActivated = true;
+		visible = true;
+		this.x = x;
+		this.y = y;
+		typeCode = 0;
 	}
 
 	public void setID(int input) {
@@ -28,10 +36,23 @@ public abstract class Entity {
 
 	protected void setActivationTime(int seconds) {
 		activeIn = seconds * 1000;
+		hasBeenActivated = false;
 	}
 
 	public String getType() {
 		return type;
+	}
+
+	// TODO This should probably not be here
+	// Fulhack, as its called in Swedish
+	public int getTypeCode() {
+		if (isVisible())
+			return typeCode;
+		return 0;
+	}
+
+	protected void makeInvisible() {
+		visible = false;
 	}
 
 	public boolean canActivate() {
@@ -43,9 +64,27 @@ public abstract class Entity {
 		return false;
 	}
 
-	private int getID() {
+	public int getID() {
 		return id;
 	}
 
-	public abstract void activate();
+	/**
+	 * What this entity does. If its a bomb it explodes and kills stuff in this
+	 * method.
+	 */
+	public abstract void action();
+
+	public boolean isVisible() {
+		return visible;
+	}
+	
+	public String getPos() {
+		return "" + x + " " + y;
+	}
+
+	public boolean isAt(int x, int y) {
+		if (this.x == x && this.y == y)
+			return true;
+		return false;
+	}
 }

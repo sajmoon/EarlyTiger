@@ -44,7 +44,7 @@ public class ClientSwing implements Runnable, KeyListener{
 
 		labels = new JLabel[map.getSize()][map.getSize()];
 
-		frame = new JFrame("PPS13");
+		frame = new JFrame("EarlyTiger");
 		frame.setLayout(new BorderLayout());
 
 		JPanel gameGrid = new JPanel();
@@ -183,11 +183,14 @@ public class ClientSwing implements Runnable, KeyListener{
 	}
 
 	public void updateView() {
-		for (int i = 0; i < map.getSize(); i++) {
-			for (int j = 0; j < map.getSize(); j++) {
-				labels[j][i].setText( game.playerIdAt(i, j) );
-				if (map.hasEntity(i , j)) {
-					labels[j][i].setText( "M" );
+		for (int x = 0; x < map.getSize(); x++) {
+			for (int y = 0; y < map.getSize(); y++) {
+				labels[y][x].setText( game.playerIdAt(x, y) );
+				int type = map.getTileCode(x, y);
+				if (type == 1) {
+					labels[y][x].setText( "W" );
+				} else if (type == 2) {
+					labels[y][x].setText( "M" );
 				}
 			}
 		}

@@ -64,7 +64,6 @@ public class ClientConnectionHandler implements ConnectionHandler{
 	
 	
 	private void processInput(String data) {
-		System.out.println("got: " + data);
 		String[] inputs = data.split(" ");
 		if (inputs[0].equals("you")) {
 			if (inputs[1].equals("id")) {
@@ -107,6 +106,17 @@ public class ClientConnectionHandler implements ConnectionHandler{
 				Player player 	= game.getPlayer(playerId);
 				game.build(player, inputs[3], x, y);
 			}
+		} else if(inputs[0].equals("entity")) {
+			// entity :x :y
+			int x = Integer.parseInt(inputs[1]);
+			int y = Integer.parseInt(inputs[2]);
+			if (inputs[3].equals("action")) {
+				// entity :x :y action
+				game.EntityAction(x,  y);
+				
+			}
+			
+		} else {System.out.println("got unknown command: " + data);
 		}
 	}
 

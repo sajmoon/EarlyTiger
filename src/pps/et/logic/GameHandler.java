@@ -94,6 +94,10 @@ public class GameHandler {
 			}	
 		}
 	}
+	
+	public void EntityAction(int x, int y) {
+		map.activateEntity(x, y);
+	}
 
 	private void doMove(Player p,int x, int y){
 		if(x >= 0 && x < map.getSize() && y >= 0 && y < map.getSize()){

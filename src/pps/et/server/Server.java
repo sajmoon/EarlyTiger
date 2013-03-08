@@ -9,6 +9,7 @@ import pps.et.logic.ConnectionInterface;
 import pps.et.logic.EntityController;
 import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
+import pps.et.server.tasks.ChangeTeam;
 
 public class Server implements ConnectionInterface {
 	static int port = 4711;
@@ -19,8 +20,7 @@ public class Server implements ConnectionInterface {
 	TaskHandler taskHandler;
 	
 	public static void main(String[] args) throws IOException {
-		Server s = new Server();
-		
+		new Server();
 	}
 	
 	public Server() throws IOException {
@@ -64,7 +64,8 @@ public class Server implements ConnectionInterface {
 			while (RUNNING) {
 				if((tempSocket = server.accept()) != null){
 					System.out.println("Accepted: " + tempSocket.getInetAddress());
-					Player p = new Player(connectionCount, "unknown", 0, 0);
+					int team = chooseTeam();
+					Player p = new Player(connectionCount, "unknown", team, getTeamSpawnPointX(team), getTeamSpawnPointY(team));
 					
 					ServerConnectionHandler c = new ServerConnectionHandler(tempSocket, taskHandler, p);
 					connections.add(c);
@@ -83,6 +84,22 @@ public class Server implements ConnectionInterface {
 		}
 	}
 	
+	private int getTeamSpawnPointX(int team) {
+		if (team == 0)
+			return 10;
+		return 0;
+	}
+
+	private int getTeamSpawnPointY(int team) {
+		if (team == 0)
+			return 10;
+		return 0;
+	}
+
+	private int chooseTeam() {
+		return connectionCount % 2;
+	}
+
 	public ArrayList<ServerConnectionHandler> getConnections() {
 		return connections;
 	}

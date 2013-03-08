@@ -35,7 +35,7 @@ public class Client implements ConnectionInterface {
 			nick = args[1];		
 		
 		game = new GameHandler(client);
-		Player p = new Player(0, nick, 0, 0);
+		Player p = new Player(0, nick, 0, 0, 0);
 		
 		try {
 			
@@ -44,9 +44,6 @@ public class Client implements ConnectionInterface {
 			
 			Thread t = new Thread(cch);
 			t.start();
-			
-			// Set nick
-			cch.send("nick " + nick);
 				
 		} catch (Exception e) {
 			System.err.println("Error connectiong to server");

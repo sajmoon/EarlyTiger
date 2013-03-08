@@ -12,6 +12,6 @@ public class Chat extends Task {
 
 	@Override
 	public void consume() {
-		server.sendToAllBut(player, text);
+		server.sendToAllBut(player, "chat " + text);
 	}
 }

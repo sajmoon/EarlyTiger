@@ -53,7 +53,6 @@ public class ClientConnectionHandler implements ConnectionHandler{
 						System.out.println(data);
 						processInput(data);	
 					}
-					
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -62,27 +61,32 @@ public class ClientConnectionHandler implements ConnectionHandler{
 		System.out.println("Closing connection to server");
 	}
 	
-	
 	private void processInput(String data) {
 		String[] inputs = data.split(" ");
 		if (inputs[0].equals("you")) {
 			if (inputs[1].equals("id")) {
 				currentPlayer.setID(Integer.parseInt(inputs[2]));
 				game.addPlayer(currentPlayer);
+				send("nick " + currentPlayer.getNick());
 			}
 		} else if (inputs[0].equals("player")) {
 			if (inputs[1].equals("connected")) {
 				System.out.println("new player connected");
-				// player connected :id nick :nick
+				System.out.println("connected: " + data);
+				// player connected :id :nick :team
 				int id = Integer.parseInt( inputs[2] );
 				
 				// dont add self
 				if (id != currentPlayer.getID()) {
-					String newNick = inputs[4]; // TODO FUUUU!
-					Player newPlayer = new Player(id, newNick, 0, 0); 
+					String newNick = inputs[3]; // TODO FUUUU!
+					int team = Integer.parseInt(inputs[4]);
+					Player newPlayer = new Player(id, newNick, team, 0, 0); 
 					game.addPlayer(newPlayer);
 				}
-				
+			} else if (inputs[2].equals("nick")) {
+				// player :id nick :newnick
+				int id = Integer.parseInt( inputs[1] );
+				game.getPlayer(id).setNick(inputs[3]);
 			} else if (inputs[2].equals("disconnected")) {
 				// player connected :id nick :nick
 				
@@ -113,8 +117,10 @@ public class ClientConnectionHandler implements ConnectionHandler{
 			if (inputs[3].equals("action")) {
 				// entity :x :y action
 				game.EntityAction(x,  y);
-				
 			}
+		} else if (inputs[0].equals("chat")) {
+			System.out.println(data);
+			
 			
 		} else {System.out.println("got unknown command: " + data);
 		}

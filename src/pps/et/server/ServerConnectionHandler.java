@@ -9,6 +9,7 @@ import java.net.Socket;
 import pps.et.logic.ConnectionHandler;
 import pps.et.logic.Player;
 import pps.et.server.tasks.Build;
+import pps.et.server.tasks.ChangeNick;
 import pps.et.server.tasks.Chat;
 import pps.et.server.tasks.ConnectionTask;
 import pps.et.server.tasks.DisconnectedTask;
@@ -46,8 +47,8 @@ public class ServerConnectionHandler implements ConnectionHandler {
 		
 		if (args[0].startsWith("nick")) {
 			// nick :newnick
-			setNick(input);
-			th.addTask(new Chat(player, "nich changed"));
+			setNick(args[1]);
+			th.addTask(new ChangeNick(player));
 		} else if (args[0].startsWith("map")) {
 			// dont work
 			sendMap();

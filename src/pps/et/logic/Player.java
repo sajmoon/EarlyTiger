@@ -8,8 +8,7 @@ public class Player {
 	String nick;
 	int id;
 	
-	
-	public Player(int id, String nick, int x, int y) {
+	public Player(int id, String nick, int team, int x, int y) {
 		this.id 	= id;
 		this.x 		= x;
 		this.y 		= y;
@@ -23,6 +22,7 @@ public class Player {
 	
 	public void setNick(String input) {
 		nick = input;
+		System.out.println("new nick!: " + nick);
 	}
 
 	public void setPos(int x, int y){
@@ -71,5 +71,9 @@ public class Player {
 	
 	public int getY(){
 		return y;
+	}
+
+	public int getTeam() {
+		return team;
 	}
 }

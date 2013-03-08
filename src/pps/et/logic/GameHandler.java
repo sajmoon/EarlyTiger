@@ -20,7 +20,7 @@ public class GameHandler {
 	}
 
 	public void addPlayer(Player p) {
-		System.out.println("[" + p.getNick() + "(" + p.getID()+")] joined the game.");
+		System.out.println("[" + p.getNick() + "(" + p.getID() + ")] joined the game.");
 		players.add(p);
 	}
 

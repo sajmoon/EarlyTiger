@@ -9,16 +9,15 @@ public class ConnectionTask extends Task {
 
 	@Override
 	public void consume() {
-		server.sendToPlayer(player, "you id " + player.getID()); // update player id.
+		server.sendToPlayer(player, "you id " + player.getID()); // update player id client side.
 		
-		String text = "player connected " + player.getID() + " " + player.getNick();
-//		server.sendToPlayer(player, "connected " + player.getID());
+		String text = "player connected " + player.getID() + " " + player.getNick() + " " + player.getTeam();
 		
 		server.send(text);
 		
 		System.out.println("size(): "  + this.game.players.size());
 		for (Player p : this.game.players) {
-			String t = "player connected " + p.getID() + " " + p.getNick();
+			String t = "player connected " + p.getID() + " " + p.getNick() + " " + player.getTeam();
 			server.sendToPlayer(player, t);
 			
 			String pos = "player " + p.getID() + " at " + p.getPos();

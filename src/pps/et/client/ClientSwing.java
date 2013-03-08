@@ -185,12 +185,16 @@ public class ClientSwing implements Runnable, KeyListener{
 	public void updateView() {
 		for (int x = 0; x < map.getSize(); x++) {
 			for (int y = 0; y < map.getSize(); y++) {
-				labels[y][x].setText( game.playerIdAt(x, y) );
 				int type = map.getTileCode(x, y);
+				
+				labels[y][x].setText( game.playerIdAt(x, y) );
+				
 				if (type == 1) {
 					labels[y][x].setText( "W" );
 				} else if (type == 2) {
 					labels[y][x].setText( "M" );
+				} else if (type == 3) {
+					labels[y][x].setText( "D" );
 				}
 			}
 		}

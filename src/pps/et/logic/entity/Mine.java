@@ -21,12 +21,12 @@ public class Mine extends Entity {
 		// Mine goes off.
 		System.out.println(getIdentifier() + " goes BOOM! ");
 
-		for (int i = (int)getPoint().getX() - 2; i < (int)getPoint().getX() + 2; i++) {
-			game.attack( i, (int)getPoint().getY(), damage);
+		for (int i = (int)getPoint().getX() - range; i < (int)getPoint().getX() + range + 1; i++) {
+			game.attack( owner, i, (int)getPoint().getY(), damage);
 		}
 		
-		for (int i = (int)getPoint().getY() - 2; i < (int)getPoint().getY() + 2; i++) {
-			game.attack( (int)getPoint().getX(), i, damage);
+		for (int i = (int)getPoint().getY() - range; i < (int)getPoint().getY() + range + 1; i++) {
+			game.attack( owner, (int)getPoint().getX(), i, damage);
 		}
 		
 		makeInvisible();

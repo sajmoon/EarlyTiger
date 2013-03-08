@@ -1,7 +1,7 @@
 package pps.et.logic;
 
-import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 
 import pps.et.logic.entity.Entity;
 
@@ -122,19 +122,23 @@ public class GameHandler {
 		addEntity(player, what, x, y);
 	}
 
-	public ArrayList<Entity> getEntities() {
+	
+	public synchronized List<Entity> getEntities() {
 		return map.getEntities();
 	}
 
 	/**
 	 * Inflict damage on a point
+	 * @params by
 	 * @param x
 	 * @param y
 	 * @param damage
 	 */
-	public void attack(int x, int y , int damage) {
+	public void attack(Player by, int x, int y , int damage) {
 		Player p = getPlayerAt(x, y);
 		if (p!= null)
 			p.attack(damage);
+		
+		addEntity(by, "Damage", x, y );
 	}
 }

@@ -23,7 +23,7 @@ public class Player {
 	public String getNick() {
 		if (alive)
 			return nick;
-		return "X-" + nick;
+		return "X-" + nick;	
 	}
 	
 	public void setNick(String input) {

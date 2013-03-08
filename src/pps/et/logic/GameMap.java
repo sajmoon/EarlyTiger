@@ -2,8 +2,11 @@ package pps.et.logic;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
+import pps.et.logic.entity.Damage;
 import pps.et.logic.entity.Entity;
 import pps.et.logic.entity.Mine;
 import pps.et.logic.entity.Wall;
@@ -36,7 +39,8 @@ public class GameMap {
 			
 		} else if (what.equals("Wall")) {
 			e = new Wall(player, game, x, y);
-			
+		} else if (what.equals("Damage")) {
+			e = new Damage(player, game, x, y);
 		} else {
 			System.out.println("No such thing to build.");
 			return; // So nothing to do but end here.
@@ -95,10 +99,15 @@ public class GameMap {
 		return false;
 	}
 
-	public ArrayList<Entity> getEntities() {
-		return entityList;
-	}
-
+	/**
+	 * Returns a unmodifiableList
+	 * for sync reasons
+	 * @return
+	 */
+	public synchronized List<Entity> getEntities() {
+        return Collections.unmodifiableList((new ArrayList<Entity>(entityList)));
+    }
+	
 	public void activateEntity(int x, int y) {
 		Entity e = map.get(new Point(x, y));
 		

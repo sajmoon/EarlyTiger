@@ -3,20 +3,20 @@ TODO
 
 Att saker händer när minor sprängs.
 Lägga till saker vi vill ha.
-- destructable walls/object
+(DONE)- destructable walls/object
 - indestructable walls.
 
 Saker på entities:
-- Liv
+(DONE) - Liv
 - destructable/indestructable boolean
-- Skada
+(DONE)- Skada
 - action
 
-- man måste kunna dö.
+(DONE)- man måste kunna dö.
 - man måste kunna försvinna och respawn.
 
-- teams.
-- olika spawn places.
+(DONE)- teams.
+(DONE)- olika spawn places.
 - score så man vet vem som vinner.
 
 - Startskärm Skit it. (Charlie)

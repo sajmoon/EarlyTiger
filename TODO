@@ -34,8 +34,8 @@ Spelide:
 - val av vapen. (senare, först kniv)
 - last man standing. / capture the flag.
 
-Ändra kartan till en hashmap med key som pair.
-Ta bort matrix, kör bara entities.
+(DONE!) Ändra kartan till en hashmap med key som pair.
+(DONE!) Ta bort matrix, kör bara entities. 
 
 - Kollap pingtider. Inbyggt i socket
 

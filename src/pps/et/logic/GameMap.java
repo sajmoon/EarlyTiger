@@ -116,4 +116,14 @@ public class GameMap {
 		
 		e.action();
 	}
+
+	public boolean canAttack(int x, int y) {
+		System.out.println("Can attack?" + x + " " + y);
+		Entity e = map.get(new Point(x, y));
+		if (e != null) {
+			System.out.println("yes");
+			return e.isDestructable();
+		}	
+		return true;
+	}
 }

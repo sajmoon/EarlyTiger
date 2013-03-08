@@ -7,7 +7,7 @@ public class Damage extends Entity {
 
 	public Damage(Player p, GameHandler g, int x, int y) {
 		super(p, g, x, y);
-		setActivationTime(5); //visa skade ett tag bara
+		setActivationTime(2); //visa skade ett tag bara
 		typeCode = 3;
 		System.out.println("[" + owner.getNick() + "] Inflictied damage at " + x + " " + y);
 	}

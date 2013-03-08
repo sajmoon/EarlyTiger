@@ -9,6 +9,7 @@ public class Wall extends Entity {
 		super(p, g, x, y);
 		typeCode = 1;
 		type = "Wall";
+		destructable = false;
 	}
 
 	@Override

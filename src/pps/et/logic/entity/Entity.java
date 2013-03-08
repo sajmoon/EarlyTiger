@@ -6,17 +6,18 @@ import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
 
 public abstract class Entity {
-	protected Player	owner;
-	private long		createdAt;
-	private long		activeIn;
-	protected String	type;
-	private boolean		hasBeenActivated;
-	private int			id;
-	private boolean		visible;
-	private int			x;
-	private int			y;
+	protected Player		owner;
+	private long			createdAt;
+	private long			activeIn;
+	protected String		type;
+	private boolean			hasBeenActivated;
+	private int				id;
+	private boolean			visible;
+	private int				x;
+	private int				y;
 	protected int			typeCode;
-	protected GameHandler game;
+	protected GameHandler	game;
+	protected boolean		destructable;
 
 	public Entity(Player p, GameHandler g, int x, int y) {
 		owner = p;
@@ -29,8 +30,13 @@ public abstract class Entity {
 		this.y = y;
 		typeCode = 0;
 		game = g;
+		destructable = true;
 	}
 
+	public boolean isDestructable() {
+		return destructable;
+	}
+	
 	public void setID(int input) {
 		id = input;
 	}

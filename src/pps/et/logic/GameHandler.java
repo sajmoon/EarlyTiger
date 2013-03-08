@@ -126,7 +126,7 @@ public class GameHandler {
 	public synchronized List<Entity> getEntities() {
 		return map.getEntities();
 	}
-
+	
 	/**
 	 * Inflict damage on a point
 	 * @params by
@@ -135,10 +135,14 @@ public class GameHandler {
 	 * @param damage
 	 */
 	public void attack(Player by, int x, int y , int damage) {
-		Player p = getPlayerAt(x, y);
-		if (p!= null)
-			p.attack(damage);
 		
-		addEntity(by, "Damage", x, y );
+		if (map.canAttack(x, y)) {
+			Player p = getPlayerAt(x, y);
+			
+			if (p!= null)
+				p.attack(damage);
+			
+			addEntity(by, "Damage", x, y );
+		}
 	}
 }

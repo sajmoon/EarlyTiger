@@ -4,9 +4,11 @@ public class Player {
 
 	int x;
 	int y;
-	int team; // 0 or 1
-	String nick;
-	int id;
+	private int team; // 0 or 1
+	private String nick;
+	private int id;
+	private int health;
+	private boolean alive;
 	
 	public Player(int id, String nick, int team, int x, int y) {
 		this.id 	= id;
@@ -14,10 +16,14 @@ public class Player {
 		this.y 		= y;
 		this.team 	= team;
 		this.nick 	= nick;
+		this.health = 100;
+		this.alive  = true;
 	}
 	
 	public String getNick() {
-		return nick;
+		if (alive)
+			return nick;
+		return "X-" + nick;
 	}
 	
 	public void setNick(String input) {
@@ -28,23 +34,6 @@ public class Player {
 	public void setPos(int x, int y){
 		this.x = x;
 		this.y = y;
-	}
-	
-	
-	@Deprecated
-	public synchronized void move(String direction) {
-		// TODO check if valid move
-		if (direction.equals("R"))
-			x++;
-		else if (direction.equals("L"))
-			x--;
-		else if (direction.equals("U"))
-			y++;
-		else if (direction.equals("D"))
-			y--;
-		else 
-			System.err.println("ERROR: unknown direction");
-		
 	}
 	
 	public String getPos() {
@@ -75,5 +64,22 @@ public class Player {
 
 	public int getTeam() {
 		return team;
+	}
+	
+	private void setAsDead() {
+		alive = false;
+	}
+
+	public void attack(int damage) {
+		health -= damage;
+		if (health <= 0) {
+			setAsDead();
+		}
+	}
+
+	public boolean canMove() {
+		if (alive)
+			return true;
+		return false;
 	}
 }

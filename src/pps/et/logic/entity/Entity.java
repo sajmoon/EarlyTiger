@@ -1,5 +1,8 @@
 package pps.et.logic.entity;
 
+import java.awt.Point;
+
+import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
 
 public abstract class Entity {
@@ -13,8 +16,9 @@ public abstract class Entity {
 	private int			x;
 	private int			y;
 	protected int			typeCode;
+	protected GameHandler game;
 
-	public Entity(Player p, int x, int y) {
+	public Entity(Player p, GameHandler g, int x, int y) {
 		owner = p;
 		createdAt = System.currentTimeMillis();
 		activeIn = 0;
@@ -24,6 +28,7 @@ public abstract class Entity {
 		this.x = x;
 		this.y = y;
 		typeCode = 0;
+		game = g;
 	}
 
 	public void setID(int input) {
@@ -77,9 +82,13 @@ public abstract class Entity {
 	public boolean isVisible() {
 		return visible;
 	}
-	
+
 	public String getPos() {
 		return "" + x + " " + y;
+	}
+	
+	protected Point getPoint() {
+		return new Point(x, y);
 	}
 
 	public boolean isAt(int x, int y) {

@@ -9,7 +9,6 @@ import pps.et.logic.ConnectionInterface;
 import pps.et.logic.EntityController;
 import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
-import pps.et.server.tasks.ChangeTeam;
 
 public class Server implements ConnectionInterface {
 	static int port = 4711;
@@ -28,7 +27,7 @@ public class Server implements ConnectionInterface {
 		
 		connections = new ArrayList<ServerConnectionHandler>();
 		game = new GameHandler(this);
-		
+
 		try {
 			server = new ServerSocket(port);
 			System.out.println("Connected to port: " + port);

@@ -12,15 +12,18 @@ public class GameMap {
 	private int mapSize = 20;
 	private ArrayList<Entity> entityList;
 	private HashMap<Point, Entity> map;
+	private GameHandler game;
 	
 	public static final int FLOOR = 0;
 	public static final int WALL = 1;
 	
 	private int	lastEntityID = 0;
 	
-	public GameMap() {
+	public GameMap(GameHandler g) {
 		map 		= new HashMap<Point, Entity>();
 		entityList 	= new ArrayList<Entity>();
+		
+		game = g;
 		
 		populateMap();
 	}
@@ -29,10 +32,10 @@ public class GameMap {
 		Entity e = null;
 		Point p = new Point(x, y);
 		if (what.equals("Mine")) {
-			e = new Mine(player, x, y);
+			e = new Mine(player, game, x, y);
 			
 		} else if (what.equals("Wall")) {
-			e = new Wall(player, x, y);
+			e = new Wall(player, game, x, y);
 			
 		} else {
 			System.out.println("No such thing to build.");

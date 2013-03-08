@@ -1,5 +1,6 @@
 package pps.et.logic;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import pps.et.logic.entity.Entity;
@@ -10,7 +11,7 @@ public class GameHandler {
 	public ArrayList<Player> players;
 
 	public GameHandler(ConnectionInterface i) {
-		map = new GameMap();
+		map = new GameMap(this);
 		players = new ArrayList<Player>();
 		connector = i;
 	}
@@ -57,8 +58,7 @@ public class GameHandler {
 	public void setPos(int playerId, int x, int y) {
 		for (Player p : players) {
 			if (p.getID() == playerId) {
-				p.x = x;
-				p.y = y;
+				p.setPos(x, y);
 			}
 		}
 	}
@@ -76,12 +76,19 @@ public class GameHandler {
 		return false;
 	}
 
-	public String playerIdAt(int x, int y) {
-		for (Player p : players) {
+	private Player getPlayerAt(int x, int y) {
+		for (Player p : players ) {
 			if (p.x == x && p.y == y) {
-				return p.getNick();
+				return p;
 			}
 		}
+		return null;
+	}
+	
+	public String playerIdAt(int x, int y) {
+		Player p = getPlayerAt(x, y);
+		if (p != null)
+			return p.getNick();
 		return "";
 	}
 
@@ -99,7 +106,10 @@ public class GameHandler {
 		map.activateEntity(x, y);
 	}
 
-	private void doMove(Player p,int x, int y){
+	private void doMove(Player p,int x, int y) {
+		if (!p.canMove())
+			return;
+		
 		if(x >= 0 && x < map.getSize() && y >= 0 && y < map.getSize()){
 			if(map.walkableTile(x,y)){
 				p.setPos(x,y);
@@ -114,5 +124,17 @@ public class GameHandler {
 
 	public ArrayList<Entity> getEntities() {
 		return map.getEntities();
+	}
+
+	/**
+	 * Inflict damage on a point
+	 * @param x
+	 * @param y
+	 * @param damage
+	 */
+	public void attack(int x, int y , int damage) {
+		Player p = getPlayerAt(x, y);
+		if (p!= null)
+			p.attack(damage);
 	}
 }

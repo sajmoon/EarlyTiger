@@ -1,6 +1,7 @@
 package pps.et.server.tasks;
 
 import pps.et.logic.Player;
+import pps.et.logic.entity.Entity;
 
 public class ConnectionTask extends Task {
 	public ConnectionTask(Player p) {
@@ -15,13 +16,16 @@ public class ConnectionTask extends Task {
 		
 		server.send(text);
 		
-		System.out.println("size(): "  + this.game.players.size());
 		for (Player p : this.game.players) {
 			String t = "player connected " + p.getID() + " " + p.getNick() + " " + player.getTeam();
 			server.sendToPlayer(player, t);
 			
 			String pos = "player " + p.getID() + " at " + p.getPos();
 			server.sendToPlayer(player, pos);
+		}
+		
+		for (Entity e : game.getEntities()) {
+			server.sendToPlayer(player, "player " + player.getID() + " build " + e.getType() + " at " + e.getPos());
 		}
 	}
 }

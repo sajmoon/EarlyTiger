@@ -74,6 +74,10 @@ public class GameMap {
 		return mapSize;
 	}
 	
+	private Entity getEntity(int x, int y) {
+		return map.get(new Point(x,y));
+	}
+	
 	public int getTileCode(int x, int y) {
 		Entity e = map.get(new Point(x, y));
 		if (e == null) 
@@ -82,10 +86,11 @@ public class GameMap {
 	}
 	
 	public boolean walkableTile(int x, int y) {
-		if (getTileCode(x,y) == FLOOR)
+		Entity e = getEntity(x, y);
+		if (e == null)
 			return true;
 		
-		return false;
+		return getEntity(x,y).isWalkable();
 	}
 	
 	public boolean hasEntity(int x, int y) {

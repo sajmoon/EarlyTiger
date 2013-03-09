@@ -10,6 +10,7 @@ public class Wall extends Entity {
 		typeCode = 1;
 		type = "Wall";
 		destructable = false;
+		canWalkOn = false;
 	}
 
 	@Override

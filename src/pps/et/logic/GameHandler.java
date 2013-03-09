@@ -25,7 +25,7 @@ public class GameHandler {
 		players.add(p);
 	}
 
-	public synchronized void movePlayer(Player player, String direction) {
+	public void movePlayer(Player player, String direction) {
 		if (direction.equals("R"))
 			doMove(player, player.getX() + 1, player.getY());
 		else if (direction.equals("L"))
@@ -106,7 +106,7 @@ public class GameHandler {
 		map.activateEntity(x, y);
 	}
 
-	private void doMove(Player p,int x, int y) {
+	private synchronized void doMove(Player p,int x, int y) {
 		if (!p.canMove())
 			return;
 		

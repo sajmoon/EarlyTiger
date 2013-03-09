@@ -18,6 +18,7 @@ public abstract class Entity {
 	protected int			typeCode;
 	protected GameHandler	game;
 	protected boolean		destructable;
+	protected boolean 	canWalkOn;
 
 	public Entity(Player p, GameHandler g, int x, int y) {
 		owner = p;
@@ -31,6 +32,7 @@ public abstract class Entity {
 		typeCode = 0;
 		game = g;
 		destructable = true;
+		canWalkOn = true;
 	}
 
 	public boolean isDestructable() {
@@ -101,5 +103,9 @@ public abstract class Entity {
 		if (this.x == x && this.y == y)
 			return true;
 		return false;
+	}
+
+	public boolean isWalkable() {
+		return canWalkOn;
 	}
 }

@@ -112,6 +112,7 @@ public class GameHandler {
 		
 		if(x >= 0 && x < map.getSize() && y >= 0 && y < map.getSize()){
 			if(map.walkableTile(x,y)){
+				EntityAction(x, y);
 				p.setPos(x,y);
 			}else
 				System.out.println("[GAME] Not a valid move");

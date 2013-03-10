@@ -67,6 +67,10 @@ public abstract class Entity {
 	protected void makeInvisible() {
 		visible = false;
 	}
+	
+	protected void remove() {
+		game.map.removeEntity(this, new Point(x, y));
+	}
 
 	public boolean canActivate() {
 		if (!hasBeenActivated

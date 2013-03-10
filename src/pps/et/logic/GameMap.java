@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import pps.et.logic.entity.Box;
 import pps.et.logic.entity.Damage;
 import pps.et.logic.entity.Entity;
 import pps.et.logic.entity.Mine;
@@ -41,6 +42,8 @@ public class GameMap {
 			e = new Wall(player, game, x, y);
 		} else if (what.equals("Damage")) {
 			e = new Damage(player, game, x, y);
+		} else if (what.equals("Box")) {
+			e = new Box(player, game, x, y);
 		} else {
 			System.out.println("No such thing to build.");
 			return; // So nothing to do but end here.
@@ -68,6 +71,8 @@ public class GameMap {
 		addEntity(null, "Wall", 9, 8);
 		addEntity(null, "Wall", 5, 8);
 		addEntity(null, "Wall", 6, 8);
+		
+		addEntity(null, "Box", 12, 12);
 	}
 	
 	public int getSize() {
@@ -130,5 +135,9 @@ public class GameMap {
 			return e.isDestructable();
 		}	
 		return true;
+	}
+
+	public void removeEntity(Entity entity, Point at) {
+		map.remove(at);
 	}
 }

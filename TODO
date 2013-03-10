@@ -4,13 +4,13 @@ TODO
 Att saker händer när minor sprängs.
 Lägga till saker vi vill ha.
 (DONE)- destructable walls/object
-- indestructable walls.
+(DONE) - indestructable walls.
 
 Saker på entities:
 (DONE) - Liv
-- destructable/indestructable boolean
+(DONE) - destructable/indestructable boolean
 (DONE)- Skada
-- action
+(DONE) - action
 
 (DONE)- man måste kunna dö.
 - man måste kunna försvinna och respawn.

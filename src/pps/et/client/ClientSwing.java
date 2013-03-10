@@ -195,6 +195,9 @@ public class ClientSwing implements Runnable, KeyListener{
 					labels[y][x].setText( "M" );
 				} else if (type == 3) {
 					labels[y][x].setText( "D" );
+				} else if (type == 4) {
+					//Box
+					labels[y][x].setText( "B" );
 				}
 			}
 		}

@@ -188,6 +188,6 @@ public class GameMap {
 				return e.attack();
 			}
 		}
-		return false;
+		return true;
 	}
 }

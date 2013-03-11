@@ -238,6 +238,10 @@ class PaintPanel extends JPanel implements MouseListener,
 			connection.quit();
 		} else if (e.getKeyCode() == 32) {
 			// Space
+			
+			connection.send("build Mine at " + player.getPos());
+			game.build(player, "Mine", player.getX(), player.getY());
+			
 		} else if (e.getKeyCode() == 10) {
 			// enter
 		} else if (e.getKeyCode() == 84) {

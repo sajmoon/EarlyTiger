@@ -13,6 +13,9 @@ public class EntityAction extends Task {
 
 	@Override
 	public void consume() {
+		String pos = entity.getPos();
+		
+		entity.action();
 		server.sendToAll("entity " + entity.getPos() + " action");
 	}
 }

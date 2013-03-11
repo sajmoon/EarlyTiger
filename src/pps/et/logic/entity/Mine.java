@@ -1,7 +1,5 @@
 package pps.et.logic.entity;
 
-import java.util.Random;
-
 import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
 

@@ -179,6 +179,8 @@ class PaintPanel extends JPanel implements MouseListener,
     	//g2.fillRect(0, 0, this.getWidth(), this.getHeight());
     	g2.drawImage(grass, 0, 0, 610, 610, this);	
     	for(Entity e : map.getEntities()){
+    		if (e == null)
+    			break;
     		
     		if(e.getType().equals("Wall")){
     			g2.drawImage(wall, e.getX()*10, e.getY()*10, this);

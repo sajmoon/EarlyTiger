@@ -1,5 +1,7 @@
 package pps.et.logic;
 
+import java.util.Random;
+
 import pps.et.logic.entity.Entity;
 import pps.et.server.TaskHandler;
 import pps.et.server.tasks.EntityAction;
@@ -22,12 +24,15 @@ public class EntityController implements Runnable {
 		at pps.et.logic.EntityController.run(EntityController.java:33)
 		at java.lang.Thread.run(Thread.java:679)
 		*/
-		
+		Random r = new Random();
 		while (true) {
 			for (Entity e : game.getEntities()) {
 				if (e.canActivate()) {
-					e.action();
 					tasks.addTask(new EntityAction(null, e));
+					if (e.getType().equals("Mine")) {
+						if (r.nextInt(10)<3)
+							tasks.addTask(new SummonBox(null, e.getX(), e.getY()));
+					}
 				}
 			}
 			try {

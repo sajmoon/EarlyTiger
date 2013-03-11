@@ -44,6 +44,7 @@ public class GameMap {
 		} else if (what.equals("Damage")) {
 			e = new Damage(player, game, x, y);
 		} else if (what.equals("Box")) {
+			System.out.println("Build box at " + x + " " + y);
 			e = new Box(player, game, x, y);
 		} else if (what.equals("Barrier")) {
 			e = new Barrier(player, game, x, y);

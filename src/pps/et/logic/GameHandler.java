@@ -38,7 +38,7 @@ public class GameHandler {
 			System.err.println("ERROR: unknown direction");
 	}
 	
-	private void addEntity(Player player, String what, int x, int y) {
+	private synchronized void addEntity(Player player, String what, int x, int y) {
 		map.addEntity(player, what, x, y);
 	}
 
@@ -145,5 +145,9 @@ public class GameHandler {
 				addEntity(by, "Damage", x, y );
 			}
 		}
+	}
+
+	public void playerLevelUp(Player p) {
+		connector.send("levelup");
 	}
 }

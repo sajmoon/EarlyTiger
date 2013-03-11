@@ -5,7 +5,7 @@ import pps.et.logic.Player;
 import pps.et.server.Server;
 
 public abstract class Task {
-	Player player;
+	protected Player player;
 	public GameHandler game;
 	public Server server;
 

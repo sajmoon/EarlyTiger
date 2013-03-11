@@ -146,6 +146,8 @@ public class GameMap {
     }
 	
 	public void activateEntity(Player p, int x, int y) {
+		System.out.println("activate entity")
+		;
 		Entity e = map.get(new Point(x, y));
 		
 		if ( e == null)
@@ -153,6 +155,7 @@ public class GameMap {
 		
 		if (p == null)
 			e.action();
+		
 		e.action(p);
 	}
 

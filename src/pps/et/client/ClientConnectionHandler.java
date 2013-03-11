@@ -112,7 +112,7 @@ public class ClientConnectionHandler implements ConnectionHandler{
 			} else if (inputs[2].equals("level")) {
 				// player :id level :lvl
 				Player player = game.getPlayer(Integer.parseInt(inputs[1]));
-				player.levelUp(Integer.parseInt(inputs[3]));
+				player.levelUp();
 			}
 		} else if(inputs[0].equals("entity")) {
 			// entity :x :y

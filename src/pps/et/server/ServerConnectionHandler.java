@@ -63,6 +63,7 @@ public class ServerConnectionHandler implements ConnectionHandler {
 			// build :what at :x :y
 			th.addTask(new Build(player, args[1], Integer.parseInt(args[3]), Integer.parseInt(args[4])));
 		} else if (args[0].equals("levelup")) {
+			System.out.println("levelup");
 			th.addTask(new LevelUp(player)); 
 		} else {
 			System.out.println("unknwon command: " + args[0]);

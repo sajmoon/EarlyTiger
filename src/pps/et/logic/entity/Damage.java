@@ -10,8 +10,8 @@ public class Damage extends Entity {
 		type = "Damage";
 		setActivationTime(1); //visa skade ett tag bara
 		typeCode = 3;
-		if (owner != null)
-			System.out.println("[" + owner.getNick() + "] Inflictied damage at " + x + " " + y);
+		//if (owner != null)
+			//System.out.println("[" + owner.getNick() + "] Inflictied damage at " + x + " " + y);
 	}
 
 	@Override

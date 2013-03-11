@@ -146,6 +146,5 @@ public class GameMap {
 			if (e.isAt(at.x, at.y))
 				entityList.remove(e);
 		}
-
 	}
 }

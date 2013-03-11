@@ -1,5 +1,7 @@
 package pps.et.logic.entity;
 
+import java.util.Random;
+
 import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
 
@@ -35,6 +37,10 @@ public class Mine extends Entity {
 		for (int i = (int)getPoint().getY() - range; i < (int)getPoint().getY() + range + 1; i++) {
 			game.attack( owner, (int)getPoint().getX(), i, damage);
 		}
+		
+		Random r = new Random();
+		if (r.nextInt(10)<5)
+			game.build(null, "Box", x, y);
 		
 		makeInvisible();
 	}

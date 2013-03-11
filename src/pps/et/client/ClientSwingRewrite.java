@@ -143,16 +143,16 @@ class PaintPanel extends JPanel implements MouseListener,
         this.addMouseListener(this); 
         this.addMouseMotionListener(this);
         
-        player_one = Toolkit.getDefaultToolkit().getImage("p1.png");
-        wall = Toolkit.getDefaultToolkit().getImage("wall.png");
-        grass = Toolkit.getDefaultToolkit().getImage("grass.jpg");
-        crate = Toolkit.getDefaultToolkit().getImage("crate.png");
-        fire = Toolkit.getDefaultToolkit().getImage("fire.png");
-        tnt = Toolkit.getDefaultToolkit().getImage("TNT.png");
-        death = Toolkit.getDefaultToolkit().getImage("death.png");
-        opponent = Toolkit.getDefaultToolkit().getImage("opponent.png");
-        team_mate = Toolkit.getDefaultToolkit().getImage("team_mate.png");
-        treasure = Toolkit.getDefaultToolkit().getImage("treasure.png");
+        player_one = Toolkit.getDefaultToolkit().getImage("../p1.png");
+        wall = Toolkit.getDefaultToolkit().getImage("../wall.png");
+        grass = Toolkit.getDefaultToolkit().getImage("../grass.jpg");
+        crate = Toolkit.getDefaultToolkit().getImage("../crate.png");
+        fire = Toolkit.getDefaultToolkit().getImage("../fire.png");
+        tnt = Toolkit.getDefaultToolkit().getImage("../TNT.png");
+        death = Toolkit.getDefaultToolkit().getImage("../death.png");
+        opponent = Toolkit.getDefaultToolkit().getImage("../opponent.png");
+        team_mate = Toolkit.getDefaultToolkit().getImage("../team_mate.png");
+        treasure = Toolkit.getDefaultToolkit().getImage("../treasure.png");
         
     }
     

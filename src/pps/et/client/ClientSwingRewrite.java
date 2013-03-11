@@ -14,13 +14,16 @@ import pps.et.logic.entity.Entity;
 
 import java.awt.image.BufferedImage;
 
-class ClientSwingRewrite extends JFrame {
+class ClientSwingRewrite extends JFrame implements KeyListener {
     
 	private ConnectionHandler connection;
 	private Player player;
 	private GameHandler game;
 	GameMap map;
 	
+	protected JLabel chatPane;
+	 
+	 
 	PaintPanel canvas;
     
     public ClientSwingRewrite(final ClientConnectionHandler connection, final Player player, final GameHandler game) {
@@ -30,7 +33,7 @@ class ClientSwingRewrite extends JFrame {
 		this.map 		= game.getMap();
     	
 		
-		canvas = new PaintPanel(connection, player, game);
+		canvas = new PaintPanel(connection, player, game, this);
 		
     	//--- create the buttons
         JButton connectButton = new JButton("Connect");
@@ -47,12 +50,12 @@ class ClientSwingRewrite extends JFrame {
             	//TODO
             }});
         
-        JLabel chatPane = new JLabel();
+        chatPane = new JLabel();
         chatPane.setBackground(Color.white);
         chatPane.setAlignmentY(TOP_ALIGNMENT);
         chatPane.setText("Welcome to the game.");
         
-        JTextField chatInput = new JTextField(">");
+        JTextField chatInput = new JTextField("> BAJS :D HAHA");
       
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(4, 1));
@@ -78,6 +81,29 @@ class ClientSwingRewrite extends JFrame {
 	public void start(){
         canvas.run();
     }
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == 10) {
+			System.out.println("Wat..");
+			connection.send("chat "+ chatPane.getText());
+		}
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 
@@ -91,6 +117,7 @@ class PaintPanel extends JPanel implements MouseListener,
 	private GameHandler game;
 	GameMap map;
 
+	private ClientSwingRewrite csr;
 		
 	
     
@@ -98,13 +125,15 @@ class PaintPanel extends JPanel implements MouseListener,
     
     private static final int SIZE = 610;
     
-    public PaintPanel(final ClientConnectionHandler connection, final Player player, final GameHandler game) {
+    public PaintPanel(final ClientConnectionHandler connection, final Player player, final GameHandler game, ClientSwingRewrite csr) {
     	
     	this.connection	= connection;
 		this.player 	= player;
 		this.game 		= game;
 		this.map 		= game.getMap();
-    	
+    	this.csr 		= csr;
+		
+		
         setPreferredSize(new Dimension(SIZE, SIZE));
         setBackground(Color.white);
       
@@ -144,6 +173,8 @@ class PaintPanel extends JPanel implements MouseListener,
     	g2.setColor(Color.white);
     	g2.fillRect(0, 0, this.getWidth(), this.getHeight());
     	
+    	if (map != null){
+    		
     	for(Entity e : map.getEntities()){
     		
     		if(e.getType().equals("Wall")){
@@ -165,16 +196,18 @@ class PaintPanel extends JPanel implements MouseListener,
     			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
     	}
-    	
-    	//Self
-    	g2.setColor(Color.black);
-    	g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
-    	
-    	if(!player.isAlive()){
-    		g2.setColor(Color.white);
-    		g2.fillOval(player.getX()*10+2, player.getY()*10+2, 6, 6);
     	}
+    	if(player != null){    		
+	    	//Self
+	    	g2.setColor(Color.black);
+	    	g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
+	    	
+	    	if(!player.isAlive()){
+	    		g2.setColor(Color.white);
+	    		g2.fillOval(player.getX()*10+2, player.getY()*10+2, 6, 6);
+	    	}
     	
+    	}
     }
 
     public void mousePressed(MouseEvent e) {  
@@ -252,6 +285,8 @@ class PaintPanel extends JPanel implements MouseListener,
 		} else if (e.getKeyCode() == 84) {
 			// t
 			// for talk/chat
+			System.out.println("Moving focus...");
+			csr.chatPane.grabFocus();
 		} else if (e.getKeyCode() == 66) {
 			// build
 			// "player :id build :what at :x :y

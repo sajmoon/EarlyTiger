@@ -87,13 +87,13 @@ public class Server implements ConnectionInterface {
 	
 	private int getTeamSpawnPointX(int team) {
 		Random rand = new Random();
-		return (rand.nextInt(59)+1);
+		return (rand.nextInt(game.map.getSize()-2)+1);
 	}
 
 	private int getTeamSpawnPointY(int team) {
 		if (team == 0)
 			return 1;
-		return 60;
+		return game.map.getSize()-2;
 	}
 
 	private int chooseTeam() {

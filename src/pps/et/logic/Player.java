@@ -79,6 +79,10 @@ public class Player {
 		}
 	}
 
+	public boolean isAlive(){
+		return alive;
+	}
+	
 	public boolean canMove() {
 		if (alive)
 			return true;

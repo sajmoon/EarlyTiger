@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Random;
 
 import pps.et.logic.ConnectionInterface;
 import pps.et.logic.EntityController;
@@ -85,15 +86,14 @@ public class Server implements ConnectionInterface {
 	}
 	
 	private int getTeamSpawnPointX(int team) {
-		if (team == 0)
-			return 10;
-		return 0;
+		Random rand = new Random();
+		return (rand.nextInt(59)+1);
 	}
 
 	private int getTeamSpawnPointY(int team) {
 		if (team == 0)
-			return 10;
-		return 0;
+			return 1;
+		return 60;
 	}
 
 	private int chooseTeam() {

@@ -146,9 +146,6 @@ class PaintPanel extends JPanel implements MouseListener,
     	
     	for(Entity e : map.getEntities()){
     		
-    		if(!e.getType().equals("Wall"))
-    			System.out.println(e.getType());
-    		
     		if(e.getType().equals("Wall")){
     			g2.setColor(Color.gray);
     			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
@@ -169,10 +166,14 @@ class PaintPanel extends JPanel implements MouseListener,
     	g2.setColor(Color.black);
     	g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
     	
+    	if(!player.isAlive()){
+    		g2.setColor(Color.white);
+    		g2.fillOval(player.getX()*10+2, player.getY()*10+2, 6, 6);
+    	}
+    	
     }
 
     public void mousePressed(MouseEvent e) {  
-    	System.out.println(e.getClickCount());
     }
 
     public void mouseDragged(MouseEvent e) {
@@ -208,7 +209,7 @@ class PaintPanel extends JPanel implements MouseListener,
 				this.repaint();
 			}
 			try {
-				Thread.sleep(100);
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -254,7 +255,6 @@ class PaintPanel extends JPanel implements MouseListener,
 			connection.send("build Mine at " + player.getPos());
 			game.build(player, "Mine", player.getX(), player.getY());
 		} else {
-			System.out.println("Keypres: " + e.getKeyCode());
 		}
 	
 	}

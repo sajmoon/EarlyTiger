@@ -55,10 +55,13 @@ public class GameHandler {
 		return null;
 	}
 
+	
 	public void setPos(int playerId, int x, int y) {
+		
 		for (Player p : players) {
 			if (p.getID() == playerId) {
 				p.setPos(x, y);
+				EntityAction(p, x, y);
 			}
 		}
 	}
@@ -116,8 +119,8 @@ public class GameHandler {
 		
 		if(x >= 0 && x < map.getSize() && y >= 0 && y < map.getSize()){
 			if(map.walkableTile(x,y)){
-				EntityAction(p, x, y);
-				p.setPos(x,y);
+				//EntityAction(p, x, y);
+				setPos(p.getID(), x,y);
 			}else
 				System.out.println("[GAME] Not a valid move");
 		}

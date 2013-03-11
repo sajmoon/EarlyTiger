@@ -21,11 +21,14 @@ public class Damage extends Entity {
 	}
 
 	@Override
-	public void action(Player p) {		
+	public void action(Player p) {
+		makeInvisible();
+		remove();
 	}
 
 	@Override
 	public boolean attack() {
+		makeInvisible();
 		return true;
 	}
 }

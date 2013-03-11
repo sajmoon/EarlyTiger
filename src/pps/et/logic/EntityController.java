@@ -31,7 +31,7 @@ public class EntityController implements Runnable {
 				}
 			}
 			try {
-				Thread.sleep(100);
+				Thread.sleep(20);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

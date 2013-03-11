@@ -24,4 +24,10 @@ public class Barrier extends Entity {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean attack() {
+		makeInvisible();
+		return true;
+	}
 }

@@ -146,6 +146,8 @@ public class GameMap {
     }
 	
 	public void activateEntity(Player p, int x, int y) {
+		System.out.println("activate entity")
+		;
 		Entity e = map.get(new Point(x, y));
 		
 		if ( e == null)
@@ -153,6 +155,7 @@ public class GameMap {
 		
 		if (p == null)
 			e.action();
+		
 		e.action(p);
 	}
 
@@ -170,5 +173,21 @@ public class GameMap {
 			if (e.isAt(at.x, at.y))
 				entityList.remove(e);
 		}
+	}
+
+	// true if thing destroyed
+	public boolean attack(Player by, int x, int y, int damage) {
+		Player p = game.getPlayerAt(x, y);
+		
+		if (p!= null)
+			p.attack(damage);
+		
+		Entity e = map.get(new Point(x,y));
+		if (e != null) {
+			if (e.isDestructable()) {
+				return e.attack();
+			}
+		}
+		return true;
 	}
 }

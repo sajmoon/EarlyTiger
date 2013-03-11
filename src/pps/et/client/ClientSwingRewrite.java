@@ -255,7 +255,7 @@ class PaintPanel extends JPanel implements MouseListener,
 
 			if (_bufImage != null){
 				Graphics2D grafarea = _bufImage.createGraphics();
-			    
+
 		        draw(grafarea);
 				
 				this.repaint();

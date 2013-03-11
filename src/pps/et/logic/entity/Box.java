@@ -25,6 +25,11 @@ public class Box extends Entity {
 		
 		this.remove();
 		
-		
+	}
+
+	@Override
+	public boolean attack() {
+		this.remove();
+		return true;
 	}
 }

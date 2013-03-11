@@ -140,14 +140,10 @@ public class GameHandler {
 	 * @param damage
 	 */
 	public void attack(Player by, int x, int y , int damage) {
-		
 		if (map.canAttack(x, y)) {
-			Player p = getPlayerAt(x, y);
-			
-			if (p!= null)
-				p.attack(damage);
-			
-			addEntity(by, "Damage", x, y );
+			if (map.attack(by, x, y, damage)) {
+				addEntity(by, "Damage", x, y );
+			}
 		}
 	}
 }

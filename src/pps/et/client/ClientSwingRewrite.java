@@ -6,6 +6,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import org.omg.CORBA.portable.InvokeHandler;
+
 import pps.et.logic.ConnectionHandler;
 import pps.et.logic.GameHandler;
 import pps.et.logic.GameMap;
@@ -33,7 +35,7 @@ class ClientSwingRewrite extends JFrame implements KeyListener {
 		this.map 		= game.getMap();
     	
 		
-		canvas = new PaintPanel(connection, player, game, this);
+		canvas = new PaintPanel(connection, player, game);
 		
     	//--- create the buttons
         JButton connectButton = new JButton("Connect");
@@ -73,8 +75,13 @@ class ClientSwingRewrite extends JFrame implements KeyListener {
         
         
         this.setTitle("PPS13Project");
+        
+        this.setResizable(false);
+        
         this.setVisible(true);
+        
         this.pack();
+        
     }
     
 
@@ -117,7 +124,6 @@ class PaintPanel extends JPanel implements MouseListener,
 	private GameHandler game;
 	GameMap map;
 
-	private ClientSwingRewrite csr;
 		
 	
     
@@ -125,13 +131,12 @@ class PaintPanel extends JPanel implements MouseListener,
     
     private static final int SIZE = 610;
     
-    public PaintPanel(final ClientConnectionHandler connection, final Player player, final GameHandler game, ClientSwingRewrite csr) {
+    public PaintPanel(final ClientConnectionHandler connection, final Player player, final GameHandler game) {
     	
     	this.connection	= connection;
 		this.player 	= player;
 		this.game 		= game;
 		this.map 		= game.getMap();
-    	this.csr 		= csr;
 		
 		
         setPreferredSize(new Dimension(SIZE, SIZE));
@@ -155,14 +160,17 @@ class PaintPanel extends JPanel implements MouseListener,
         
         Graphics2D g2 = (Graphics2D)g;  // downcast to Graphics2D
         if (_bufImage == null) {
-            //--- This is the first time, initialize _bufImage
+           
+        	//--- This is the first time, initialize _bufImage
             int w = this.getWidth();
             int h = this.getHeight();
             _bufImage = (BufferedImage)this.createImage(w, h);
             Graphics2D gc = _bufImage.createGraphics();
+            
             gc.setColor(Color.white);
             gc.fillRect(0, 0, w, h); // fill in background
         }
+        
         g2.drawImage(_bufImage, null, 0, 0);  // draw previous shapes
         
         draw(g2);
@@ -233,19 +241,15 @@ class PaintPanel extends JPanel implements MouseListener,
 	@Override
 	public void run() {
 		while(true){
+
 			if (_bufImage != null){
-				
 				Graphics2D grafarea = _bufImage.createGraphics();
-			        
-				
+			    
 		        draw(grafarea);
 				
 				this.repaint();
-			}
-			try {
-				
-			} catch (Exception e) {
-				// TODO: handle exception
+			}else{
+				System.err.println("Broke..");
 			}
 		}
 	}
@@ -289,8 +293,8 @@ class PaintPanel extends JPanel implements MouseListener,
 			connection.send("build Mine at " + player.getPos());
 			game.build(player, "Mine", player.getX(), player.getY());
 		} else {
+		
 		}
-	
 	}
 
 

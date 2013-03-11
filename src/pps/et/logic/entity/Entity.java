@@ -69,7 +69,7 @@ public abstract class Entity {
 	}
 	
 	protected void remove() {
-		game.map.removeEntity(this, new Point(x, y));
+		game.map.removeEntity(new Point(x, y));
 	}
 
 	public boolean canActivate() {

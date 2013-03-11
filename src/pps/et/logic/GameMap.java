@@ -139,7 +139,13 @@ public class GameMap {
 		return true;
 	}
 
-	public void removeEntity(Entity entity, Point at) {
+	public void removeEntity(Point at) {
+
 		map.remove(at);
+		for (Entity e : getEntities()) {
+			if (e.isAt(at.x, at.y))
+				entityList.remove(e);
+		}
+
 	}
 }

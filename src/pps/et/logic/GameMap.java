@@ -157,17 +157,14 @@ public class GameMap {
 	}
 
 	public boolean canAttack(int x, int y) {
-		System.out.println("Can attack?" + x + " " + y);
 		Entity e = map.get(new Point(x, y));
 		if (e != null) {
-			System.out.println("yes");
 			return e.isDestructable();
 		}	
 		return true;
 	}
 
 	public void removeEntity(Point at) {
-
 		map.remove(at);
 		for (Entity e : getEntities()) {
 			if (e.isAt(at.x, at.y))

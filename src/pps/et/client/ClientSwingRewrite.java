@@ -285,8 +285,6 @@ class PaintPanel extends JPanel implements MouseListener,
 		} else if (e.getKeyCode() == 84) {
 			// t
 			// for talk/chat
-			System.out.println("Moving focus...");
-			csr.chatPane.grabFocus();
 		} else if (e.getKeyCode() == 66) {
 			// build
 			// "player :id build :what at :x :y

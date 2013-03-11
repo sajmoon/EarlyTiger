@@ -52,6 +52,7 @@ public class Client implements ConnectionInterface {
 		}
 		
 		cs = new ClientSwingRewrite(cch, p, game);
+		
 		cs.start();
 		
 		

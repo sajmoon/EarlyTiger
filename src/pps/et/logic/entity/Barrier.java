@@ -8,6 +8,9 @@ public class Barrier extends Entity {
 	public Barrier(Player p, GameHandler g, int x, int y) {
 		super(p, g, x, y);
 		type = "Barrier";
+		typeCode = 5;
+		destructable = true;
+		canWalkOn = false;
 	}
 
 	@Override

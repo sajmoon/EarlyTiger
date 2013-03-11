@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import pps.et.logic.entity.Barrier;
 import pps.et.logic.entity.Box;
 import pps.et.logic.entity.Damage;
 import pps.et.logic.entity.Entity;
@@ -44,6 +45,8 @@ public class GameMap {
 			e = new Damage(player, game, x, y);
 		} else if (what.equals("Box")) {
 			e = new Box(player, game, x, y);
+		} else if (what.equals("Barrier")) {
+			e = new Barrier(player, game, x, y);
 		} else {
 			System.out.println("No such thing to build.");
 			return; // So nothing to do but end here.
@@ -75,6 +78,13 @@ public class GameMap {
 			}
 		}
 		
+		for (int i = 1; i < mapSize-1; i++) {
+			for (int j = 5; j < mapSize - 5; j++) {
+				if (i%2 != 0 || j%2 != 0)
+					addEntity(null, "Barrier", i,j);
+				
+			}
+		}
 		
 		
 //		addEntity(null, "Wall", 3, 2);

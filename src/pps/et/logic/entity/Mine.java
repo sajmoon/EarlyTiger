@@ -42,18 +42,18 @@ public class Mine extends Entity {
 			game.attack( owner, (int)getPoint().getX()+i, (int)getPoint().getY(), damage);
 		}
 		
-		// Middle to left
+		// Middle down
 		for (int i = 1; i < range; i++) {
 			if (!game.map.canAttack((int)getPoint().getX(), (int)getPoint().getY()-i))
 				break;
 			game.attack( owner, (int)getPoint().getX(), (int)getPoint().getY()-i, damage);
 		}
 		
-		// Middle + 1 to right
+		// Middle up
 		for (int i = 1; i < range; i++) {
 			if (!game.map.canAttack((int)getPoint().getX(), (int)getPoint().getY()+i))
 				break;
-			game.attack( owner, (int)getPoint().getX(), (int)getPoint().getY()+1, damage);
+			game.attack( owner, (int)getPoint().getX(), (int)getPoint().getY()+i, damage);
 		}
 		
 		makeInvisible();

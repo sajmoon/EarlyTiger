@@ -53,7 +53,6 @@ class ClientSwingRewrite extends JFrame implements KeyListener {
         chatPane.setAlignmentY(TOP_ALIGNMENT);
         chatPane.setText("Welcome to the game.");
         
-        JTextField chatInput = new JTextField("> BAJS :D HAHA");
       
        // JPanel buttonPanel = new JPanel();
        // buttonPanel.setLayout(new GridLayout(2, 1));

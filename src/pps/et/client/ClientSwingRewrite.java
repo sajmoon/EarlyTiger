@@ -116,7 +116,7 @@ class PaintPanel extends JPanel implements MouseListener,
 	private GameHandler game;
 	GameMap map;
 
-	private Image wall, grass, crate, fire, player_one, tnt;
+	private Image wall, grass, crate, fire, player_one, tnt, death, opponent, team_mate, treasure;
 	
     
     private BufferedImage _bufImage = null;
@@ -149,6 +149,11 @@ class PaintPanel extends JPanel implements MouseListener,
         crate = Toolkit.getDefaultToolkit().getImage("crate.png");
         fire = Toolkit.getDefaultToolkit().getImage("fire.png");
         tnt = Toolkit.getDefaultToolkit().getImage("TNT.png");
+        death = Toolkit.getDefaultToolkit().getImage("death.png");
+        opponent = Toolkit.getDefaultToolkit().getImage("opponent.png");
+        team_mate = Toolkit.getDefaultToolkit().getImage("team_mate.png");
+        treasure = Toolkit.getDefaultToolkit().getImage("treasure.png");
+        
     }
     
     
@@ -209,8 +214,9 @@ class PaintPanel extends JPanel implements MouseListener,
     		}
     		
     		if (e.getType().equals("Box")){
-    			g2.setColor(Color.YELLOW);
-    			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
+    			g2.drawImage(treasure, e.getX()*10, e.getY()*10, this);
+    			//g2.setColor(Color.YELLOW);
+    			//g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
     		
     	}
@@ -218,11 +224,14 @@ class PaintPanel extends JPanel implements MouseListener,
     	for (Player p : game.players) {
 			if (p.getID() != player.getID()){
 				if(p.getTeam() == 0)
-					g2.setColor(Color.cyan);
+					g2.drawImage(team_mate, p.getX()*10, p.getY()*10, this);
 				else
-					g2.setColor(Color.magenta);
+					g2.drawImage(opponent, p.getX()*10, p.getY()*10, this);
 				
-				g2.fillOval(p.getX()*10, p.getY()*10, 10, 10);
+				if(!p.isAlive())
+					g2.drawImage(death, player.getX()*10, player.getY()*10, this);
+				else
+					g2.fillOval(p.getX()*10, p.getY()*10, 10, 10);
 			}
 		}
     	//Self
@@ -232,8 +241,9 @@ class PaintPanel extends JPanel implements MouseListener,
     	//g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
     	
     	if(!player.isAlive()){
-    		g2.setColor(Color.white);
-    		g2.fillOval(player.getX()*10+2, player.getY()*10+2, 6, 6);
+    		g2.drawImage(death, player.getX()*10, player.getY()*10, this);
+    		//g2.setColor(Color.white);
+    		//g2.fillOval(player.getX()*10+2, player.getY()*10+2, 6, 6);
     	}
     	
     }

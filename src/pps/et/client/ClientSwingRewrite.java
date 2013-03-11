@@ -55,19 +55,19 @@ class ClientSwingRewrite extends JFrame implements KeyListener {
         
         JTextField chatInput = new JTextField("> BAJS :D HAHA");
       
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2, 1));
-//        buttonPanel.add(connectButton);
-//        buttonPanel.add(disconnectButton);
-        buttonPanel.add(chatPane);
-        buttonPanel.add(chatInput);
+       // JPanel buttonPanel = new JPanel();
+       // buttonPanel.setLayout(new GridLayout(2, 1));
+       //        buttonPanel.add(connectButton);
+   //        buttonPanel.add(disconnectButton);
+       // buttonPanel.add(chatPane);
+       // buttonPanel.add(chatInput);
         
         
         Container content = this.getContentPane();
         
         content.setLayout(new BorderLayout());
-        content.add(canvas     , BorderLayout.CENTER);
-        content.add(buttonPanel, BorderLayout.EAST);
+        content.add(canvas, BorderLayout.CENTER);
+       // content.add(buttonPanel, BorderLayout.EAST);
         
         
         this.setTitle("PPS13Project");

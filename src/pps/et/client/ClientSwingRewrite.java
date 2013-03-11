@@ -208,7 +208,7 @@ class PaintPanel extends JPanel implements MouseListener,
     	for (Player p : game.players) {
 			if (p.getID() != player.getID()){
 				if(p.getTeam() == 0)
-					g2.setColor(Color.pink);
+					g2.setColor(Color.cyan);
 				else
 					g2.setColor(Color.magenta);
 				

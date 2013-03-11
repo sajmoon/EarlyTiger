@@ -90,7 +90,7 @@ public class Player {
 	}
 
 	public void levelUp() {
-		level++;
+		this.level++;
 	}
 	
 	public int getLevel() {

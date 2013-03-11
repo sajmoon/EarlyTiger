@@ -18,12 +18,13 @@ public class Box extends Entity {
 	
 	public void action(Player p) {
 		// triggered
+		game.playerLevelUp(p);
 		
 		System.out.println("Picked up a box");
-		p.levelUp();
-		makeInvisible();
 		
+		makeInvisible();
 		this.remove();
+		
 		
 	}
 

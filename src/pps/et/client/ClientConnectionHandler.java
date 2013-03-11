@@ -109,6 +109,10 @@ public class ClientConnectionHandler implements ConnectionHandler{
 				int y 			= Integer.parseInt(inputs[6]);
 				Player player 	= game.getPlayer(playerId);
 				game.build(player, inputs[3], x, y);
+			} else if (inputs[2].equals("level")) {
+				// player :id level :lvl
+				Player player = game.getPlayer(Integer.parseInt(inputs[1]));
+				player.levelUp(Integer.parseInt(inputs[3]));
 			}
 		} else if(inputs[0].equals("entity")) {
 			// entity :x :y
@@ -117,6 +121,8 @@ public class ClientConnectionHandler implements ConnectionHandler{
 			if (inputs[3].equals("action")) {
 				// entity :x :y action
 				game.EntityAction(x,  y);
+			} else if (inputs[3].equals("box")) {
+				game.build(null, "Box", x, y);
 			}
 		} else if (inputs[0].equals("chat")) {
 			System.out.println(data);

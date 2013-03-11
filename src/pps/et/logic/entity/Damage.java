@@ -17,7 +17,7 @@ public class Damage extends Entity {
 	public void action() {
 		//TODO Should be removed instead of just invisible
 		remove();
-		makeInvisible();
+		//makeInvisible();
 	}
 
 	@Override

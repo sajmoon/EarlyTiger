@@ -29,7 +29,7 @@ public class GameMap {
 		
 		game = g;
 		
-		populateMap();
+		//populateMap();
 	}
 	
 	public void addEntity(Player player, String what, int x, int y) {
@@ -59,20 +59,38 @@ public class GameMap {
 		return lastEntityID;
 	}
 
-	private void populateMap() {
-		addEntity(null, "Wall", 3, 2);
-		addEntity(null, "Wall", 5, 3);
-		addEntity(null, "Wall", 5, 4);
-		addEntity(null, "Wall", 5, 5);
-		addEntity(null, "Wall", 4, 5);
-		addEntity(null, "Wall", 3, 5);
-		addEntity(null, "Wall", 7, 7);
-		addEntity(null, "Wall", 7, 8);
-		addEntity(null, "Wall", 9, 8);
-		addEntity(null, "Wall", 5, 8);
-		addEntity(null, "Wall", 6, 8);
+	public void populateMap() {
 		
-		addEntity(null, "Box", 12, 12);
+		
+		for (int i = 0; i < mapSize; i++) {
+			addEntity(null, "Wall", 0, i);
+			addEntity(null, "Wall", mapSize-1, i);
+			addEntity(null, "Wall", i, 0);
+			addEntity(null, "Wall", i, mapSize -1);
+			
+			for (int j = 0; j < mapSize; j++) {
+				if (i%2 == 0 && j%2 == 0) {
+					addEntity(null, "Wall", j,i);
+				}
+		
+			}
+		}
+		
+		
+		
+//		addEntity(null, "Wall", 3, 2);
+//		addEntity(null, "Wall", 5, 3);
+//		addEntity(null, "Wall", 5, 4);
+//		addEntity(null, "Wall", 5, 5);
+//		addEntity(null, "Wall", 4, 5);
+//		addEntity(null, "Wall", 3, 5);
+//		addEntity(null, "Wall", 7, 7);
+//		addEntity(null, "Wall", 7, 8);
+//		addEntity(null, "Wall", 9, 8);
+//		addEntity(null, "Wall", 5, 8);
+//		addEntity(null, "Wall", 6, 8);
+//		
+//		addEntity(null, "Box", 12, 12);
 	}
 	
 	public int getSize() {
@@ -139,7 +157,12 @@ public class GameMap {
 		return true;
 	}
 
-	public void removeEntity(Entity entity, Point at) {
+	public void removeEntity(Point at) {
+
 		map.remove(at);
+		for (Entity e : getEntities()) {
+			if (e.isAt(at.x, at.y))
+				entityList.remove(e);
+		}
 	}
 }

@@ -180,70 +180,53 @@ class PaintPanel extends JPanel implements MouseListener,
     
     
     private void draw(Graphics2D g2) {	
-    	//g2.setColor(Color.green);
-    	//g2.fillRect(0, 0, this.getWidth(), this.getHeight());
+    
     	g2.drawImage(grass, 0, 0, 610, 610, this);	
+    	
     	for(Entity e : map.getEntities()){
     		if (e == null)
     			break;
     		
     		if(e.getType().equals("Wall")){
     			g2.drawImage(wall, e.getX()*10, e.getY()*10, this);
-    			//g2.setColor(Color.gray);
-    			//g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
-    	    	
+    			
     		}
     		
     		if (e.getType().equals("Mine")){
     			g2.drawImage(tnt, e.getX()*10, e.getY()*10, 10, 10, this);
-    			//g2.setColor(Color.red);
-    			//g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
     		
     		if (e.getType().equals("Damage")){
 				g2.drawImage(fire,e.getX()*10,e.getY()*10, this);
-    			//g2.setColor(Color.orange);	
-    			//g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
     		
     		if (e.getType().equals("Barrier")){
     			g2.drawImage(crate, e.getX()*10, e.getY()*10, this);
-    			
-    			//g2.setColor(Color.GREEN);
-    			//g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
     		
     		if (e.getType().equals("Box")){
     			g2.drawImage(treasure, e.getX()*10, e.getY()*10, this);
-    			//g2.setColor(Color.YELLOW);
-    			//g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
     		
     	}
     	
     	for (Player p : game.players) {
 			if (p.getID() != player.getID()){
-				if(p.getTeam() == 0)
-					g2.drawImage(team_mate, p.getX()*10, p.getY()*10, this);
-				else
-					g2.drawImage(opponent, p.getX()*10, p.getY()*10, this);
-				
-				if(!p.isAlive())
-					g2.drawImage(death, player.getX()*10, player.getY()*10, this);
-				else
-					g2.fillOval(p.getX()*10, p.getY()*10, 10, 10);
+				if(!p.isAlive()){
+					g2.drawImage(death, player.getX()*10, player.getY()*10, this);					
+				}else{
+					if(p.getTeam() == 0)
+						g2.drawImage(team_mate, p.getX()*10, p.getY()*10, this);
+					else
+						g2.drawImage(opponent, p.getX()*10, p.getY()*10, this);
+				}
 			}
 		}
     	//Self
-    	//g2.setColor(Color.black);
-    	
     	g2.drawImage(player_one, player.getX()*10, player.getY()*10, this);
-    	//g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
     	
     	if(!player.isAlive()){
     		g2.drawImage(death, player.getX()*10, player.getY()*10, this);
-    		//g2.setColor(Color.white);
-    		//g2.fillOval(player.getX()*10+2, player.getY()*10+2, 6, 6);
     	}
     	
     }

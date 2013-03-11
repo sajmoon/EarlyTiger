@@ -29,7 +29,7 @@ public class GameMap {
 		
 		game = g;
 		
-		populateMap();
+		//populateMap();
 	}
 	
 	public void addEntity(Player player, String what, int x, int y) {
@@ -59,7 +59,7 @@ public class GameMap {
 		return lastEntityID;
 	}
 
-	private void populateMap() {
+	public void populateMap() {
 		addEntity(null, "Wall", 3, 2);
 		addEntity(null, "Wall", 5, 3);
 		addEntity(null, "Wall", 5, 4);

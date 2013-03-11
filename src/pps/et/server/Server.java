@@ -27,6 +27,7 @@ public class Server implements ConnectionInterface {
 		
 		connections = new ArrayList<ServerConnectionHandler>();
 		game = new GameHandler(this);
+		game.map.populateMap();
 
 		try {
 			server = new ServerSocket(port);

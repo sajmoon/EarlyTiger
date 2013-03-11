@@ -13,8 +13,8 @@ public abstract class Entity {
 	private boolean			hasBeenActivated;
 	private int				id;
 	private boolean			visible;
-	private int				x;
-	private int				y;
+	protected int				x;
+	protected int				y;
 	protected int			typeCode;
 	protected GameHandler	game;
 	protected boolean		destructable;
@@ -90,6 +90,9 @@ public abstract class Entity {
 	 * method.
 	 */
 	public abstract void action();
+	
+	// Triggered when touched.
+	public abstract void action(Player p);
 
 	public boolean isVisible() {
 		return visible;

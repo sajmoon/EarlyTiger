@@ -11,11 +11,20 @@ public class Box extends Entity {
 		type = "Box";
 	}
 
-	@Override
 	public void action() {
-		makeInvisible();
-		this.remove();
+		// Timedelayed action
+		
+	}
+	
+	public void action(Player p) {
+		// triggered
+		
 		System.out.println("Picked up a box");
+		p.levelUp();
+		makeInvisible();
+		
+		this.remove();
+		
 		
 	}
 }

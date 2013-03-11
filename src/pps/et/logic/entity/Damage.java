@@ -19,4 +19,10 @@ public class Damage extends Entity {
 		remove();
 		makeInvisible();
 	}
+
+	@Override
+	public void action(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

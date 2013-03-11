@@ -17,4 +17,10 @@ public class Wall extends Entity {
 	public void action() {
 		// A wall does nothing.
 	}
+
+	@Override
+	public void action(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

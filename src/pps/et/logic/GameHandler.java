@@ -76,7 +76,7 @@ public class GameHandler {
 		return false;
 	}
 
-	private Player getPlayerAt(int x, int y) {
+	public Player getPlayerAt(int x, int y) {
 		for (Player p : players ) {
 			if (p.x == x && p.y == y) {
 				return p;
@@ -103,7 +103,11 @@ public class GameHandler {
 	}
 	
 	public void EntityAction(int x, int y) {
-		map.activateEntity(x, y);
+		map.activateEntity(null, x, y);
+	}
+	
+	public void EntityAction(Player p, int x, int y) {
+		map.activateEntity(p, x, y);
 	}
 
 	private synchronized void doMove(Player p,int x, int y) {
@@ -112,7 +116,7 @@ public class GameHandler {
 		
 		if(x >= 0 && x < map.getSize() && y >= 0 && y < map.getSize()){
 			if(map.walkableTile(x,y)){
-				EntityAction(x, y);
+				EntityAction(p, x, y);
 				p.setPos(x,y);
 			}else
 				System.out.println("[GAME] Not a valid move");

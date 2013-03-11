@@ -12,8 +12,8 @@ public class Mine extends Entity {
 		type = "Mine";
 		damage = 100;
 		typeCode = 2;
-		range = 2;
-		setActivationTime(10);
+		this.range = owner.getLevel();
+		setActivationTime(5);
 		System.out.println("[" + owner.getNick() + "] Placed a mine.");
 	}
 	
@@ -30,5 +30,11 @@ public class Mine extends Entity {
 		}
 		
 		makeInvisible();
+	}
+
+	@Override
+	public void action(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 }

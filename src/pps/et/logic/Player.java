@@ -9,6 +9,7 @@ public class Player {
 	private int id;
 	private int health;
 	private boolean alive;
+	private int level;
 	
 	public Player(int id, String nick, int team, int x, int y) {
 		this.id 	= id;
@@ -17,7 +18,8 @@ public class Player {
 		this.team 	= team;
 		this.nick 	= nick;
 		this.health = 100;
-		this.alive  = true;
+		this.alive = true;
+		this.level = 1;
 	}
 	
 	public String getNick() {
@@ -81,5 +83,13 @@ public class Player {
 		if (alive)
 			return true;
 		return false;
+	}
+
+	public void levelUp() {
+		level++;
+	}
+	
+	public int getLevel() {
+		return level;
 	}
 }

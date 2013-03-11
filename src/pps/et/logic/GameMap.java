@@ -118,13 +118,15 @@ public class GameMap {
         return Collections.unmodifiableList((new ArrayList<Entity>(entityList)));
     }
 	
-	public void activateEntity(int x, int y) {
+	public void activateEntity(Player p, int x, int y) {
 		Entity e = map.get(new Point(x, y));
 		
 		if ( e == null)
 			return;
 		
-		e.action();
+		if (p == null)
+			e.action();
+		e.action(p);
 	}
 
 	public boolean canAttack(int x, int y) {

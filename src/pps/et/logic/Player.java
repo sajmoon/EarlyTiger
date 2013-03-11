@@ -33,7 +33,8 @@ public class Player {
 		System.out.println("new nick!: " + nick);
 	}
 
-	public void setPos(int x, int y){
+	
+	public synchronized void setPos(int x, int y){
 		this.x = x;
 		this.y = y;
 	}

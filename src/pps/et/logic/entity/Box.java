@@ -18,14 +18,15 @@ public class Box extends Entity {
 	
 	public void action(Player p) {
 		// triggered
-		game.playerLevelUp(p);
-		
-		System.out.println("Picked up a box");
-		
-		makeInvisible();
-		this.remove();
-		
-		
+		System.out.println("player at : " + p.getX() + " " + p.getY() + " box at " + x + " " + y);
+		if (p.getX() == x && p.getY() == y) {
+			game.playerLevelUp(p);	
+	
+			System.out.println("Picked up a box");
+	
+			makeInvisible();
+			this.remove();
+		}
 	}
 
 	@Override

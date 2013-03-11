@@ -15,9 +15,9 @@ public class Mine extends Entity {
 		canWalkOn = false;
 		
 		if(owner == null)
-			this.range = 2;
+			this.range = 3;
 		else
-			this.range = owner.getLevel();
+			this.range = owner.getLevel() + 1;
 		setActivationTime(5);
 		
 		if(owner != null)
@@ -28,12 +28,32 @@ public class Mine extends Entity {
 		// Mine goes off.
 		this.remove();
 		
-		for (int i = (int)getPoint().getX() - range; i < (int)getPoint().getX() + range + 1; i++) {
-			game.attack( owner, i, (int)getPoint().getY(), damage);
+		// Middle to left
+		for (int i = 0; i < range; i++) {
+			if (!game.map.canAttack((int)getPoint().getX()-i, (int)getPoint().getY()))
+				break;
+			game.attack( owner, (int)getPoint().getX()-i, (int)getPoint().getY(), damage);
 		}
 		
-		for (int i = (int)getPoint().getY() - range; i < (int)getPoint().getY() + range + 1; i++) {
-			game.attack( owner, (int)getPoint().getX(), i, damage);
+		// Middle + 1 to right
+		for (int i = 1; i < range; i++) {
+			if (!game.map.canAttack((int)getPoint().getX()+i, (int)getPoint().getY()))
+				break;
+			game.attack( owner, (int)getPoint().getX()+i, (int)getPoint().getY(), damage);
+		}
+		
+		// Middle to left
+		for (int i = 1; i < range; i++) {
+			if (!game.map.canAttack((int)getPoint().getX(), (int)getPoint().getY()-i))
+				break;
+			game.attack( owner, (int)getPoint().getX(), (int)getPoint().getY()-i, damage);
+		}
+		
+		// Middle + 1 to right
+		for (int i = 1; i < range; i++) {
+			if (!game.map.canAttack((int)getPoint().getX(), (int)getPoint().getY()+i))
+				break;
+			game.attack( owner, (int)getPoint().getX(), (int)getPoint().getY()+1, damage);
 		}
 		
 		makeInvisible();

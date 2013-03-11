@@ -202,15 +202,26 @@ class PaintPanel extends JPanel implements MouseListener,
     			g2.setColor(Color.GREEN);
     			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
-    			
-	    	//Self
-	    	g2.setColor(Color.black);
-	    	g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
-	    	
-	    	if(!player.isAlive()){
-	    		g2.setColor(Color.white);
-	    		g2.fillOval(player.getX()*10+2, player.getY()*10+2, 6, 6);
-	    	}
+    		
+    	}
+    	
+    	for (Player p : game.players) {
+			if (p.getID() != player.getID()){
+				if(p.getTeam() == 0)
+					g2.setColor(Color.pink);
+				else
+					g2.setColor(Color.magenta);
+				
+				g2.fillOval(p.getX()*10, p.getY()*10, 10, 10);
+			}
+		}
+    	//Self
+    	g2.setColor(Color.black);
+    	g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
+    	
+    	if(!player.isAlive()){
+    		g2.setColor(Color.white);
+    		g2.fillOval(player.getX()*10+2, player.getY()*10+2, 6, 6);
     	}
     	
     }

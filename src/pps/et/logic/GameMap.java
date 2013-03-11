@@ -13,7 +13,7 @@ import pps.et.logic.entity.Mine;
 import pps.et.logic.entity.Wall;
 
 public class GameMap {
-	private int mapSize = 20;
+	private int mapSize = 61;
 	private ArrayList<Entity> entityList;
 	private HashMap<Point, Entity> map;
 	private GameHandler game;
@@ -72,7 +72,9 @@ public class GameMap {
 				if (i%2 == 0 && j%2 == 0) {
 					addEntity(null, "Wall", j,i);
 				}
-		
+				if (i%2 != 0 && j%2 != 0) {
+					addEntity(null, "Mine", j,i);
+				}
 			}
 		}
 		

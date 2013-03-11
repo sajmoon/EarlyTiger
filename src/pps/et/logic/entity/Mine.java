@@ -12,9 +12,14 @@ public class Mine extends Entity {
 		type = "Mine";
 		damage = 100;
 		typeCode = 2;
-		this.range = owner.getLevel();
+		if(owner == null)
+			this.range = 2;
+		else
+			this.range = owner.getLevel();
 		setActivationTime(5);
-		System.out.println("[" + owner.getNick() + "] Placed a mine.");
+		
+		if(owner != null)
+			System.out.println("[" + owner.getNick() + "] Placed a mine.");
 	}
 	
 	public void action() {

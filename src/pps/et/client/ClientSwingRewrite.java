@@ -96,7 +96,7 @@ class PaintPanel extends JPanel implements MouseListener,
     
     private BufferedImage _bufImage = null;
     
-    private static final int SIZE = 600;
+    private static final int SIZE = 610;
     
     public PaintPanel(final ClientConnectionHandler connection, final Player player, final GameHandler game) {
     	
@@ -145,12 +145,27 @@ class PaintPanel extends JPanel implements MouseListener,
     	g2.fillRect(0, 0, this.getWidth(), this.getHeight());
     	
     	for(Entity e : map.getEntities()){
+    		
+    		if(!e.getType().equals("Wall"))
+    			System.out.println(e.getType());
+    		
     		if(e.getType().equals("Wall")){
     			g2.setColor(Color.gray);
     			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
+    		
+    		if (e.getType().equals("Mine")){
+    			g2.setColor(Color.red);
+    			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
+    		}
+    		
+    		if (e.getType().equals("Damage")){
+    			g2.setColor(Color.orange);
+    			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
+    		}
     	}
     	
+    	//Self
     	g2.setColor(Color.black);
     	g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
     	
@@ -230,6 +245,9 @@ class PaintPanel extends JPanel implements MouseListener,
 			// for talk/chat
 		} else if (e.getKeyCode() == 66) {
 			// build
+			// "player :id build :what at :x :y
+			
+			connection.send("build Mine at 2 2");
 		} else {
 			System.out.println("Keypres: " + e.getKeyCode());
 		}

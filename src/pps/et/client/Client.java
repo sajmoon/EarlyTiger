@@ -5,8 +5,10 @@ import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
 
 public class Client implements ConnectionInterface {
-	static private ClientSwing cs;
 	
+	
+	//static private ClientSwing cs;
+	static private ClientSwingRewrite cs;
 	static private ClientConnectionHandler cch;
 	static private GameHandler game;
 	static private String host;
@@ -49,7 +51,9 @@ public class Client implements ConnectionInterface {
 			System.err.println("Error connectiong to server");
 		}
 		
-		cs = new ClientSwing(cch, p, game);
+		cs = new ClientSwingRewrite(cch, p, game);
+		cs.start();
+		
 		
 		try {
 			Thread.sleep(200);
@@ -57,8 +61,8 @@ public class Client implements ConnectionInterface {
 			System.out.println("no sleep");
 		}
 		
-		Thread swing = new Thread(cs);
-		swing.start();
+		//Thread swing = new Thread(cs);
+		//swing.start();
 		
 	}
 

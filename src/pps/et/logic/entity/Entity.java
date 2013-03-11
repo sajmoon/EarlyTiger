@@ -102,6 +102,14 @@ public abstract class Entity {
 		return "" + x + " " + y;
 	}
 	
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		return y;
+	}
+	
 	protected Point getPoint() {
 		return new Point(x, y);
 	}

@@ -5,25 +5,33 @@ import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
+
+import pps.et.logic.ConnectionHandler;
+import pps.et.logic.GameHandler;
+import pps.et.logic.GameMap;
+import pps.et.logic.Player;
+import pps.et.logic.entity.Entity;
+
 import java.awt.image.BufferedImage;
 
-class ClientSwingRewrite {
-    public static void main(String[] args) {
-        PaintWindow window = new PaintWindow();
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setVisible(true);
-        window.start();
-    }
-}
-
-
-class PaintWindow extends JFrame {
+class ClientSwingRewrite extends JFrame {
     
-	PaintPanel canvas = new PaintPanel();
+	private ConnectionHandler connection;
+	private Player player;
+	private GameHandler game;
+	GameMap map;
+	
+	PaintPanel canvas;
     
-    public PaintWindow() {
-        
+    public ClientSwingRewrite(final ClientConnectionHandler connection, final Player player, final GameHandler game) {
+    	this.connection	= connection;
+		this.player 	= player;
+		this.game 		= game;
+		this.map 		= game.getMap();
     	
+		
+		canvas = new PaintPanel(connection, player, game);
+		
     	//--- create the buttons
         JButton connectButton = new JButton("Connect");
         connectButton.addActionListener(new ActionListener() {
@@ -31,9 +39,7 @@ class PaintWindow extends JFrame {
             	//TODO
             }});
         
-        
-        //Doesn't work?
-        connectButton.setSize(10, 10);
+        connectButton.setBounds(0, 0, 10, 10);
         
         JButton disconnectButton = new JButton("Disconnect");
         disconnectButton.addActionListener(new ActionListener() {
@@ -64,10 +70,12 @@ class PaintWindow extends JFrame {
         
         
         this.setTitle("PPS13Project");
+        this.setVisible(true);
         this.pack();
     }
     
-    public void start(){
+
+	public void start(){
         canvas.run();
     }
 }
@@ -78,21 +86,28 @@ class PaintPanel extends JPanel implements MouseListener,
                                            Runnable,
                                            KeyListener {
 
-	int pX = 20;
-	int pY = 80;
+	private ConnectionHandler connection;
+	private Player player;
+	private GameHandler game;
+	GameMap map;
+
+		
 	
-	
-    private int _currentStartX = 0;  
-    private int _currentStartY = 0;
     
     private BufferedImage _bufImage = null;
     
     private static final int SIZE = 600;
     
-    public PaintPanel() {
+    public PaintPanel(final ClientConnectionHandler connection, final Player player, final GameHandler game) {
+    	
+    	this.connection	= connection;
+		this.player 	= player;
+		this.game 		= game;
+		this.map 		= game.getMap();
     	
         setPreferredSize(new Dimension(SIZE, SIZE));
         setBackground(Color.white);
+      
         this.setFocusable(true);
         this.requestFocusInWindow();
         
@@ -129,23 +144,20 @@ class PaintPanel extends JPanel implements MouseListener,
     	g2.setColor(Color.white);
     	g2.fillRect(0, 0, this.getWidth(), this.getHeight());
     	
+    	for(Entity e : map.getEntities()){
+    		if(e.getType().equals("Wall")){
+    			g2.setColor(Color.gray);
+    			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
+    		}
+    	}
+    	
     	g2.setColor(Color.black);
-    	g2.fillOval(pX, pY, 10, 10);
+    	g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
     	
     }
 
-    public void mousePressed(MouseEvent e) {
-        _currentStartX = e.getX(); 
-        _currentStartY = e.getY();
-       
-        System.out.println(e.getClickCount());
-        
-        Graphics2D grafarea = _bufImage.createGraphics();
-        
-        draw(grafarea);
-        
-        this.repaint();            // show new shape
-        
+    public void mousePressed(MouseEvent e) {  
+    	System.out.println(e.getClickCount());
     }
 
     public void mouseDragged(MouseEvent e) {
@@ -188,25 +200,27 @@ class PaintPanel extends JPanel implements MouseListener,
 		}
 	}
 
-
-
-
+	
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 37 || e.getKeyCode() == 65) {
 			// left or a
-			pX -= 10;
+			game.movePlayer(player, "L");
+			connection.send("move L");
 		} else if (e.getKeyCode() == 38 || e.getKeyCode() == 87) {
 			// up or w
-			pY -= 10;
+			game.movePlayer(player, "D");
+			connection.send("move D");
 		} else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) {
 			// 	right or d
-			pX += 10;
+			game.movePlayer(player, "R");
+			connection.send("move R");
 		} else if (e.getKeyCode() == 40 || e.getKeyCode() == 83) {
 			// down or s
-			pY += 10;
+			game.movePlayer(player, "U");
+			connection.send("move U");
 		} else if (e.getKeyCode() == 27) {
 			//escape
-			System.exit(0);
+			connection.quit();
 		} else if (e.getKeyCode() == 32) {
 			// Space
 		} else if (e.getKeyCode() == 10) {
@@ -225,11 +239,9 @@ class PaintPanel extends JPanel implements MouseListener,
 
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getKeyCode());
 	}
 
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getKeyCode());	
 	}
 }

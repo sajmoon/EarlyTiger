@@ -12,6 +12,8 @@ public class Mine extends Entity {
 		type = "Mine";
 		damage = 100;
 		typeCode = 2;
+		canWalkOn = false;
+		
 		if(owner == null)
 			this.range = 2;
 		else

@@ -72,9 +72,6 @@ public class GameMap {
 				if (i%2 == 0 && j%2 == 0) {
 					addEntity(null, "Wall", j,i);
 				}
-				if (i%2 != 0 && j%2 != 0) {
-					addEntity(null, "Mine", j,i);
-				}
 			}
 		}
 		

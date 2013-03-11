@@ -247,7 +247,8 @@ class PaintPanel extends JPanel implements MouseListener,
 			// build
 			// "player :id build :what at :x :y
 			
-			connection.send("build Mine at 2 2");
+			connection.send("build Mine at " + player.getPos());
+			game.build(player, "Mine", player.getX(), player.getY());
 		} else {
 			System.out.println("Keypres: " + e.getKeyCode());
 		}

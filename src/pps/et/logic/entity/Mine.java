@@ -24,8 +24,7 @@ public class Mine extends Entity {
 	
 	public void action() {
 		// Mine goes off.
-		System.out.println(getIdentifier() + " goes BOOM! ");
-
+		
 		for (int i = (int)getPoint().getX() - range; i < (int)getPoint().getX() + range + 1; i++) {
 			game.attack( owner, i, (int)getPoint().getY(), damage);
 		}
@@ -41,5 +40,11 @@ public class Mine extends Entity {
 	public void action(Player p) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean attack() {
+		action();
+		return true;
 	}
 }

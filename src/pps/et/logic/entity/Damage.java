@@ -26,4 +26,9 @@ public class Damage extends Entity {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean attack() {
+		return true;
+	}
 }

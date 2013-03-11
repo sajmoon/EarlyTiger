@@ -93,6 +93,8 @@ public abstract class Entity {
 	
 	// Triggered when touched.
 	public abstract void action(Player p);
+	
+	public abstract boolean attack();
 
 	public boolean isVisible() {
 		return visible;

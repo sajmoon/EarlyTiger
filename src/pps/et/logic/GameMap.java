@@ -171,4 +171,20 @@ public class GameMap {
 				entityList.remove(e);
 		}
 	}
+
+	// true if thing destroyed
+	public boolean attack(Player by, int x, int y, int damage) {
+		Player p = game.getPlayerAt(x, y);
+		
+		if (p!= null)
+			p.attack(damage);
+		
+		Entity e = map.get(new Point(x,y));
+		if (e != null) {
+			if (e.isDestructable()) {
+				return e.attack();
+			}
+		}
+		return false;
+	}
 }

@@ -23,4 +23,9 @@ public class Wall extends Entity {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean attack() {
+		return false;
+	}
 }

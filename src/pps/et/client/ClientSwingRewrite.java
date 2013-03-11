@@ -173,7 +173,6 @@ class PaintPanel extends JPanel implements MouseListener,
     	g2.setColor(Color.white);
     	g2.fillRect(0, 0, this.getWidth(), this.getHeight());
     	
-    	if (map != null){
     		
     	for(Entity e : map.getEntities()){
     		
@@ -195,9 +194,7 @@ class PaintPanel extends JPanel implements MouseListener,
     			g2.setColor(Color.GREEN);
     			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
-    	}
-    	}
-    	if(player != null){    		
+    			
 	    	//Self
 	    	g2.setColor(Color.black);
 	    	g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
@@ -206,8 +203,8 @@ class PaintPanel extends JPanel implements MouseListener,
 	    		g2.setColor(Color.white);
 	    		g2.fillOval(player.getX()*10+2, player.getY()*10+2, 6, 6);
 	    	}
-    	
     	}
+    	
     }
 
     public void mousePressed(MouseEvent e) {  

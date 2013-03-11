@@ -125,4 +125,16 @@ public abstract class Entity {
 	public boolean isWalkable() {
 		return canWalkOn;
 	}
+	
+	public long createdAt(){
+		return createdAt;
+	}
+	
+	public boolean ignoreDrawing(){
+		if(System.currentTimeMillis() > (activeIn + createdAt))
+			return true;
+		
+		return false;
+	}
+	
 }

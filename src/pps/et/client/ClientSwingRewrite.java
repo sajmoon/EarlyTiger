@@ -4,9 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.event.*;
-
-import org.omg.CORBA.portable.InvokeHandler;
 
 import pps.et.logic.ConnectionHandler;
 import pps.et.logic.GameHandler;
@@ -44,7 +41,6 @@ class ClientSwingRewrite extends JFrame implements KeyListener {
             	//TODO
             }});
         
-        connectButton.setBounds(0, 0, 10, 10);
         
         JButton disconnectButton = new JButton("Disconnect");
         disconnectButton.addActionListener(new ActionListener() {
@@ -60,9 +56,9 @@ class ClientSwingRewrite extends JFrame implements KeyListener {
         JTextField chatInput = new JTextField("> BAJS :D HAHA");
       
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(4, 1));
-        buttonPanel.add(connectButton);
-        buttonPanel.add(disconnectButton);
+        buttonPanel.setLayout(new GridLayout(2, 1));
+//        buttonPanel.add(connectButton);
+//        buttonPanel.add(disconnectButton);
         buttonPanel.add(chatPane);
         buttonPanel.add(chatInput);
         
@@ -92,10 +88,6 @@ class ClientSwingRewrite extends JFrame implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == 10) {
-			System.out.println("Wat..");
-			connection.send("chat "+ chatPane.getText());
-		}
 	}
 
 
@@ -124,7 +116,7 @@ class PaintPanel extends JPanel implements MouseListener,
 	private GameHandler game;
 	GameMap map;
 
-		
+	private Image wall, grass, crate, fire, player_one, tnt;
 	
     
     private BufferedImage _bufImage = null;
@@ -151,7 +143,12 @@ class PaintPanel extends JPanel implements MouseListener,
         this.addMouseListener(this); 
         this.addMouseMotionListener(this);
         
-        
+        player_one = Toolkit.getDefaultToolkit().getImage("p1.png");
+        wall = Toolkit.getDefaultToolkit().getImage("wall.png");
+        grass = Toolkit.getDefaultToolkit().getImage("grass.jpg");
+        crate = Toolkit.getDefaultToolkit().getImage("crate.png");
+        fire = Toolkit.getDefaultToolkit().getImage("fire.png");
+        tnt = Toolkit.getDefaultToolkit().getImage("TNT.png");
     }
     
     
@@ -178,28 +175,35 @@ class PaintPanel extends JPanel implements MouseListener,
     
     
     private void draw(Graphics2D g2) {	
-    	g2.setColor(Color.white);
-    	g2.fillRect(0, 0, this.getWidth(), this.getHeight());
-    		
+    	//g2.setColor(Color.green);
+    	//g2.fillRect(0, 0, this.getWidth(), this.getHeight());
+    	g2.drawImage(grass, 0, 0, 610, 610, this);	
     	for(Entity e : map.getEntities()){
     		
     		if(e.getType().equals("Wall")){
-    			g2.setColor(Color.gray);
-    			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
+    			g2.drawImage(wall, e.getX()*10, e.getY()*10, this);
+    			//g2.setColor(Color.gray);
+    			//g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
+    	    	
     		}
     		
     		if (e.getType().equals("Mine")){
-    			g2.setColor(Color.red);
-    			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
+    			g2.drawImage(tnt, e.getX()*10, e.getY()*10, 10, 10, this);
+    			//g2.setColor(Color.red);
+    			//g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
     		
     		if (e.getType().equals("Damage")){
-    			g2.setColor(Color.orange);
-    			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
+				g2.drawImage(fire,e.getX()*10,e.getY()*10, this);
+    			//g2.setColor(Color.orange);	
+    			//g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
+    		
     		if (e.getType().equals("Barrier")){
-    			g2.setColor(Color.GREEN);
-    			g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
+    			g2.drawImage(crate, e.getX()*10, e.getY()*10, this);
+    			
+    			//g2.setColor(Color.GREEN);
+    			//g2.fillRect(e.getX()*10, e.getY()*10, 10, 10);
     		}
     		
     		if (e.getType().equals("Box")){
@@ -220,8 +224,10 @@ class PaintPanel extends JPanel implements MouseListener,
 			}
 		}
     	//Self
-    	g2.setColor(Color.black);
-    	g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
+    	//g2.setColor(Color.black);
+    	
+    	g2.drawImage(player_one, player.getX()*10, player.getY()*10, this);
+    	//g2.fillOval(player.getX()*10, player.getY()*10, 10, 10);
     	
     	if(!player.isAlive()){
     		g2.setColor(Color.white);

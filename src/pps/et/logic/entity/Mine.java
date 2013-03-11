@@ -38,10 +38,6 @@ public class Mine extends Entity {
 			game.attack( owner, (int)getPoint().getX(), i, damage);
 		}
 		
-		Random r = new Random();
-		if (r.nextInt(10)<5)
-			game.build(null, "Box", x, y);
-		
 		makeInvisible();
 	}
 

@@ -8,7 +8,7 @@ public class Damage extends Entity {
 	public Damage(Player p, GameHandler g, int x, int y) {
 		super(p, g, x, y);
 		type = "Damage";
-		setActivationTime(2); //visa skade ett tag bara
+		setActivationTime(1); //visa skade ett tag bara
 		typeCode = 3;
 		if (owner != null)
 			System.out.println("[" + owner.getNick() + "] Inflictied damage at " + x + " " + y);
@@ -16,15 +16,12 @@ public class Damage extends Entity {
 
 	@Override
 	public void action() {
-		//TODO Should be removed instead of just invisible
+		makeInvisible();
 		remove();
-		//makeInvisible();
 	}
 
 	@Override
-	public void action(Player p) {
-		// TODO Auto-generated method stub
-		
+	public void action(Player p) {		
 	}
 
 	@Override

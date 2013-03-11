@@ -1,5 +1,7 @@
 package pps.et.logic.entity;
 
+import java.util.Random;
+
 import pps.et.logic.GameHandler;
 import pps.et.logic.Player;
 
@@ -15,7 +17,6 @@ public class Barrier extends Entity {
 
 	@Override
 	public void action() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -27,7 +28,12 @@ public class Barrier extends Entity {
 
 	@Override
 	public boolean attack() {
-		makeInvisible();
+		remove();
+		Random r = new Random();
+		if (r.nextInt(10)<2) {
+			game.build(null, "Box", x, y);
+			return false;
+		}
 		return true;
 	}
 }

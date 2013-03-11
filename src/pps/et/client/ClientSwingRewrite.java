@@ -180,7 +180,6 @@ class PaintPanel extends JPanel implements MouseListener,
     private void draw(Graphics2D g2) {	
     	g2.setColor(Color.white);
     	g2.fillRect(0, 0, this.getWidth(), this.getHeight());
-    	
     		
     	for(Entity e : map.getEntities()){
     		

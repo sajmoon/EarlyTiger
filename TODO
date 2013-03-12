@@ -49,6 +49,11 @@ Design
 - Rich set of process interatctions.
 
 
+- Spawn ska bero på mapsize
+- map size ska komma från servern.
+- Respawn
+- När man dör kan man lägga bomber.
+
 Krav:
 - Descirbe application
 - descrbe algorithms. /Choosen algorithms.

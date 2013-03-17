@@ -3,8 +3,9 @@ package pps.et.logic;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import pps.et.logic.entity.Barrier;
 import pps.et.logic.entity.Box;
@@ -15,8 +16,8 @@ import pps.et.logic.entity.Wall;
 
 public class GameMap {
 	private int mapSize = 61;
-	private ArrayList<Entity> entityList;
-	private HashMap<Point, Entity> map;
+	private CopyOnWriteArrayList<Entity> entityList;
+	private ConcurrentHashMap<Point, Entity> map;
 	private GameHandler game;
 	
 	public static final int FLOOR = 0;
@@ -25,8 +26,8 @@ public class GameMap {
 	private int	lastEntityID = 0;
 	
 	public GameMap(GameHandler g) {
-		map 		= new HashMap<Point, Entity>();
-		entityList 	= new ArrayList<Entity>();
+		map 		= new ConcurrentHashMap<Point, Entity>();
+		entityList 	= new CopyOnWriteArrayList<Entity>();
 		
 		game = g;
 		

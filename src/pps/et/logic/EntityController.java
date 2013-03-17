@@ -18,6 +18,7 @@ public class EntityController implements Runnable {
 	@Override
 	public void run() {
 		/*
+		 * Fixed with concurrant datastructures in gamemap.
 		Exception in thread "Thread-3" java.util.ConcurrentModificationException
 		at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:782)
 		at java.util.ArrayList$Itr.next(ArrayList.java:754)

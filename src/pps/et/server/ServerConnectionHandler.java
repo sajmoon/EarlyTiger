@@ -13,6 +13,7 @@ import pps.et.server.tasks.ChangeNick;
 import pps.et.server.tasks.Chat;
 import pps.et.server.tasks.ConnectionTask;
 import pps.et.server.tasks.DisconnectedTask;
+import pps.et.server.tasks.LevelUp;
 import pps.et.server.tasks.Move;
 
 public class ServerConnectionHandler implements ConnectionHandler {

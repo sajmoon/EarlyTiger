@@ -5,6 +5,7 @@ import java.util.Random;
 import pps.et.logic.entity.Entity;
 import pps.et.server.TaskHandler;
 import pps.et.server.tasks.EntityAction;
+import pps.et.server.tasks.SummonBox;
 
 public class EntityController implements Runnable {
 	private GameHandler game;

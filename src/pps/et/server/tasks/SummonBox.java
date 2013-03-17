@@ -1,6 +1,6 @@
-package pps.et.logic;
+package pps.et.server.tasks;
 
-import pps.et.server.tasks.Task;
+import pps.et.logic.Player;
 
 public class SummonBox extends Task {
 	private int x;

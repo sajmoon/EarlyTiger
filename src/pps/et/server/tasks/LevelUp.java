@@ -1,7 +1,6 @@
-package pps.et.server;
+package pps.et.server.tasks;
 
 import pps.et.logic.Player;
-import pps.et.server.tasks.Task;
 
 public class LevelUp extends Task {
 	int level;
